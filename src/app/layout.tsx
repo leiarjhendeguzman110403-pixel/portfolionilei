@@ -20,10 +20,7 @@ export default function RootLayout({
           <div className="w-full max-w-7xl flex items-center justify-between">
             
             {/* Logo area */}
-            <div className="font-bold text-2xl leading-none flex flex-col">
-              <span className="text-white tracking-widest text-lg">LEI</span>
-              <span className="text-[#f55b14] tracking-wider">ARJHEN</span>
-            </div>
+           
 
             {/* Nav Pill */}
             <nav className="hidden md:flex bg-white/10 backdrop-blur-md border border-white/10 rounded-full p-1.5 items-center gap-2">

@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import { Vina_Sans, Special_Gothic_Expanded_One, Rubik_Mono_One } from "next/font/google";
 
@@ -17,32 +16,35 @@ export default function Home() {
     
     return {
       textDecoration: 'none',
-      backgroundColor: isActive 
-        ? (isContact ? 'rgba(245, 91, 20, 0.6)' : 'rgba(255, 255, 255, 0.3)') 
-        : 'transparent',
+      backgroundColor: isContact 
+        ? '#f55b14' 
+        : (isActive ? 'rgba(255, 255, 255, 0.3)' : 'transparent'),
       color: 'white',
-      border: isActive ? '2px solid rgba(255, 255, 255, 0.4)' : 'none',
+      border: isContact ? 'none' : (isActive ? '2px solid rgba(255, 255, 255, 0.4)' : '2px solid transparent'),
       backdropFilter: 'blur(5px)',
       WebkitBackdropFilter: 'blur(5px)',
-      padding: isActive ? '8px 25px' : '8px 20px',
-      margin: isActive ? '-5px 0' : '0',
+      padding: isContact ? '12px 20px' : '8px 25px', 
+      margin: '0', 
       borderRadius: '9999px',
-      fontSize: '10px',
+      fontSize: isContact ? '11px' : '10px',
       letterSpacing: '0px',
-      transition: 'all 0.2s ease',
+      transition: 'all 0.3s ease', 
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: isActive ? 10 : 1,
+      cursor: 'pointer',
+      outline: 'none',
     };
   };
 
   return (
     <div className="relative w-full min-h-screen bg-[#1e1e1e] flex flex-col items-center justify-start px-4 overflow-x-hidden">
       
-      <header className="fixed top-0 left-0 w-full flex items-center px-6 py-6 md:px-10 md:py-8 z-50 pointer-events-none">
+      {/* Restored Header without the pointer-events traps */}
+      <header className="fixed top-0 left-0 w-full flex items-center px-6 py-6 md:px-10 md:py-8 z-[99999]">
         
-        <div className="pointer-events-auto flex items-center gap-4 md:gap-6">
+        <div className="flex items-center gap-4 md:gap-6">
           <Image src="/images/about/lalogo.png" alt="Logo" width={90} height={90} className="object-contain" priority />
           <div className="leading-none flex flex-col items-start justify-center mt-1">
             <span className={`text-white tracking-widest text-[40px] md:text-[50px] ${specialGothic.className}`}>LEI</span>
@@ -50,9 +52,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CENTER: NAV BAR - Restored to original stable state */}
+        {/* CENTER: NAV BAR */}
         <nav 
-          className="pointer-events-auto"
           style={{ 
             position: 'absolute', 
             left: '50%', 
@@ -60,7 +61,7 @@ export default function Home() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-end',
-            gap: '2px',
+            gap: '8px', 
             backgroundColor: 'rgba(137, 138, 141, 0.4)', 
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
@@ -72,15 +73,15 @@ export default function Home() {
             boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
           }}
         >
-          <Link href="/" onClick={() => setActiveTab("HOME")} className={rubikOne.className} style={getLinkStyle("HOME")}>HOME</Link>
-          <Link href="#about" onClick={() => setActiveTab("ABOUT")} className={rubikOne.className} style={getLinkStyle("ABOUT")}>ABOUT</Link>
-          <Link href="#projects" onClick={() => setActiveTab("PROJECTS")} className={rubikOne.className} style={getLinkStyle("PROJECTS")}>PROJECTS</Link>
-          <Link href="#contact" onClick={() => setActiveTab("CONTACT")} className={rubikOne.className} style={getLinkStyle("CONTACT", true)}>CONTACT ME</Link>
+          <button type="button" onClick={() => setActiveTab("HOME")} className={rubikOne.className} style={getLinkStyle("HOME")}>HOME</button>
+          <button type="button" onClick={() => setActiveTab("ABOUT")} className={rubikOne.className} style={getLinkStyle("ABOUT")}>ABOUT</button>
+          <button type="button" onClick={() => setActiveTab("PROJECTS")} className={rubikOne.className} style={getLinkStyle("PROJECTS")}>PROJECTS</button>
+          <button type="button" onClick={() => setActiveTab("CONTACT")} className={rubikOne.className} style={getLinkStyle("CONTACT", true)}>CONTACT ME</button>
         </nav>
       </header>
 
       {/* HERO SECTION */}
-      <section className="relative w-full max-w-7xl flex flex-col items-center justify-center text-center mt-12">
+      <section className="relative w-full max-w-7xl flex flex-col items-center justify-center text-center mt-12 pointer-events-none">
         <div className="relative flex flex-col items-center justify-center w-full">
           <div className="z-10 flex flex-col items-center">
             <h1 className={`relative top-[80px] md:top-[100px] text-[15vw] md:text-[10rem] text-[#F25623] leading-[0.8] tracking-tighter select-none whitespace-nowrap ${vinaSans.className}`}>THINK. DESIGN.</h1>

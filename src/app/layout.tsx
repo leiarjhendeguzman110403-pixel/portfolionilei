@@ -12,9 +12,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased overflow-x-hidden">
-        {/* Page Content */}
+    // We added suppressHydrationWarning to both of these tags!
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased overflow-x-hidden" suppressHydrationWarning>
         <main>{children}</main>
       </body>
     </html>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link"; // Added Link from next/link
 import { useState } from "react";
 import { Vina_Sans, Special_Gothic_Expanded_One, Rubik_Mono_One } from "next/font/google";
 
@@ -69,8 +70,9 @@ export default function Navbar() {
           boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
         }}
       >
-        <button type="button" onClick={() => setActiveTab("HOME")} className={rubikOne.className} style={getLinkStyle("HOME")}>HOME</button>
-        <button type="button" onClick={() => setActiveTab("ABOUT")} className={rubikOne.className} style={getLinkStyle("ABOUT")}>ABOUT</button>
+        {/* Converted HOME and ABOUT to Link components for navigation */}
+        <Link href="/" onClick={() => setActiveTab("HOME")} className={rubikOne.className} style={getLinkStyle("HOME")}>HOME</Link>
+        <Link href="/about" onClick={() => setActiveTab("ABOUT")} className={rubikOne.className} style={getLinkStyle("ABOUT")}>ABOUT</Link>
         <button type="button" onClick={() => setActiveTab("PROJECTS")} className={rubikOne.className} style={getLinkStyle("PROJECTS")}>PROJECTS</button>
         <button type="button" onClick={() => setActiveTab("CONTACT")} className={rubikOne.className} style={getLinkStyle("CONTACT", true)}>CONTACT ME</button>
       </nav>

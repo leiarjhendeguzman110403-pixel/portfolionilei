@@ -31,7 +31,7 @@ export default function BentoCard({
   // Restored "bento-card" so your globals.css applies perfectly.
   const classes = [
     "bento-card",
-    "bg-[#0a0a0a] border border-white/10 rounded-[24px]", // Fallback so it never turns white
+    "bg-[#0a0a0a] border border-white/10 rounded-[10px]", // Fallback so it never turns white
     col,
     row,
     href ? "cursor-pointer" : "",
@@ -68,4 +68,6 @@ export default function BentoCard({
       {children}
     </motion.div>
   );
+
+  
 }

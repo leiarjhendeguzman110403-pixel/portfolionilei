@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link"; // Added Link from next/link
+import Link from "next/link";
 import { useState } from "react";
 import { Vina_Sans, Special_Gothic_Expanded_One, Rubik_Mono_One } from "next/font/google";
 
@@ -40,7 +40,8 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full flex items-center px-6 py-6 md:px-10 md:py-8 z-[99999]">
+    // 👇 Changed w-full to w-[100vw]. This locks it to the monitor's exact center forever!
+    <header className="fixed top-0 left-0 w-[100vw] flex items-center px-6 py-6 md:px-10 md:py-8 z-[99999]">
       <div className="flex items-center gap-4 md:gap-6">
         <Image src="/images/about/lalogo.png" alt="Logo" width={90} height={90} className="object-contain" priority />
         <div className="leading-none flex flex-col items-start justify-center mt-1">
@@ -49,7 +50,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* CENTER: NAV BAR */}
       <nav 
         style={{ 
           position: 'absolute', 
@@ -70,7 +70,6 @@ export default function Navbar() {
           boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
         }}
       >
-        {/* Converted HOME and ABOUT to Link components for navigation */}
         <Link href="/" onClick={() => setActiveTab("HOME")} className={rubikOne.className} style={getLinkStyle("HOME")}>HOME</Link>
         <Link href="/about" onClick={() => setActiveTab("ABOUT")} className={rubikOne.className} style={getLinkStyle("ABOUT")}>ABOUT</Link>
         <button type="button" onClick={() => setActiveTab("PROJECTS")} className={rubikOne.className} style={getLinkStyle("PROJECTS")}>PROJECTS</button>

@@ -12,7 +12,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // We added suppressHydrationWarning to both of these tags!
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased overflow-x-hidden" suppressHydrationWarning>
         <main>{children}</main>

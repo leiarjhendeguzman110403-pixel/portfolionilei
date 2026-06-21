@@ -136,25 +136,47 @@ export default function Home() {
             {/* CARD 1: GRAPHIC DESIGN (1 Column, 2 Rows) */}
             <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
               <BentoCard 
-                style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-                className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#F25623]/50 hover:shadow-[0_0_30px_rgba(242,86,35,0.2)]"
+                style={{ borderRadius: "10px", backgroundColor: "#171717" }} 
+                /* 🛠️ BRIGHT WHITE GLOW APPLIED HERE */
+                className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
               >
                 <div className="glass-sweep z-30" />
                 
-                {/* 🛠️ ADJUST IMAGE 1 HERE 🛠️
-                  1. VERTICAL (Up/Down): Change `mt-[2px]` (Negative is up, Positive is down).
-                  2. HORIZONTAL (Left/Right): Change `ml-[0px]` (Negative is left, Positive is right).
-                  3. SIZE: Change `width={180} height={180}` below to make it bigger or smaller.
-                */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none mt-[2px] ml-[82px]">
-                  <Image src="/images/about/graphic.png" alt="Graphic Design" width={180} height={180} className="object-contain opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500" />
+                  <Image src="/images/about/graphic.png" alt="Graphic Design" width={180} height={180} className="object-contain" />
                 </div>
                 
-                <div className="z-20" style={{ position: 'absolute', top: '15px', right: '15px' }}>
-                  <span className={`text-[#F25623] text-[12px] tracking-[2px] uppercase ${rubikMonoOne.className}`}>01</span>
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '1px', 
+                    left: '3px',
+                    transform: 'scaleY(1.6)', 
+                    transformOrigin: 'bottom left' 
+                  }}
+                >
+                  <h3 
+                  className={`text-white text-[61px] md:text-[60px] uppercase tracking-wide leading-tight ${vinaSans.className}`}
+                  style={{ color: '#E6FF2B' }}
+                  >
+                    GRAPHIC
+                  </h3>
                 </div>
-                <div className="z-20" style={{ position: 'absolute', bottom: '20px', left: '20px' }}>
-                  <h3 className={`text-white text-[15px] md:text-lg uppercase tracking-wide leading-tight ${rubikMonoOne.className}`}>GRAPHIC <br/> DESIGN</h3>
+
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '-170px', 
+                    left: '3px',
+                    transform: 'scaleY(2)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 className={`text-white text-[75px] md:text-[60px] uppercase tracking-wide leading-tight ${vinaSans.className}`}>
+                    DESIGN
+                  </h3>
                 </div>
               </BentoCard>
             </motion.div>
@@ -162,25 +184,46 @@ export default function Home() {
             {/* CARD 2: WEB DESIGNER (1 Column, 2 Rows) */}
             <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
               <BentoCard 
-                style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-                className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#F25623]/50 hover:shadow-[0_0_30px_rgba(242,86,35,0.2)]"
+                style={{ borderRadius: "10px", backgroundColor: "#4d4d4d" }} 
+                className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
               >
                 <div className="glass-sweep z-30" />
                 
-                {/* 🛠️ ADJUST IMAGE 2 HERE 🛠️
-                  1. VERTICAL (Up/Down): Change `mt-[-15px]` (Negative is up, Positive is down).
-                  2. HORIZONTAL (Left/Right): Change `ml-[0px]` (Negative is left, Positive is right).
-                  3. SIZE: Change `width={130} height={130}` below.
-                */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none mt-[2px] ml-[-74px]">
-                  <Image src="/images/about/webdesign.png" alt="Web Designer" width={180} height={180} className="object-contain opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500" />
+                  <Image src="/images/about/webdesign.png" alt="Web Designer" width={180} height={180} className="object-contain" />
                 </div>
                 
-                <div className="z-20" style={{ position: 'absolute', top: '15px', right: '15px' }}>
-                  <span className={`text-[#F25623] text-[12px] tracking-[2px] uppercase ${rubikMonoOne.className}`}>02</span>
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '-50px', 
+                    left: '176px',
+                    transform: 'scaleY(1)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 
+                  className={`text-white text-[125px] md:text-lg uppercase tracking-wide leading-tight ${vinaSans.className}`}
+                  style={{ color: '#F25623' }}
+                  >
+                    WEB
+                  </h3>
                 </div>
-                <div className="z-20" style={{ position: 'absolute', bottom: '20px', left: '15px' }}>
-                  <h3 className={`text-white text-[15px] md:text-lg uppercase tracking-wide leading-tight ${rubikMonoOne.className}`}>WEB <br/> DESIGNER</h3>
+                
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '-140px', 
+                    left: '178px',
+                    transform: 'scale(1.35, 2.5)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 className={`text-white text-[50px] md:text-lg uppercase tracking-wide leading-tight ${vinaSans.className}`}>
+                    DESIGN
+                  </h3>
                 </div>
               </BentoCard>
             </motion.div>
@@ -188,25 +231,58 @@ export default function Home() {
             {/* CARD 3: UI/UX DESIGNER (1 Column, 4 Rows) */}
             <motion.div variants={itemVariants} className="col-span-1 row-span-4 hover:z-50">
               <BentoCard 
-                style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-                className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#F25623]/50 hover:shadow-[0_0_30px_rgba(242,86,35,0.2)]"
+                style={{ borderRadius: "10px", backgroundColor: "#171717" }} 
+                className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
               >
                 <div className="glass-sweep z-30" />
                 
-                {/* 🛠️ ADJUST IMAGE 3 HERE 🛠️
-                  1. VERTICAL (Up/Down): Change `mt-[-15px]` (Negative is up, Positive is down).
-                  2. HORIZONTAL (Left/Right): Change `ml-[0px]` (Negative is left, Positive is right).
-                  3. SIZE: Change `width={160} height={160}` below.
-                */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none mt-[-80px] ml-[0px]">
-                  <Image src="/images/about/uiux.png" alt="UI/UX Designer" width={330} height={330} className="object-contain opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500" />
+                  <Image src="/images/about/uiux.png" alt="UI/UX Designer" width={330} height={330} className="object-contain" />
                 </div>
                 
-                <div className="z-20" style={{ position: 'absolute', top: '15px', right: '15px' }}>
-                  <span className={`text-[#F25623] text-[12px] tracking-[2px] uppercase ${rubikMonoOne.className}`}>03</span>
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '55px', 
+                    left: '5px',
+                    transform: 'scale(1.7, 1.5)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 className={`text-white text-[39px] md:text-lg uppercase tracking-wide leading-tight ${vinaSans.className}`}>
+                    USER INTERFACE
+                  </h3>
                 </div>
-                <div className="z-20" style={{ position: 'absolute', bottom: '20px', left: '15px' }}>
-                  <h3 className={`text-white text-[15px] md:text-lg uppercase tracking-wide leading-tight ${rubikMonoOne.className}`}>UI/UX <br/> DESIGNER</h3>
+
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '17px', 
+                    left: '5px',
+                    transform: 'scale(1.68, 1.5)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 className={`text-white text-[36px] md:text-lg uppercase tracking-wide leading-tight ${vinaSans.className}`}>
+                    USER EXPERIENCE
+                  </h3>
+                </div>
+                
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '-105px', 
+                    left: '2px',
+                    transform: 'scale(2.49, 1.6)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 className={`text-white text-[60px] md:text-lg uppercase tracking-wide leading-tight ${vinaSans.className}`}>
+                    DESIGN
+                  </h3>
                 </div>
               </BentoCard>
             </motion.div>
@@ -214,25 +290,31 @@ export default function Home() {
             {/* CARD 4: SOCIAL MEDIA MANAGER (2 Columns, 2 Rows) */}
             <motion.div variants={itemVariants} className="col-span-2 row-span-2 hover:z-50">
               <BentoCard 
-                style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-                className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#F25623]/50 hover:shadow-[0_0_30px_rgba(242,86,35,0.2)]"
+                style={{ borderRadius: "10px", backgroundColor: "#ffffff" }} 
+                className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
               >
                 <div className="glass-sweep z-30" />
                 
-                {/* 🛠️ ADJUST IMAGE 4 HERE 🛠️
-                  1. VERTICAL (Up/Down): Change `mt-[-15px]` (Negative is up, Positive is down).
-                  2. HORIZONTAL (Left/Right): Change `ml-[0px]` (Negative is left, Positive is right).
-                  3. SIZE: Change `width={180} height={180}` below.
-                */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none mt-[-41px] ml-[0px]">
-                  <Image src="/images/about/smm.png" alt="Social Media Manager" width={665} height={665} className="object-contain opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500" />
+                  <Image src="/images/about/smm.png" alt="Social Media Manager" width={665} height={665} className="object-contain" />
                 </div>
                 
-                <div className="z-20" style={{ position: 'absolute', top: '15px', right: '20px' }}>
-                  <span className={`text-[#F25623] text-[12px] tracking-[2px] uppercase ${rubikMonoOne.className}`}>04</span>
-                </div>
-                <div className="z-20" style={{ position: 'absolute', bottom: '20px', left: '20px' }}>
-                  <h3 className={`text-white text-lg md:text-xl uppercase tracking-wide ${rubikMonoOne.className}`}>SOCIAL MEDIA MANAGER</h3>
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '-120px', 
+                    left: '3px',
+                    transform: 'scale(1.31, 1.8)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 
+                    className={`text-[60px] md:text-xl uppercase tracking-wide ${vinaSans.className}`}
+                    style={{ color: '#000000' }}
+                  >
+                    SOCIAL MEDIA MANAGEMENT
+                  </h3>
                 </div>
               </BentoCard>
             </motion.div>
@@ -240,25 +322,43 @@ export default function Home() {
             {/* CARD 5: VIDEO EDITOR (1 Column, 2 Rows) */}
             <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
               <BentoCard 
-                style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-                className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#F25623]/50 hover:shadow-[0_0_30px_rgba(242,86,35,0.2)]"
+                style={{ borderRadius: "10px", backgroundColor: "#1e1e1e" }} 
+                className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
               >
                 <div className="glass-sweep z-30" />
                 
-                {/* 🛠️ ADJUST IMAGE 5 HERE 🛠️
-                  1. VERTICAL (Up/Down): Change `mt-[-15px]` (Negative is up, Positive is down).
-                  2. HORIZONTAL (Left/Right): Change `ml-[0px]` (Negative is left, Positive is right).
-                  3. SIZE: Change `width={130} height={130}` below.
-                */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none mt-[2px] ml-[-65px]">
-                  <Image src="/images/about/videditing.png" alt="Video Editor" width={183} height={183} className="object-contain opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500" />
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none mt-[2px] ml-[-67px]">
+                  <Image src="/images/about/videditing.png" alt="Video Editor" width={183} height={183} className="object-contain" />
                 </div>
                 
-                <div className="z-20" style={{ position: 'absolute', top: '15px', right: '15px' }}>
-                  <span className={`text-[#F25623] text-[12px] tracking-[2px] uppercase ${rubikMonoOne.className}`}>05</span>
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '-44px', 
+                    left: '190px',
+                    transform: 'scale(1.2, 2)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 className={`text-white text-[65px] md:text-lg uppercase tracking-wide leading-none ${vinaSans.className}`}>VIDEO</h3>
                 </div>
-                <div className="z-20" style={{ position: 'absolute', bottom: '20px', left: '20px' }}>
-                  <h3 className={`text-white text-[15px] md:text-lg uppercase tracking-wide leading-tight ${rubikMonoOne.className}`}>VIDEO <br/> EDITOR</h3>
+
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '-122px', 
+                    left: '191px',
+                    transform: 'scale(1.2, 2.6)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 
+                  className={`text-white text-[46px] md:text-lg uppercase tracking-wide leading-none ${vinaSans.className}`}
+                  style={{ color: '#8593F0' }}
+                  >
+                    EDITING</h3>
                 </div>
               </BentoCard>
             </motion.div>
@@ -266,29 +366,52 @@ export default function Home() {
             {/* CARD 6: FRONT-END DEVELOPER (2 Columns, 2 Rows) */}
             <motion.div variants={itemVariants} className="col-span-2 row-span-2 hover:z-50">
               <BentoCard 
-                style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-                className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#F25623]/50 hover:shadow-[0_0_30px_rgba(242,86,35,0.2)]"
+                style={{ borderRadius: "10px", backgroundColor: "#d9d9d9" }} 
+                className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
               >
                 <div className="glass-sweep z-30" />
                 
-                {/* 🛠️ ADJUST IMAGE 6 HERE 🛠️
-                  1. VERTICAL (Up/Down): Change `mt-[-15px]` (Negative is up, Positive is down).
-                  2. HORIZONTAL (Left/Right): Change `ml-[0px]` (Negative is left, Positive is right).
-                  3. SIZE: Change `width={180} height={180}` below.
-                */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none mt-[-0px] ml-[0px]">
-                  <Image src="/images/about/frontend.png" alt="Front End Developer" width={180} height={180} className="object-contain opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500" />
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none mt-[2px] ml-[150px]">
+                  <Image src="/images/about/frontend.png" alt="Front End Developer" width={370} height={370} className="object-contain" />
                 </div>
                 
-                <div className="z-20" style={{ position: 'absolute', top: '15px', right: '15px' }}>
-                  <span className={`text-[#F25623] text-[12px] tracking-[2px] uppercase ${rubikMonoOne.className}`}>06</span>
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '-10px', 
+                    left: '2px',
+                    transform: 'scale(1.2, 1.5)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 
+                    className={`text-white text-[74px] md:text-xl uppercase tracking-wide leading-none ${vinaSans.className}`}
+                    style={{ color: '#000000' }} 
+                  >
+                    FRONT-END
+                  </h3>
                 </div>
-                <div className="z-20" style={{ position: 'absolute', bottom: '20px', left: '15px' }}>
-                  <h3 className={`text-white text-lg md:text-xl uppercase tracking-wide ${rubikMonoOne.className}`}>FRONT-END DEVELOPER</h3>
+
+                <div 
+                  className="z-20" 
+                  style={{ 
+                    position: 'absolute', 
+                    bottom: '-148px', 
+                    left: '2px',
+                    transform: 'scale(1.2, 1.9)', 
+                    transformOrigin: 'bottom left'
+                  }}
+                >
+                  <h3 
+                    className={`text-white text-[75px] md:text-xl uppercase tracking-wide leading-none ${vinaSans.className}`}
+                    style={{ color: '#000000' }} 
+                  >
+                    DEVELOPER
+                  </h3>
                 </div>
               </BentoCard>
             </motion.div>
-
           </motion.div>
 
           {/* DEDICATED SPACER TO FORCE SCROLL HEIGHT */}

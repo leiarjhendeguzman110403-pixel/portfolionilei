@@ -11,7 +11,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
-import { Vina_Sans, Alata } from "next/font/google"; 
+
+/* --- IMPORTED FONTS --- */
+import { Vina_Sans, Alata, Dela_Gothic_One, Albert_Sans } from "next/font/google"; 
 
 const vinaSans = Vina_Sans({ 
   weight: "400",
@@ -20,6 +22,18 @@ const vinaSans = Vina_Sans({
 
 const alata = Alata({
   weight: "400",
+  subsets: ["latin"]
+});
+
+/* New Expanded Gothic Font */
+const delaGothic = Dela_Gothic_One({
+  weight: "400",
+  subsets: ["latin"]
+});
+
+/* New Paragraph Font */
+const albertSans = Albert_Sans({
+  weight: ["400", "500"],
   subsets: ["latin"]
 });
 
@@ -41,6 +55,7 @@ const itemVariants: Variants = {
 
 export default function AboutPage() {
   const [isMobile, setIsMobile] = useState(true);
+  const [activeTab, setActiveTab] = useState("SEMINAR");
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -62,13 +77,11 @@ export default function AboutPage() {
           100% { filter: drop-shadow(0px 0px 15px rgba(133, 147, 240, 0.4)); }
         }
         .glowing-portrait {
-          /* FIXED: Slowed down from 3s to 5s for a smoother pulse */
           animation: customGlow 5s ease-in-out infinite;
         }
 
         /* 2. The Continuous Light Sweep Animation for Cards */
         @keyframes glassSweep {
-          /* FIXED: Removed the pause. It now sweeps continuously from 0% to 100% */
           0% { left: -100%; }
           100% { left: 200%; }
         }
@@ -79,7 +92,6 @@ export default function AboutPage() {
           width: 150px;
           background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
           transform: skewX(-25deg);
-          /* FIXED: Set to a smooth, continuous 8-second linear loop */
           animation: glassSweep 8s linear infinite; 
           pointer-events: none;
           z-index: 1;
@@ -411,8 +423,157 @@ export default function AboutPage() {
 
             </BentoCard>
           </motion.div>
+        </motion.div>
+
+        {/* --- EXACT PERFECT UI (TOGGLE BUTTON) --- */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '64px', marginBottom: '32px', position: 'relative', zIndex: 9999 }}>
+          <div style={{ 
+            display: 'inline-flex', 
+            position: 'relative', 
+            alignItems: 'center', 
+            padding: '4px', 
+            borderRadius: '9999px', 
+            border: '1px solid #334155', 
+            backgroundColor: '#1e1e1e', 
+            isolation: 'isolate' 
+          }}>
+            
+            {/* THE FIXED SLIDING PILL */}
+            <div style={{
+              position: 'absolute',
+              top: '4px',
+              bottom: '4px',
+              left: activeTab === 'SEMINAR' ? '4px' : '144px',
+              width: '140px',
+              backgroundColor: '#e2e8f0', 
+              borderRadius: '9999px',
+              transition: 'left 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              zIndex: -1, 
+              pointerEvents: 'none' 
+            }} />
+
+            {/* Seminar Button */}
+            <button 
+              type="button"
+              onClickCapture={() => setActiveTab("SEMINAR")}
+              className={alata.className}
+              style={{ 
+                position: 'relative', 
+                zIndex: 10, 
+                padding: '8px 24px', 
+                fontSize: '12px', 
+                fontWeight: 'bold', 
+                textTransform: 'uppercase', 
+                letterSpacing: '0.1em', 
+                width: '140px', 
+                textAlign: 'center', 
+                color: activeTab === 'SEMINAR' ? '#0f172a' : '#94a3b8', 
+                transition: 'color 0.3s ease', 
+                outline: 'none',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              SEMINAR
+            </button>
+
+            {/* Certificates Button */}
+            <button 
+              type="button"
+              onClickCapture={() => setActiveTab("CERTIFICATES")}
+              className={alata.className}
+              style={{ 
+                position: 'relative', 
+                zIndex: 10, 
+                padding: '8px 24px', 
+                fontSize: '12px', 
+                fontWeight: 'bold', 
+                textTransform: 'uppercase', 
+                letterSpacing: '0.1em', 
+                width: '140px', 
+                textAlign: 'center', 
+                color: activeTab === 'CERTIFICATES' ? '#0f172a' : '#94a3b8', 
+                transition: 'color 0.3s ease', 
+                outline: 'none',
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              CERTIFICATES
+            </button>
+
+          </div>
+        </div>
+
+        {/* --- 100px VERTICALLY ALIGNED 6 CARDS (MANUAL HEIGHT CONTROL) --- */}
+        <motion.div 
+          className="flex flex-col max-w-[600px] mx-auto mt-8"
+          variants={containerVariants}
+          initial={isMobile ? "onscreen" : "offscreen"}
+          whileInView="onscreen"
+          viewport={{ once: true, margin: "-50px" }}
+        >
+
+          {[ 
+            { title: "FRONT-END DEVELOPER", sub: "PCCI Valenzuela Website", date: "Feb 2026 - Mar 2026", tag: "INTERNSHIP" },
+            { title: "FRONT-END DEVELOPER", sub: "LITTLE-LIONS MONITORING SYSTEM", date: "Dec 2026 - Feb 2026", tag: "INTERNSHIP" },
+            { title: "FRONT-END DEVELOPER", sub: "8Con Academy Website", date: "Mar 2026 - Apr 2026", tag: "INTERNSHIP" },
+            { title: "VIDEO EDITOR", sub: "SCHOOL PROJECTS/PERSONAL PROJECTS", date: "Aug 2022 - Present", tag: "PROMOTION" },
+            { title: "AFFILIATE MARKETER", sub: "Tiktok Affiliate", date: "May 2025 - Present", tag: "MARKETING" },
+            { title: "GRAPHIC DESIGNER", sub: "FREELANCE", date: "2021 - Present", tag: "FREELANCE" }
+          ].map((card, index) => (
+            <motion.div key={index} variants={itemVariants} className="w-full relative z-20 hover:z-50" style={{ marginBottom: '10px' }}>
+              <BentoCard 
+                style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)", padding: "12px 16px", height: "100px" }} 
+                className="w-full flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+              >
+                <div className="glass-sweep" /> 
+                <div style={{ position: 'absolute', top: '12px', bottom: '12px', left: '16px', width: '3px', backgroundColor: '#8593F0' }} />
+                
+                <div style={{ position: 'relative', height: '100%', marginLeft: '14px' }}>
+                  
+                  {/* LEFT TEXT CONTENT */}
+                  <div style={{ position: 'absolute', top: '-10px', left: '0px' }}>
+                    <h2 className={`${delaGothic.className} text-white uppercase tracking-wider text-[26px] leading-none`}>{card.title}</h2>
+                  </div>
+                  <div style={{ position: 'absolute', top: '25px', left: '0px' }}>
+                    <p className={`${delaGothic.className} text-[#8593F0] text-[16px] uppercase tracking-widest leading-none`}>{card.sub}</p>
+                  </div>
+                  <div style={{ position: 'absolute', top: '50px', left: '0px' }}>
+                    <p className={`${albertSans.className} text-[#898A8D] text-[14px] leading-tight`}>{card.date}</p>
+                  </div>
+
+                  {/* MANUAL BADGE CONTROL */}
+                  <div style={{ 
+                    position: 'absolute', 
+                    top: '27%', 
+                    right: '0px', 
+                    transform: 'translateY(-50%)',
+                    backgroundColor: 'rgba(255,255,255,0.05)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: '4px',
+                    whiteSpace: 'nowrap',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    /* ADJUST BADGE SIZE HERE */
+                    height: '22px', 
+                    padding: '0 10px'
+                  }}>
+                    <p className={`${delaGothic.className} text-white text-[10px] uppercase tracking-wider`}>
+                      {card.tag}
+                    </p>
+                  </div>
+
+                </div>
+              </BentoCard>
+            </motion.div>
+          ))}
 
         </motion.div>
+
       </div>
     </div>
   );

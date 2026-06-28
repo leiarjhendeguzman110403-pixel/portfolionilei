@@ -12,6 +12,7 @@ interface BentoCardProps {
   className?: string;
   style?: CSSProperties;
   external?: boolean;
+  onClick?: () => void; // 1. Added onClick here
 }
 
 const cardVariants: Variants = {
@@ -25,16 +26,15 @@ const cardVariants: Variants = {
 };
 
 export default function BentoCard({
-  children, col = "", row = "", href, accentHover = false, className = "", style, external = false,
+  children, col = "", row = "", href, accentHover = false, className = "", style, external = false, onClick
 }: BentoCardProps) {
 
-  // Restored "bento-card" so your globals.css applies perfectly.
   const classes = [
     "bento-card",
-    "bg-[#0a0a0a] border border-white/10 rounded-[10px]", // Fallback so it never turns white
+    "bg-[#0a0a0a] border border-white/10 rounded-[10px]", 
     col,
     row,
-    href ? "cursor-pointer" : "",
+    href || onClick ? "cursor-pointer" : "", // 2. Show pointer if clickable
     accentHover ? "hover:border-[#f55b14] transition-colors" : "",
     className,
   ].filter(Boolean).join(" ");
@@ -46,6 +46,7 @@ export default function BentoCard({
         whileHover={{ scale: 1.02, y: -4, transition: { type: "spring", stiffness: 400, damping: 10 } }}
         style={style}
         className={classes}
+        onClick={onClick}
       >
         <Link
           href={href}
@@ -64,10 +65,9 @@ export default function BentoCard({
       variants={cardVariants}
       className={classes} 
       style={style}
+      onClick={onClick} // 3. Passed onClick to the wrapper
     >
       {children}
     </motion.div>
   );
-
-  
 }

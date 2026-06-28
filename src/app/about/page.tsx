@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import BentoCard from "@/components/ui/BentoCard";
 import Navbar from "@/components/navbar"; 
 import { 
@@ -10,7 +10,7 @@ import {
   Terminal
 } from "lucide-react";
 import Image from "next/image";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion"; // <-- Added AnimatePresence
 
 /* --- IMPORTED FONTS --- */
 import { Vina_Sans, Alata, Dela_Gothic_One, Albert_Sans } from "next/font/google"; 
@@ -56,6 +56,7 @@ const itemVariants: Variants = {
 export default function AboutPage() {
   const [isMobile, setIsMobile] = useState(true);
   const [activeTab, setActiveTab] = useState("SEMINAR");
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -137,7 +138,7 @@ export default function AboutPage() {
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
               className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
-              <div className="glass-sweep" /> {/* Added Light Sweep */}
+              <div className="glass-sweep" /> 
 
               <div 
                 className="absolute top-0 right-0 z-20 text-left" 
@@ -148,7 +149,6 @@ export default function AboutPage() {
                   boxSizing: 'border-box' 
                 }}
               >
-                {/* Name Header */}
                 <h2 
                   className={`${alata.className} text-white font-bold uppercase tracking-wide`}
                   style={{ fontSize: '40px', lineHeight: '0.8' }} 
@@ -157,7 +157,6 @@ export default function AboutPage() {
                   DE GUZMAN
                 </h2>
 
-                {/* Job Title */}
                 <div style={{ marginTop: '-30px', paddingLeft: '2px' }}>
                   <span 
                     className={`${alata.className} block`} 
@@ -167,7 +166,6 @@ export default function AboutPage() {
                   </span>
                 </div>
 
-                {/* Bio Section */}
                 <div style={{ 
                   marginTop: '15px', 
                   borderLeft: '3px solid #8593F0', 
@@ -210,7 +208,7 @@ export default function AboutPage() {
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
               className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
-              <div className="glass-sweep" /> {/* Added Light Sweep */}
+              <div className="glass-sweep" /> 
 
               <div style={{ position: 'absolute', top: '0px', left: '20px', color: '#898A8D' }}>
                 <h2 className={`${alata.className} text-[12px] text-[#898A8D] tracking-[1.5px] uppercase`}>
@@ -256,7 +254,7 @@ export default function AboutPage() {
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
               className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
-              <div className="glass-sweep" /> {/* Added Light Sweep */}
+              <div className="glass-sweep" /> 
 
               <div style={{ position: 'absolute', top: '0px', left: '17px', right: '25px',  }}>
                 <h3 className={`${alata.className} text-[12px] tracking-[1.8px] uppercase text-[#898A8D]`}>
@@ -290,7 +288,7 @@ export default function AboutPage() {
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
               className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
-              <div className="glass-sweep" /> {/* Added Light Sweep */}
+              <div className="glass-sweep" /> 
 
               <div style={{ position: 'absolute', top: '5px', left: '20px', color: '#898A8D' }}>
                 <span className={`${alata.className} text-[12px] tracking-[1.8px] uppercase text-[#898A8D]`}>
@@ -342,7 +340,7 @@ export default function AboutPage() {
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
               className="w-full h-full flex flex-col p-5 lg:px-6 overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
-              <div className="glass-sweep" /> {/* Added Light Sweep */}
+              <div className="glass-sweep" /> 
 
               <div style={{ position: 'absolute', top: '-1px', left: '14px' }}>
                 <h3 className={`${alata.className} text-[13px] md:text-sm text-[#898A8D] uppercase`}>
@@ -382,7 +380,7 @@ export default function AboutPage() {
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
               className="w-full h-full p-5 lg:px-6 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
-              <div className="glass-sweep" /> {/* Added Light Sweep */}
+              <div className="glass-sweep" /> 
 
               <div style={{ position: 'absolute', top: '-1px', left: '13px' }}>
                 <h3 className={`${alata.className} text-[13px] md:text-sm text-[#898A8D] uppercase`}>
@@ -438,7 +436,6 @@ export default function AboutPage() {
             isolation: 'isolate' 
           }}>
             
-            {/* THE FIXED SLIDING PILL */}
             <div style={{
               position: 'absolute',
               top: '4px',
@@ -452,7 +449,6 @@ export default function AboutPage() {
               pointerEvents: 'none' 
             }} />
 
-            {/* Seminar Button */}
             <button 
               type="button"
               onClickCapture={() => setActiveTab("SEMINAR")}
@@ -478,7 +474,6 @@ export default function AboutPage() {
               SEMINAR
             </button>
 
-            {/* Certificates Button */}
             <button 
               type="button"
               onClickCapture={() => setActiveTab("CERTIFICATES")}
@@ -507,7 +502,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* --- 100px VERTICALLY ALIGNED 6 CARDS (MANUAL HEIGHT CONTROL) --- */}
+        {/* --- EXPANDING ACCORDION CARDS --- */}
         <motion.div 
           className="flex flex-col max-w-[600px] mx-auto mt-8"
           variants={containerVariants}
@@ -515,63 +510,116 @@ export default function AboutPage() {
           whileInView="onscreen"
           viewport={{ once: true, margin: "-50px" }}
         >
-
           {[ 
-            { title: "FRONT-END DEVELOPER", sub: "PCCI Valenzuela Website", date: "Feb 2026 - Mar 2026", tag: "INTERNSHIP" },
-            { title: "FRONT-END DEVELOPER", sub: "LITTLE-LIONS MONITORING SYSTEM", date: "Dec 2026 - Feb 2026", tag: "INTERNSHIP" },
-            { title: "FRONT-END DEVELOPER", sub: "8Con Academy Website", date: "Mar 2026 - Apr 2026", tag: "INTERNSHIP" },
-            { title: "VIDEO EDITOR", sub: "SCHOOL PROJECTS/PERSONAL PROJECTS", date: "Aug 2022 - Present", tag: "PROMOTION" },
-            { title: "AFFILIATE MARKETER", sub: "Tiktok Affiliate", date: "May 2025 - Present", tag: "MARKETING" },
-            { title: "GRAPHIC DESIGNER", sub: "FREELANCE", date: "2021 - Present", tag: "FREELANCE" }
+            { title: "FRONT-END DEVELOPER", sub: "8Con Academy Website", date: "Mar 2026 - Apr 2026", tag: "INTERNSHIP",
+              desc: "Contributed frontend work on the marketing website for 8Con Academy, a Philippine forex trading education company. Built an interactive chatbot with a custom 8Con knowledge base and FAQ accordion. Implemented light/dark mode theming across the entire site, and redesigned the Hero, About, CareerPath, Internship, and Contact sections. Shipped registration and enrollment modals plus an infinite testimonial carousel, and integrated Web3Forms for contact form submissions with email delivery." },
+            { title: "FRONT-END DEVELOPER", sub: "PCCI Valenzuela Website", date: "Feb 2026 - Mar 2026", tag: "INTERNSHIP",
+              desc: "Built and maintained the official PCCI Valenzuela chapter website. Responsible for responsive layout, component architecture, and UI polish using React and Tailwind CSS." },
+            { title: "FRONT-END DEVELOPER", sub: "LITTLE-LIONS MONITORING SYSTEM", date: "Dec 2025 - Feb 2026", tag: "INTERNSHIP",
+              desc: "Developed the front-end of a child monitoring system for a daycare facility, featuring real-time attendance tracking and a parent-facing dashboard." },
+            { title: "VIDEO EDITOR", sub: "SCHOOL PROJECTS/PERSONAL PROJECTS", date: "Aug 2022 - Present", tag: "PROMOTION",
+              desc: "Produced and edited video content for academic submissions and personal creative projects, utilizing CapCut for motion graphics and short-form storytelling." },
+            { title: "AFFILIATE MARKETER", sub: "Tiktok Affiliate", date: "May 2025 - Present", tag: "MARKETING",
+              desc: "Managed TikTok affiliate campaigns by creating product-focused short videos, tracking engagement metrics, and optimizing content strategy to drive conversions." },
+            { title: "GRAPHIC DESIGNER", sub: "FREELANCE", date: "2021 - Present", tag: "FREELANCE",
+              desc: "Delivered branding, social media assets, and print materials for various clients. Specialized in clean, modern visual identities and promotional content." }
           ].map((card, index) => (
-            <motion.div key={index} variants={itemVariants} className="w-full relative z-20 hover:z-50" style={{ marginBottom: '10px' }}>
-              <BentoCard 
-                style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)", padding: "12px 16px", height: "100px" }} 
-                className="w-full flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+            <motion.div 
+              key={index} 
+              variants={itemVariants} 
+              layout // <-- REQUIRED for smooth push-down animation
+              className="w-full relative z-20" 
+              style={{ marginBottom: '10px' }}
+            >
+              {/* FOOLPROOF CLICK WRAPPER */}
+              <div
+                onClick={() => {
+                  console.log("Card clicked! Index:", index); // Check your browser console!
+                  setExpandedIndex(expandedIndex === index ? null : index);
+                }}
+                className="w-full cursor-pointer relative"
+                style={{ zIndex: expandedIndex === index ? 50 : 20 }}
               >
-                <div className="glass-sweep" /> 
-                <div style={{ position: 'absolute', top: '12px', bottom: '12px', left: '16px', width: '3px', backgroundColor: '#8593F0' }} />
-                
-                <div style={{ position: 'relative', height: '100%', marginLeft: '14px' }}>
+                <BentoCard 
+                  style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)", padding: "12px 16px", height: "100px" }} 
+                  className="w-full flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+                >
+                  <div className="glass-sweep" /> 
                   
-                  {/* LEFT TEXT CONTENT */}
-                  <div style={{ position: 'absolute', top: '-10px', left: '0px' }}>
-                    <h2 className={`${delaGothic.className} text-white uppercase tracking-wider text-[26px] leading-none`}>{card.title}</h2>
-                  </div>
-                  <div style={{ position: 'absolute', top: '25px', left: '0px' }}>
-                    <p className={`${delaGothic.className} text-[#8593F0] text-[16px] uppercase tracking-widest leading-none`}>{card.sub}</p>
-                  </div>
-                  <div style={{ position: 'absolute', top: '50px', left: '0px' }}>
-                    <p className={`${albertSans.className} text-[#898A8D] text-[14px] leading-tight`}>{card.date}</p>
-                  </div>
-
-                  {/* MANUAL BADGE CONTROL */}
+                  {/* Color-changing indicator bar */}
                   <div style={{ 
-                    position: 'absolute', 
-                    top: '27%', 
-                    right: '0px', 
-                    transform: 'translateY(-50%)',
-                    backgroundColor: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    borderRadius: '4px',
-                    whiteSpace: 'nowrap',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    /* ADJUST BADGE SIZE HERE */
-                    height: '22px', 
-                    padding: '0 10px'
-                  }}>
-                    <p className={`${delaGothic.className} text-white text-[10px] uppercase tracking-wider`}>
-                      {card.tag}
-                    </p>
-                  </div>
+                    position: 'absolute', top: '12px', bottom: '12px', left: '16px', width: '3px', 
+                    backgroundColor: expandedIndex === index ? '#E6FF2B' : '#8593F0', 
+                    transition: 'background-color 0.3s ease' 
+                  }} />
+                  
+                  <div style={{ position: 'relative', height: '100%', marginLeft: '14px', pointerEvents: 'none' }}>
+                    
+                    <div style={{ position: 'absolute', top: '-10px', left: '0px' }}>
+                      <h2 className={`${delaGothic.className} text-white uppercase tracking-wider text-[26px] leading-none`}>{card.title}</h2>
+                    </div>
+                    <div style={{ position: 'absolute', top: '25px', left: '0px' }}>
+                      <p className={`${delaGothic.className} text-[#8593F0] text-[16px] uppercase tracking-widest leading-none`}>{card.sub}</p>
+                    </div>
+                    <div style={{ position: 'absolute', top: '50px', left: '0px' }}>
+                      <p className={`${albertSans.className} text-[#898A8D] text-[14px] leading-tight`}>{card.date}</p>
+                    </div>
 
-                </div>
-              </BentoCard>
+                    {/* BADGE */}
+                    <div style={{ 
+                      position: 'absolute', top: '27%', right: '0px', transform: 'translateY(-50%)',
+                      backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '4px', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      height: '22px', padding: '0 10px'
+                    }}>
+                      <p className={`${delaGothic.className} text-white text-[10px] uppercase tracking-wider`}>
+                        {card.tag}
+                      </p>
+                    </div>
+
+                    {/* CHEVRON (Rotates when expanded) */}
+                    <div style={{
+                      position: 'absolute', bottom: '0px', right: '0px',
+                      transition: 'transform 0.3s ease',
+                      transform: expandedIndex === index ? 'rotate(180deg)' : 'rotate(0deg)'
+                    }}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 6L8 11L13 6" stroke="#898A8D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+
+                  </div>
+                </BentoCard>
+              </div>
+
+              {/* ACCORDION DESCRIPTION PANEL */}
+              <AnimatePresence>
+                {expandedIndex === index && (
+                  <motion.div
+                    key="desc"
+                    initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                    animate={{ height: "auto", opacity: 1, marginTop: 4 }}
+                    exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <div style={{
+                      borderRadius: '10px',
+                      backgroundColor: 'rgba(133, 147, 240, 0.06)',
+                      border: '2px solid rgba(133, 147, 240, 0.2)',
+                      padding: '16px 20px',
+                      borderLeft: '3px solid #E6FF2B',
+                    }}>
+                      <p className={`${albertSans.className} text-[#898A8D] text-[13px] leading-relaxed`}>
+                        {card.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
             </motion.div>
           ))}
-
         </motion.div>
 
       </div>

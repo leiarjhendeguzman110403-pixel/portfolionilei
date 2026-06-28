@@ -10,7 +10,7 @@ import {
   Terminal
 } from "lucide-react";
 import Image from "next/image";
-import { motion, Variants, AnimatePresence } from "framer-motion"; // <-- Added AnimatePresence
+import { motion, Variants, AnimatePresence } from "framer-motion";
 
 /* --- IMPORTED FONTS --- */
 import { Vina_Sans, Alata, Dela_Gothic_One, Albert_Sans } from "next/font/google"; 
@@ -471,7 +471,7 @@ export default function AboutPage() {
                 cursor: 'pointer'
               }}
             >
-              SEMINAR
+              EXPERIENCES
             </button>
 
             <button 
@@ -502,125 +502,286 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* --- EXPANDING ACCORDION CARDS --- */}
-        <motion.div 
-          className="flex flex-col max-w-[600px] mx-auto mt-8"
-          variants={containerVariants}
-          initial={isMobile ? "onscreen" : "offscreen"}
-          whileInView="onscreen"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {[ 
-            { title: "FRONT-END DEVELOPER", sub: "8Con Academy Website", date: "Mar 2026 - Apr 2026", tag: "INTERNSHIP",
-              desc: "Contributed frontend work on the marketing website for 8Con Academy, a Philippine forex trading education company. Built an interactive chatbot with a custom 8Con knowledge base and FAQ accordion. Implemented light/dark mode theming across the entire site, and redesigned the Hero, About, CareerPath, Internship, and Contact sections. Shipped registration and enrollment modals plus an infinite testimonial carousel, and integrated Web3Forms for contact form submissions with email delivery." },
-            { title: "FRONT-END DEVELOPER", sub: "PCCI Valenzuela Website", date: "Feb 2026 - Mar 2026", tag: "INTERNSHIP",
-              desc: "Built and maintained the official PCCI Valenzuela chapter website. Responsible for responsive layout, component architecture, and UI polish using React and Tailwind CSS." },
-            { title: "FRONT-END DEVELOPER", sub: "LITTLE-LIONS MONITORING SYSTEM", date: "Dec 2025 - Feb 2026", tag: "INTERNSHIP",
-              desc: "Developed the front-end of a child monitoring system for a daycare facility, featuring real-time attendance tracking and a parent-facing dashboard." },
-            { title: "VIDEO EDITOR", sub: "SCHOOL PROJECTS/PERSONAL PROJECTS", date: "Aug 2022 - Present", tag: "PROMOTION",
-              desc: "Produced and edited video content for academic submissions and personal creative projects, utilizing CapCut for motion graphics and short-form storytelling." },
-            { title: "AFFILIATE MARKETER", sub: "Tiktok Affiliate", date: "May 2025 - Present", tag: "MARKETING",
-              desc: "Managed TikTok affiliate campaigns by creating product-focused short videos, tracking engagement metrics, and optimizing content strategy to drive conversions." },
-            { title: "GRAPHIC DESIGNER", sub: "FREELANCE", date: "2021 - Present", tag: "FREELANCE",
-              desc: "Delivered branding, social media assets, and print materials for various clients. Specialized in clean, modern visual identities and promotional content." }
-          ].map((card, index) => (
+        {/* --- DYNAMIC CONTENT AREA --- */}
+        <AnimatePresence mode="wait">
+          
+          {/* ========================================= */}
+          {/* EXPERIENCES TAB               */}
+          {/* ========================================= */}
+          {activeTab === 'SEMINAR' && (
             <motion.div 
-              key={index} 
-              variants={itemVariants} 
-              layout // <-- REQUIRED for smooth push-down animation
-              className="w-full relative z-20" 
-              style={{ marginBottom: '10px' }}
+              key="experiences"
+              className="flex flex-col max-w-[600px] mx-auto mt-8"
+              variants={containerVariants}
+              initial="offscreen"
+              animate="onscreen"
+              exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
+              layout 
             >
-              {/* FOOLPROOF CLICK WRAPPER */}
-              <div
-                onClick={() => {
-                  console.log("Card clicked! Index:", index); // Check your browser console!
-                  setExpandedIndex(expandedIndex === index ? null : index);
-                }}
-                className="w-full cursor-pointer relative"
-                style={{ zIndex: expandedIndex === index ? 50 : 20 }}
-              >
-                <BentoCard 
-                  style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)", padding: "12px 16px", height: "100px" }} 
-                  className="w-full flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+              {[ 
+                { 
+                  title: "FRONT-END DEVELOPER", 
+                  sub: "8Con Academy Website", 
+                  date: "Mar 2026 - Apr 2026", 
+                  tag: "INTERNSHIP",
+                  desc: "Contributed to the frontend development of the marketing website for 8Con Academy, a Philippine-based forex trading education company.\n\n• Redesigned the workshop registration page based on the finalized UI/UX design.\n• Implemented an interactive carousel to highlight the company's sub-brands and enhance user exploration.\n• Redesigned individual sub-brand pages to improve visual consistency and user experience." 
+                },
+                { 
+                  title: "FRONT-END DEVELOPER", 
+                  sub: "PCCI Valenzuela Website", 
+                  date: "Feb 2026 - Mar 2026", 
+                  tag: "INTERNSHIP",
+                  desc: "Worked on the frontend development of a comprehensive membership platform for the Philippine Chamber of Commerce and Industry (PCCI) – Valenzuela Chapter. The platform was built on a headless architecture, separating the frontend from the backend to improve scalability, maintainability, and data flow.\n\n• Developed the frontend for the Contact Us and Events pages.\n• Implemented responsive, pixel-perfect layouts based on the provided UI/UX designs." 
+                },
+                { 
+                  title: "FRONT-END DEVELOPER", 
+                  sub: "LITTLE-LIONS MONITORING SYSTEM", 
+                  date: "Dec 2025 - Feb 2026", 
+                  tag: "INTERNSHIP",
+                  desc: "Contributed to the frontend development of a monitoring platform for a Special Education (SPED) school. The platform was built to support school administration through five tailored portals—Admin, Staff, Teachers, Therapists, and Parents—designed with accessibility, clarity, and ease of use in mind.\n\n• Developed the frontend for the Admin and Teacher portals.\n• Collaborated on the UI design and implemented responsive, user-friendly interfaces using React and Vite." 
+                },
+                { 
+                  title: "VIDEO EDITOR", 
+                  sub: "SCHOOL PROJECTS/PERSONAL PROJECTS", 
+                  date: "Aug 2022 - Present", 
+                  tag: "PROMOTION",
+                  desc: "I have experience editing videos for school and personal projects, creating engaging and well-organized content. I enjoy turning raw footage into polished videos while paying attention to timing, transitions, and overall presentation.\n\n• Edited videos for school presentations, academic projects, and personal creative work.\n• Created promotional and social media content with engaging visuals and smooth transitions.\n• Edited workshop videos during my internship (OJT)." 
+                },
+                { 
+                  title: "AFFILIATE MARKETER", 
+                  sub: "Tiktok Affiliate", 
+                  date: "May 2025 - Present", 
+                  tag: "MARKETING",
+                  desc: "I create promotional videos for products through affiliate marketing, producing engaging content that showcases product features in a clear and appealing way. From filming to editing, I create high-quality promotional videos and publish them across TikTok, Shopee, and Facebook to reach a wider audience and increase product visibility.\n\n• Filmed and edited high-quality promotional videos for various products.\n• Created engaging content tailored to current trends and audience preferences.\n• Added captions, transitions, music, and visual effects to enhance video quality.\n• Published and managed promotional content on TikTok, Shopee, and Facebook.\n• Optimized videos for better viewer engagement and product visibility." 
+                },
+                { 
+                  title: "GRAPHIC DESIGNER", 
+                  sub: "FREELANCE", 
+                  date: "2021 - Present", 
+                  tag: "FREELANCE",
+                  desc: "I create visual designs that help clients communicate their ideas and strengthen their brand identity. Based on each client's requirements and design brief, I produce creative, high-quality graphics tailored to their needs while maintaining a clean and visually appealing style.\n\n• Designed posters, banners, invitations, logos, and other marketing materials.\n• Created custom graphics based on clients' requirements and design briefs.\n• Developed layouts that are visually appealing and aligned with the client's branding.\n• Designed intuitive UI/UX layouts for web applications and websites." 
+                }
+              ].map((card, index) => (
+                <motion.div 
+                  key={index} 
+                  variants={itemVariants} 
+                  layout 
+                  className="w-full relative z-20" 
+                  style={{ marginBottom: '10px' }}
                 >
-                  <div className="glass-sweep" /> 
-                  
-                  {/* Color-changing indicator bar */}
-                  <div style={{ 
-                    position: 'absolute', top: '12px', bottom: '12px', left: '16px', width: '3px', 
-                    backgroundColor: expandedIndex === index ? '#E6FF2B' : '#8593F0', 
-                    transition: 'background-color 0.3s ease' 
-                  }} />
-                  
-                  <div style={{ position: 'relative', height: '100%', marginLeft: '14px', pointerEvents: 'none' }}>
-                    
-                    <div style={{ position: 'absolute', top: '-10px', left: '0px' }}>
-                      <h2 className={`${delaGothic.className} text-white uppercase tracking-wider text-[26px] leading-none`}>{card.title}</h2>
-                    </div>
-                    <div style={{ position: 'absolute', top: '25px', left: '0px' }}>
-                      <p className={`${delaGothic.className} text-[#8593F0] text-[16px] uppercase tracking-widest leading-none`}>{card.sub}</p>
-                    </div>
-                    <div style={{ position: 'absolute', top: '50px', left: '0px' }}>
-                      <p className={`${albertSans.className} text-[#898A8D] text-[14px] leading-tight`}>{card.date}</p>
-                    </div>
-
-                    {/* BADGE */}
-                    <div style={{ 
-                      position: 'absolute', top: '27%', right: '0px', transform: 'translateY(-50%)',
-                      backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
-                      borderRadius: '4px', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      height: '22px', padding: '0 10px'
-                    }}>
-                      <p className={`${delaGothic.className} text-white text-[10px] uppercase tracking-wider`}>
-                        {card.tag}
-                      </p>
-                    </div>
-
-                    {/* CHEVRON (Rotates when expanded) */}
-                    <div style={{
-                      position: 'absolute', bottom: '0px', right: '0px',
-                      transition: 'transform 0.3s ease',
-                      transform: expandedIndex === index ? 'rotate(180deg)' : 'rotate(0deg)'
-                    }}>
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 6L8 11L13 6" stroke="#898A8D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-
-                  </div>
-                </BentoCard>
-              </div>
-
-              {/* ACCORDION DESCRIPTION PANEL */}
-              <AnimatePresence>
-                {expandedIndex === index && (
-                  <motion.div
-                    key="desc"
-                    initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                    animate={{ height: "auto", opacity: 1, marginTop: 4 }}
-                    exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    style={{ overflow: "hidden" }}
+                  {/* FOOLPROOF CLICK WRAPPER */}
+                  <div
+                    onClick={() => {
+                      setExpandedIndex(expandedIndex === index ? null : index);
+                    }}
+                    className="w-full cursor-pointer relative"
+                    style={{ zIndex: expandedIndex === index ? 50 : 20 }}
                   >
-                    <div style={{
-                      borderRadius: '10px',
-                      backgroundColor: 'rgba(133, 147, 240, 0.06)',
-                      border: '2px solid rgba(133, 147, 240, 0.2)',
-                      padding: '16px 20px',
-                      borderLeft: '3px solid #E6FF2B',
-                    }}>
-                      <p className={`${albertSans.className} text-[#898A8D] text-[13px] leading-relaxed`}>
-                        {card.desc}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    <BentoCard 
+                      style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)", padding: "12px 16px", height: "100px" }} 
+                      className="w-full flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+                    >
+                      <div className="glass-sweep" /> 
+                      
+                      {/* Color-changing indicator bar */}
+                      <div style={{ 
+                        position: 'absolute', top: '12px', bottom: '12px', left: '16px', width: '3px', 
+                        backgroundColor: expandedIndex === index ? '#E6FF2B' : '#8593F0', 
+                        transition: 'background-color 0.3s ease' 
+                      }} />
+                      
+                      <div style={{ position: 'relative', height: '100%', marginLeft: '14px', pointerEvents: 'none' }}>
+                        
+                        <div style={{ position: 'absolute', top: '-10px', left: '0px' }}>
+                          <h2 className={`${delaGothic.className} text-white uppercase tracking-wider text-[26px] leading-none`}>{card.title}</h2>
+                        </div>
+                        <div style={{ position: 'absolute', top: '25px', left: '0px' }}>
+                          <p className={`${delaGothic.className} text-[#8593F0] text-[16px] uppercase tracking-widest leading-none`}>{card.sub}</p>
+                        </div>
+                        <div style={{ position: 'absolute', top: '50px', left: '0px' }}>
+                          <p className={`${albertSans.className} text-[#898A8D] text-[14px] leading-tight`}>{card.date}</p>
+                        </div>
 
+                        {/* BADGE */}
+                        <div style={{ 
+                          position: 'absolute', top: '27%', right: '0px', transform: 'translateY(-50%)',
+                          backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
+                          borderRadius: '4px', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          height: '22px', padding: '0 10px'
+                        }}>
+                          <p className={`${delaGothic.className} text-white text-[10px] uppercase tracking-wider`}>
+                            {card.tag}
+                          </p>
+                        </div>
+
+                        {/* CHEVRON (Rotates when expanded) */}
+                        <div style={{
+                          position: 'absolute', bottom: '0px', right: '0px',
+                          transition: 'transform 0.3s ease',
+                          transform: expandedIndex === index ? 'rotate(180deg)' : 'rotate(0deg)'
+                        }}>
+                          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 6L8 11L13 6" stroke="#898A8D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+
+                      </div>
+                    </BentoCard>
+                  </div>
+
+                  {/* ACCORDION DESCRIPTION PANEL */}
+                  <AnimatePresence initial={false}>
+                    {expandedIndex === index && (
+                      <motion.div
+                        key="desc"
+                        initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                        animate={{ height: "auto", opacity: 1, marginTop: 4 }}
+                        exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <div style={{
+                          borderRadius: '10px',
+                          backgroundColor: 'rgba(133, 147, 240, 0.06)',
+                          border: '2px solid rgba(133, 147, 240, 0.2)',
+                          padding: '16px 20px',
+                          borderLeft: '3px solid #E6FF2B',
+                        }}>
+                          <div className={`${albertSans.className} text-[#898A8D] text-[14px] leading-relaxed text-justify`}>
+                            {card.desc.split('\n').map((line, i) => {
+                              
+                              if (line.trim() === '') {
+                                return <div key={i} style={{ height: '24px', width: '100%' }}></div>;
+                              }
+                              
+                              if (line.trim().startsWith('•')) {
+                                return (
+                                  <div key={i} className="flex items-start gap-3 mt-2">
+                                    <span className="text-[#8593F0] shrink-0 mt-[4px]">
+                                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                      </svg>
+                                    </span>
+                                    <span>{line.replace('•', '').trim()}</span>
+                                  </div>
+                                );
+                              }
+                              
+                              return <div key={i}>{line}</div>;
+                            })}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </motion.div>
+          )}
+
+          {/* ========================================= */}
+{/* CERTIFICATES TAB                          */}
+{/* ========================================= */}
+{activeTab === 'CERTIFICATES' && (
+  <motion.div 
+    key="certificates"
+    variants={containerVariants}
+    initial="offscreen"
+    animate="onscreen"
+    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
+    style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      columnGap: '24px', // Horizontal space between the 3 cards
+      rowGap: '16px',    // TIGHTENED vertical space between the top and bottom rows
+      width: '100%',
+      maxWidth: '1200px',
+      margin: '32px auto 0 auto'
+    }}
+  >
+    {[
+      // TOP ROW (Indices 0, 1, 2)
+      { title: "MTA: HTML5 APPLICATION DEVELOPMENT", issuer: "MICROSOFT", date: "ISSUED JUL 2021" },
+      { title: "FRONT-END WEB DEVELOPMENT", issuer: "COURSERA", date: "ISSUED JAN 2024" },
+      { title: "UI/UX DESIGN FOUNDATIONS", issuer: "GOOGLE", date: "ISSUED NOV 2023" },
+      
+      // BOTTOM ROW (Indices 3, 4, 5) - Added image paths here
+      { 
+        title: "RESPONSIVE WEB DESIGN", 
+        issuer: "FREECODECAMP", 
+        date: "ISSUED AUG 2023",
+        img: "/images/about/certificate1.png" // Added image path
+      },
+      { 
+        title: "REACT BASICS", 
+        issuer: "META", 
+        date: "ISSUED MAR 2023",
+        img: "/images/about/certificate2.png" // Added image path
+      },
+      { 
+        title: "GRAPHIC DESIGN MASTERCLASS", 
+        issuer: "UDEMY", 
+        date: "ISSUED JAN 2022",
+        img: "/images/about/certificate3.png" // Added image path twice as requested
+      }
+    ].map((cert, index) => (
+      
+      <motion.div 
+        key={index} 
+        variants={itemVariants}
+        style={{
+          width: 'calc(33.333% - 16px)', 
+          minWidth: '280px', 
+          height: '270px' 
+        }}
+      >
+        <BentoCard 
+          style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
+          // Keeping the user's perfect layout dimensions
+          className="w-[330px] h-[270px] flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] cursor-pointer"
+        >
+          <div className="glass-sweep" /> 
+          
+          {/* Dynamic Image Area */}
+          <div className="relative w-full shrink-0 bg-[#1a1a1a] border-b-[3px] border-[#4d4d4d] flex items-center justify-center overflow-hidden" style={{ height: '180px' }}>
+            {/* Conditional Rendering: If cert.img exists, show the Image component */}
+            {cert.img ? (
+              <Image
+                src={cert.img}
+                alt={cert.title}
+                fill
+                className="object-cover" // Ensures the image fills the area correctly
+                sizes="(max-w-[330px]) 100vw, 330px" // Optimized sizes
+              />
+            ) : (
+              /* Conditional Rendering: If cert.img does NOT exist, show the placeholder text */
+              <span className={`${alata.className} text-[#4d4d4d] text-sm`}>Certificate Image</span>
+            )}
+          </div>
+
+          {/* Text Area (Unchanged) */}
+          <div className="flex flex-col gap-2 p-5 flex-grow">
+            <h3 className={`${alata.className} text-white text-[14px] uppercase tracking-wide leading-tight`}>
+              {cert.title}
+            </h3>
+            <p className={`${delaGothic.className} text-[#8593F0] text-[10px] uppercase tracking-widest mt-1`}>
+              {cert.issuer}
+            </p>
+            <div className="mt-auto">
+              <p className={`${albertSans.className} text-[#898A8D] text-[11px]`}>
+                {cert.date}
+              </p>
+            </div>
+          </div>
+        </BentoCard>
+      </motion.div>
+      
+    ))}
+  </motion.div>
+)}
+        </AnimatePresence>
 
       </div>
     </div>

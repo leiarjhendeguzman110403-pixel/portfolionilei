@@ -15,6 +15,8 @@ import { motion, Variants, AnimatePresence } from "framer-motion";
 /* --- IMPORTED FONTS --- */
 import { Vina_Sans, Alata, Dela_Gothic_One, Albert_Sans } from "next/font/google"; 
 
+
+
 const vinaSans = Vina_Sans({ 
   weight: "400",
   subsets: ["latin"] 
@@ -57,8 +59,8 @@ export default function AboutPage() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   
   // MODAL STATE
-  const [expandedImage, setExpandedImage] = useState<string | null>(null);
-
+  // MODAL STATE
+  const [expandedCert, setExpandedCert] = useState<{ title: string; img: string } | null>(null);
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile(); 
@@ -675,152 +677,173 @@ export default function AboutPage() {
           )}
 
           {/* ========================================= */}
-{/* CERTIFICATES TAB                          */}
-{/* ========================================= */}
-{activeTab === 'CERTIFICATES' && (
-  <motion.div 
-    key="certificates"
-    variants={containerVariants}
-    initial="offscreen"
-    animate="onscreen"
-    exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
-    style={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      columnGap: '24px', 
-      rowGap: '16px',    
-      width: '100%',
-      maxWidth: '1200px',
-      margin: '32px auto 0 auto'
-    }}
-  >
-    {[
-      { 
-        title: "certificate of contribution", 
-        issuer: "Little lions sped school monitoring system", 
-        date: "2026",
-        img: "/images/about/certificate4.png",
-        customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
-      },
-      { 
-        title: "certificate of contribution", 
-        issuer: "PCCI Valenzuela Website", 
-        date: "2026",
-        img: "/images/about/certificate5.png",
-        customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
-      },
-      { 
-        title: "certificate of completion", 
-        issuer: "8con academy", 
-        date: "2026",
-        img: "/images/about/certificate6.png",
-        customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
-      },
-      { 
-        title: "certificate of participation", 
-        issuer: "Understanding Agile Development", 
-        date: "2024",
-        img: "/images/about/certificate1.png",
-        customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
-      },
-      { 
-        title: "certificate of participation", 
-        issuer: "Beyond Coding: Business & Product Roles in Tech", 
-        date: "2024",
-        img: "/images/about/certificate2.png",
-        customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
-      },
-      { 
-        title: "certificate of participation", 
-        issuer: "Intelligent Design: Converging Architecture, Security & AI", 
-        date: "2024",
-        img: "/images/about/certificate3.png",
-        customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
-      }
-    ].map((cert, index) => (
-      <motion.div 
-        key={index} 
-        variants={itemVariants}
-        style={{ width: 'calc(33.333% - 16px)', minWidth: '280px', height: '270px' }}
-      >
-        <BentoCard 
-          style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-          className="w-[330px] h-[270px] flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] group"
-        >
-          {/* THE CLICK CATCHER */}
-          <button
-            type="button"
-            className="absolute inset-0 z-[100] cursor-pointer opacity-0"
-            onClick={() => cert.img && setExpandedImage(cert.img)}
-            aria-label="Expand certificate"
-          />
+          {/* CERTIFICATES TAB                          */}
+          {/* ========================================= */}
+          {activeTab === 'CERTIFICATES' && (
+            <motion.div 
+              key="certificates"
+              variants={containerVariants}
+              initial="offscreen"
+              animate="onscreen"
+              exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                columnGap: '24px', 
+                rowGap: '16px',    
+                width: '100%',
+                maxWidth: '1200px',
+                margin: '32px auto 0 auto'
+              }}
+            >
+              {[
+                { 
+                  title: "certificate of contribution", 
+                  issuer: "Little lions sped school monitoring system", 
+                  date: "2026",
+                  img: "/images/about/certificate4.png",
+                  customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
+                },
+                { 
+                  title: "certificate of contribution", 
+                  issuer: "PCCI Valenzuela Website", 
+                  date: "2026",
+                  img: "/images/about/certificate5.png",
+                  customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
+                },
+                { 
+                  title: "certificate of completion", 
+                  issuer: "8con academy", 
+                  date: "2026",
+                  img: "/images/about/certificate6.png",
+                  customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
+                },
+                { 
+                  title: "certificate of participation", 
+                  issuer: "Understanding Agile Development", 
+                  date: "2024",
+                  img: "/images/about/certificate1.png",
+                  customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
+                },
+                { 
+                  title: "certificate of participation", 
+                  issuer: "Beyond Coding: Business & Product Roles in Tech", 
+                  date: "2024",
+                  img: "/images/about/certificate2.png",
+                  customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
+                },
+                { 
+                  title: "certificate of participation", 
+                  issuer: "Intelligent Design: Converging Architecture, Security & AI", 
+                  date: "2024",
+                  img: "/images/about/certificate3.png",
+                  customStyles: { titleSize: "14px", titlePt: "15px", titlePl: "0px", issuerSize: "10px", issuerPt: "-10px", issuerPl: "0px", dateSize: "11px", datePt: "8px", datePl: "0px" }
+                }
+              ].map((cert, index) => (
+                <motion.div 
+                  key={index} 
+                  variants={itemVariants}
+                  /* Added mb-4 (16px) here to stop it from touching the bottom */
+                  style={{ width: 'calc(33.333% - 16px)', minWidth: '280px', height: '270px', marginBottom: '30px' }}
+                >
+                  <button
+                    type="button"
+                    className="w-full h-full block text-left bg-transparent border-none p-0 m-0 cursor-pointer focus:outline-none appearance-none"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setExpandedCert({ title: cert.title, img: cert.img });
+                    }}
+                  >
+                    <BentoCard 
+                      style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
+                      className="w-[330px] h-[270px] flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] group"
+                    >
+                      <div className="glass-sweep" /> 
 
-          <div className="glass-sweep" /> 
+                      {/* Expand Icon */}
+                      <div className="absolute top-3 right-3 z-[50] bg-black/60 p-2 rounded-full border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E6FF2B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                      </div>
+                      
+                      {/* Image */}
+                      <div className="relative w-full shrink-0 bg-[#1a1a1a] border-b-[3px] border-[#4d4d4d] flex items-center justify-center overflow-hidden z-10" style={{ height: '180px' }}>
+                        <Image src={cert.img} alt={cert.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="330px" />
+                      </div>
 
-          {/* Expand Icon */}
-          <div className="absolute top-3 right-3 z-[50] bg-black/60 p-2 rounded-full border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg pointer-events-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E6FF2B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-          </div>
-          
-          {/* Image */}
-          <div className="relative w-full shrink-0 bg-[#1a1a1a] border-b-[3px] border-[#4d4d4d] flex items-center justify-center overflow-hidden z-10 pointer-events-none" style={{ height: '180px' }}>
-            <Image src={cert.img} alt={cert.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="330px" />
-          </div>
-
-          {/* Text */}
-          <div className="flex flex-col text-center items-center flex-grow p-2 z-10 relative pointer-events-none">
-            <h3 className={`${delaGothic.className} text-white uppercase tracking-wide leading-tight`} style={{ fontSize: cert.customStyles.titleSize, marginTop: cert.customStyles.titlePt, paddingLeft: cert.customStyles.titlePl }}>{cert.title}</h3>
-            <p className={`${alata.className} text-[#8593F0] uppercase tracking-widest`} style={{ fontSize: cert.customStyles.issuerSize, marginTop: cert.customStyles.issuerPt, paddingLeft: cert.customStyles.issuerPl }}>{cert.issuer}</p>
-            <div className="mt-auto flex justify-center w-full">
-              <p className={`${alata.className} text-[#898A8D]`} style={{ fontSize: cert.customStyles.dateSize, marginTop: cert.customStyles.datePt, paddingLeft: cert.customStyles.datePl }}>{cert.date}</p>
-            </div>
-          </div>
-        </BentoCard>
-      </motion.div>
-    ))}
-  </motion.div>
-)}
+                      {/* Text */}
+                      <div className="flex flex-col text-center items-center flex-grow p-2 z-10 relative">
+                        <h3 className={`${delaGothic.className} text-[#ffffff] uppercase tracking-wide leading-tight`} style={{ fontSize: cert.customStyles.titleSize, marginTop: cert.customStyles.titlePt, paddingLeft: cert.customStyles.titlePl }}>{cert.title}</h3>
+                        <p className={`${alata.className} text-[#8593F0] uppercase tracking-widest`} style={{ fontSize: cert.customStyles.issuerSize, marginTop: cert.customStyles.issuerPt, paddingLeft: cert.customStyles.issuerPl }}>{cert.issuer}</p>
+                        <div className="mt-auto flex justify-center w-full">
+                          <p className={`${alata.className} text-[#898A8D]`} style={{ fontSize: cert.customStyles.dateSize, marginTop: cert.customStyles.datePt, paddingLeft: cert.customStyles.datePl }}>{cert.date}</p>
+                        </div>
+                      </div>
+                    </BentoCard>
+                  </button>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
         </AnimatePresence>
 
       </div>
 
       {/* --- EXPANDED IMAGE MODAL --- */}
       <AnimatePresence>
-        {expandedImage && (
+        {expandedCert && (
           <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={() => setExpandedImage(null)}
-            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 999999 }}
-            className="flex items-center justify-center bg-black/90 backdrop-blur-md p-4 cursor-zoom-out"
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }}
+            onClick={() => setExpandedCert(null)}
+            style={{
+              position: 'fixed',
+              top: 0, right: 0, bottom: 0, left: 0,
+              zIndex: 999999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgba(0, 0, 0, 0.85)',
+              backdropFilter: 'blur(8px)',
+              cursor: 'zoom-out',
+              padding: '24px'
+            }}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-lg bg-[#1a1a1a] rounded-lg overflow-hidden border-[3px] border-[#4d4d4d] shadow-2xl cursor-default flex flex-col"
+              initial={{ scale: 0.9, opacity: 0 }} 
+              animate={{ scale: 1, opacity: 1 }} 
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative bg-[#1a1a1a] rounded-lg overflow-hidden border-[3px] border-[#4d4d4d] shadow-2xl flex flex-col"
+              style={{ 
+                cursor: 'default',
+                width: '100%',
+                maxWidth: '600px', 
+                maxHeight: '85vh' 
+              }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="p-3 border-b border-[#4d4d4d] bg-[#121212] flex justify-between items-center">
+              {/* Modal Header */}
+              <div className="p-3 border-b border-[#4d4d4d] bg-[#121212] flex justify-between items-center shrink-0">
                 <h3 className={`${delaGothic.className} text-white text-[12px] uppercase tracking-wide`}>
-                  {/* Logic: Find the title in the same array structure */}
-                  {[
-                    { title: "CERTIFICATE OF CONTRIBUTION", img: "/images/about/certificate4.png" },
-                    { title: "CERTIFICATE OF CONTRIBUTION", img: "/images/about/certificate5.png" },
-                    { title: "CERTIFICATE OF COMPLETION", img: "/images/about/certificate6.png" },
-                    { title: "CERTIFICATE OF PARTICIPATION", img: "/images/about/certificate1.png" },
-                    { title: "CERTIFICATE OF PARTICIPATION", img: "/images/about/certificate2.png" },
-                    { title: "CERTIFICATE OF PARTICIPATION", img: "/images/about/certificate3.png" }
-                  ].find(c => c.img === expandedImage)?.title || "Certificate"}
+                  {expandedCert.title}
                 </h3>
-                <button onClick={() => setExpandedImage(null)} className="text-white/60 hover:text-white">✕</button>
+                <button 
+                  onClick={() => setExpandedCert(null)} 
+                  className="text-white/60 hover:text-white text-xl font-bold leading-none cursor-pointer"
+                >
+                  ✕
+                </button>
               </div>
-              <div className="relative w-full aspect-[4/3] bg-black">
-                <Image src={expandedImage} alt="Expanded" fill className="object-contain p-2" />
+              
+              {/* Modal Image */}
+              <div className="relative w-full bg-black flex-grow" style={{ aspectRatio: '4/3', maxHeight: 'calc(85vh - 50px)' }}>
+                <Image src={expandedCert.img} alt={expandedCert.title} fill className="object-contain p-2" />
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
   );
 }

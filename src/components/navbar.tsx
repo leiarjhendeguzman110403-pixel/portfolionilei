@@ -114,7 +114,7 @@ export default function Navbar() {
         <Link href="/projects" className={rubikOne.className} style={getLinkStyle("PROJECTS")}>
           PROJECTS
         </Link>
-        <Link href="/contact" className={rubikOne.className} style={getLinkStyle("CONTACT", true)}>
+        <Link href="/contacts" className={rubikOne.className} style={getLinkStyle("CONTACTS", true)}>
           CONTACT ME
         </Link>
       </nav>

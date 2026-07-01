@@ -40,10 +40,12 @@ export default function Home() {
   return (
     <>
     <Navbar />
-    <div className="relative w-full min-h-screen bg-[#1e1e1e] flex flex-col items-center justify-start px-4">
+    {/* Applied animated-bg-container here and added z-0 */}
+    <div className="relative w-full min-h-screen animated-bg-container flex flex-col items-center justify-start px-4 z-0">
       
-      {/* Light Sweep CSS matching your About page */}
+      {/* Light Sweep & Dual Grid CSS */}
       <style>{`
+        /* 1. Original Glass Sweep for Cards */
         @keyframes glassSweep {
           0% { left: -100%; }
           100% { left: 200%; }
@@ -59,8 +61,73 @@ export default function Home() {
           pointer-events: none;
           z-index: 1;
         }
+
+        /* 2. DUAL SWEEPING GRID ANIMATIONS (20px SIZE) */
+        @keyframes panGrid {
+          0% { background-position: 0px 0px; }
+          100% { background-position: 20px 20px; }
+        }
+        
+        @keyframes maskSweep {
+          0% { 
+            -webkit-mask-position: 0 -50vh, -50vw 0; 
+            mask-position: 0 -50vh, -50vw 0; 
+          }
+          100% { 
+            -webkit-mask-position: 0 150vh, 150vw 0; 
+            mask-position: 0 150vh, 150vw 0; 
+          }
+        }
+
+        .animated-bg-container {
+          background-color: #1e1e1e; /* Match existing dark background */
+          position: relative;
+        }
+
+        /* Base Faint Grid */
+        .animated-bg-container::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          background-size: 20px 20px;
+          animation: panGrid 4s linear infinite;
+          z-index: 0;
+          pointer-events: none;
+        }
+
+        /* Sweeping Glow Grid (#E6FF2B) */
+        .animated-bg-container::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(133, 147, 240, 0.4) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(133, 147, 240, 0.4) 1px, transparent 1px);
+          background-size: 20px 20px;
+          z-index: 0;
+          pointer-events: none;
+          
+          -webkit-mask-image: 
+            linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%),
+            linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%);
+          mask-image: 
+            linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%),
+            linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%);
+            
+          -webkit-mask-size: 100% 40vh, 40vw 100%;
+          mask-size: 100% 40vh, 40vw 100%;
+          
+          -webkit-mask-repeat: no-repeat, no-repeat;
+          mask-repeat: no-repeat, no-repeat;
+          
+          animation: panGrid 4s linear infinite, maskSweep 6s linear infinite;
+        }
       `}</style>
-      <div className="w-full flex flex-col items-center overflow-x-hidden">
+
+      <div className="w-full flex flex-col items-center overflow-x-hidden relative z-10">
         {/* HERO SECTION */}
         <section className="relative w-full max-w-7xl flex flex-col items-center justify-center text-center mt-12 pointer-events-none shrink-0">
           <div className="relative flex flex-col items-center justify-center w-full">

@@ -15,8 +15,6 @@ import { motion, Variants, AnimatePresence } from "framer-motion";
 /* --- IMPORTED FONTS --- */
 import { Vina_Sans, Alata, Dela_Gothic_One, Albert_Sans } from "next/font/google"; 
 
-
-
 const vinaSans = Vina_Sans({ 
   weight: "400",
   subsets: ["latin"] 
@@ -59,8 +57,8 @@ export default function AboutPage() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   
   // MODAL STATE
-  // MODAL STATE
   const [expandedCert, setExpandedCert] = useState<{ title: string; img: string } | null>(null);
+  
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile(); 
@@ -69,11 +67,12 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#1e1e1e]">
+    <div className="relative min-h-screen animated-bg-container text-white overflow-hidden z-0">
       <Navbar /> 
       
       {/* Master Style Block for all CSS Animations */}
       <style>{`
+        /* --- ORIGINAL ABOUT PAGE ANIMATIONS --- */
         @keyframes customGlow {
           0% { filter: drop-shadow(0px 0px 15px rgba(133, 147, 240, 0.4)); }
           50% { filter: drop-shadow(0px 0px 40px rgba(133, 147, 240, 0.9)); }
@@ -97,6 +96,70 @@ export default function AboutPage() {
           animation: glassSweep 8s linear infinite; 
           pointer-events: none;
           z-index: 1;
+        }
+
+        /* --- NEW DUAL SWEEPING GRID ANIMATIONS (20px SIZE) --- */
+        @keyframes panGrid {
+          0% { background-position: 0px 0px; }
+          100% { background-position: 20px 20px; }
+        }
+        
+        @keyframes maskSweep {
+          0% { 
+            -webkit-mask-position: 0 -50vh, -50vw 0; 
+            mask-position: 0 -50vh, -50vw 0; 
+          }
+          100% { 
+            -webkit-mask-position: 0 150vh, 150vw 0; 
+            mask-position: 0 150vh, 150vw 0; 
+          }
+        }
+
+        .animated-bg-container {
+          background-color: #1e1e1e; /* Matched to About page original BG */
+          position: relative;
+        }
+
+        /* 1. Base Faint Grid */
+        .animated-bg-container::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          background-size: 20px 20px;
+          animation: panGrid 4s linear infinite;
+          z-index: 0;
+          pointer-events: none;
+        }
+
+        /* 2. Sweeping Glow Grid (#E6FF2B) */
+        .animated-bg-container::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(133, 147, 240, 0.4) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(133, 147, 240, 0.4) 1px, transparent 1px);
+          background-size: 20px 20px;
+          z-index: 0;
+          pointer-events: none;
+          
+          -webkit-mask-image: 
+            linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%),
+            linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%);
+          mask-image: 
+            linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%),
+            linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%);
+            
+          -webkit-mask-size: 100% 40vh, 40vw 100%;
+          mask-size: 100% 40vh, 40vw 100%;
+          
+          -webkit-mask-repeat: no-repeat, no-repeat;
+          mask-repeat: no-repeat, no-repeat;
+          
+          animation: panGrid 4s linear infinite, maskSweep 6s linear infinite;
         }
       `}</style>
 
@@ -137,7 +200,7 @@ export default function AboutPage() {
           <motion.div variants={itemVariants} className="col-span-2 row-span-5 hover:z-50">
             <BentoCard 
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+              className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
             >
               <div className="glass-sweep" /> 
 
@@ -207,7 +270,7 @@ export default function AboutPage() {
           <motion.div variants={itemVariants} className="col-span-2 row-span-2 hover:z-50">
             <BentoCard 
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
             >
               <div className="glass-sweep" /> 
 
@@ -253,7 +316,7 @@ export default function AboutPage() {
           <motion.div variants={itemVariants} className="col-span-1 row-span-4 z-20 hover:z-50">
             <BentoCard 
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
             >
               <div className="glass-sweep" /> 
 
@@ -287,7 +350,7 @@ export default function AboutPage() {
           <motion.div variants={itemVariants} className="col-span-2 row-span-1 hover:z-50">
             <BentoCard 
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
             >
               <div className="glass-sweep" /> 
 
@@ -339,7 +402,7 @@ export default function AboutPage() {
           <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
             <BentoCard 
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full flex flex-col p-5 lg:px-6 overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+              className="w-full h-full flex flex-col p-5 lg:px-6 overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
             >
               <div className="glass-sweep" /> 
 
@@ -379,7 +442,7 @@ export default function AboutPage() {
           <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
             <BentoCard 
               style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-5 lg:px-6 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+              className="w-full h-full p-5 lg:px-6 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
             >
               <div className="glass-sweep" /> 
 
@@ -512,7 +575,7 @@ export default function AboutPage() {
           {activeTab === 'SEMINAR' && (
             <motion.div 
               key="experiences"
-              className="flex flex-col max-w-[600px] mx-auto mt-8"
+              className="flex flex-col max-w-[600px] mx-auto mt-8 relative z-20"
               variants={containerVariants}
               initial="offscreen"
               animate="onscreen"
@@ -579,7 +642,7 @@ export default function AboutPage() {
                   >
                     <BentoCard 
                       style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)", padding: "12px 16px", height: "100px" }} 
-                      className="w-full flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
+                      className="w-full flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
                     >
                       <div className="glass-sweep" /> 
                       
@@ -642,6 +705,7 @@ export default function AboutPage() {
                           border: '2px solid rgba(133, 147, 240, 0.2)',
                           padding: '16px 20px',
                           borderLeft: '3px solid #E6FF2B',
+                          backdropFilter: 'blur(4px)',
                         }}>
                           <div className={`${albertSans.className} text-[#898A8D] text-[14px] leading-relaxed text-justify`}>
                             {card.desc.split('\n').map((line, i) => {
@@ -694,7 +758,9 @@ export default function AboutPage() {
                 rowGap: '16px',    
                 width: '100%',
                 maxWidth: '1200px',
-                margin: '32px auto 0 auto'
+                margin: '32px auto 0 auto',
+                position: 'relative',
+                zIndex: 20
               }}
             >
               {[
@@ -757,7 +823,7 @@ export default function AboutPage() {
                   >
                     <BentoCard 
                       style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-                      className="w-[330px] h-[270px] flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] group"
+                      className="w-[330px] h-[270px] flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] group backdrop-blur-sm"
                     >
                       <div className="glass-sweep" /> 
 

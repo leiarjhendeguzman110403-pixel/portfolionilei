@@ -14,16 +14,26 @@ export default function ContactsPage() {
   // --- MASTER ADJUSTMENT SECTION ---
   // ==========================================
   
-  // 1. ENTIRE GRID SIZING & POSITION
-  // - To make ALL cards smaller: Change "md:w-6/12" to "md:w-5/12"
-  // - "ml-auto" is what pushes the entire grid to the right side of the screen.
-  const rightSideContainerClass = "md:w-6/12 ml-auto grid grid-cols-4 gap-4 md:gap-5";
+  // 1. ALIGNMENT & OFFSETS (Use "px", "rem", or "%")
+  const textOffsetTop = "105px";     // Adjust text vertical position
+  const textOffsetLeft = "0px";      // Adjust text horizontal position
 
-  // 2. BASE HEIGHT
-  // I lowered this to 100px to match the smaller width!
-  const baseCardHeight = "100px"; 
+  const gridOffsetTop = "-280px";    // Adjust grid vertical position
+  const gridOffsetLeft = "550px";    // Adjust grid horizontal position
 
-  // 3. INDIVIDUAL CARDS (gridSlot locks the layout, paddingClass adjusts text spacing)
+  // 2. CARD SPACING (GAP)
+  // FORCED GAP: Using inline styles guarantees this works without needing a server restart!
+  // Change "20px" to whatever size you want (e.g., "16px", "30px").
+  const cardGap = "10px";
+
+  // 3. ENTIRE GRID SIZING & POSITION
+  // Removed the Tailwind gap classes here to rely purely on the bulletproof inline style
+  const rightSideContainerClass = "md:w-6/12 ml-auto grid grid-cols-4 sticky self-start";
+
+  // 4. BASE HEIGHT
+  const baseCardHeight = "90px"; 
+
+  // 5. INDIVIDUAL CARDS (gridSlot locks the layout, paddingClass adjusts text spacing)
   const contactLinks = [
     { 
       title: "EMAIL", value: "lejden@gmail.com", link: "mailto:lejden@gmail.com",
@@ -68,7 +78,7 @@ export default function ContactsPage() {
   ];
 
   return (
-    <div className="relative min-h-screen animated-bg-container text-white pb-24">
+    <div className="relative min-h-screen animated-bg-container text-white">
       <Navbar />
       
       <style dangerouslySetInnerHTML={{__html: `
@@ -84,26 +94,53 @@ export default function ContactsPage() {
       <main className="max-w-[1200px] mx-auto px-4 pt-[100px] md:pt-[140px] flex flex-col md:flex-row gap-10 md:gap-16 relative z-10">
         
         {/* LEFT SIDE: BIG TEXT */}
-        <div className="md:w-5/12 sticky top-[120px] self-start">
-          <h1 
-            className={`${vinaSans.className} text-[#E6FF2B] uppercase tracking-tight`}
-            style={{ 
-              fontSize: "clamp(60px, 9vw, 110px)", 
-              lineHeight: "0.85" 
-            }}
-          >
-            LET'S <br/> CONNECT.
+        <div 
+          className="md:w-5/12 sticky self-start"
+          style={{ 
+            top: `calc(120px + ${textOffsetTop})`,
+            left: textOffsetLeft,
+            position: 'sticky'
+          }}
+        >
+          <h1 className={`${vinaSans.className} text-[#E6FF2B] uppercase tracking-tight flex flex-col`}>
+            
+            <span 
+              className="block"
+              style={{ 
+                fontSize: "clamp(80px, 12vw, 300px)",
+                lineHeight: "0.85" 
+              }}
+            >
+              LET'S
+            </span>
+
+            <span 
+              className="block"
+              style={{ 
+                fontSize: "clamp(80px, 12vw, 150px)",
+                lineHeight: "0.85" 
+              }}
+            >
+              CONNECT.
+            </span>
+
           </h1>
-          <p className={`${alata.className} mt-6 text-[#898A8D] text-sm uppercase tracking-widest`}>
-            Open for collaborations and opportunities.
+
+          <p className={`${alata.className} mt-8 text-[#898A8D] text-sm uppercase tracking-widest`}>
+            Available for New Projects and Career Opportunities.
           </p>
         </div>
 
         {/* RIGHT SIDE: CARDS GRID */}
-        {/* Notice how it uses rightSideContainerClass here! */}
         <div 
           className={rightSideContainerClass}
-          style={{ gridAutoRows: baseCardHeight }}
+          style={{ 
+            gridAutoRows: baseCardHeight,
+            gap: cardGap,                // <--- BULLETPROOF GAP FIX IS HERE
+            top: "120px",                
+            marginTop: gridOffsetTop,    
+            marginLeft: gridOffsetLeft
+          }}
         >
           {contactLinks.map((item, i) => (
             

@@ -10,42 +10,60 @@ const alata = Alata({ weight: "400", subsets: ["latin"] });
 
 export default function ContactsPage() {
   
-  // --- ADJUSTMENT SECTION ---
-  // Adjust the width and height by changing the gridClass!
-  // Width: "col-span-1" (half width) vs "col-span-2" (full width)
-  // Height: "row-span-1" (normal height) vs "row-span-2" (double height)
+  // ==========================================
+  // --- MASTER ADJUSTMENT SECTION ---
+  // ==========================================
+  
+  // 1. ENTIRE GRID SIZING & POSITION
+  // - To make ALL cards smaller: Change "md:w-6/12" to "md:w-5/12"
+  // - "ml-auto" is what pushes the entire grid to the right side of the screen.
+  const rightSideContainerClass = "md:w-6/12 ml-auto grid grid-cols-4 gap-4 md:gap-5";
+
+  // 2. BASE HEIGHT
+  // I lowered this to 100px to match the smaller width!
+  const baseCardHeight = "100px"; 
+
+  // 3. INDIVIDUAL CARDS (gridSlot locks the layout, paddingClass adjusts text spacing)
   const contactLinks = [
     { 
       title: "EMAIL", value: "lejden@gmail.com", link: "mailto:lejden@gmail.com",
-      gridClass: "col-span-1 row-span-1" 
+      gridSlot: "col-span-4 row-span-1", 
+      paddingClass: "p-6 md:p-8" 
     },
     { 
       title: "LINKEDIN", value: "linkedin.com/in/pjpunzal", link: "https://linkedin.com/in/pjpunzal",
-      gridClass: "col-span-1 row-span-1" 
+      gridSlot: "col-span-2 row-span-1", 
+      paddingClass: "p-5 md:p-6" 
     },
     { 
       title: "GITHUB", value: "github.com/lejden", link: "https://github.com/lejden",
-      gridClass: "col-span-1 row-span-1" 
+      gridSlot: "col-span-2 row-span-1",
+      paddingClass: "p-5 md:p-6" 
     },
     { 
       title: "BEHANCE", value: "behance.net/pjpunzal", link: "https://behance.net/pjpunzal",
-      gridClass: "col-span-1 row-span-1" 
+      gridSlot: "col-span-4 row-span-1",
+      paddingClass: "p-6 md:p-8" 
     },
     { 
       title: "INSTAGRAM", value: "@pjpunzal", link: "https://instagram.com/pjpunzal",
-      gridClass: "col-span-1 row-span-1" 
+      gridSlot: "col-span-1 row-span-1", 
+      paddingClass: "p-3 md:p-4" 
     },
     { 
       title: "TWITTER", value: "@pjpunzal", link: "https://twitter.com/pjpunzal",
-      gridClass: "col-span-1 row-span-1" 
+      gridSlot: "col-span-1 row-span-1",
+      paddingClass: "p-3 md:p-4" 
     },
     { 
       title: "UPWORK", value: "upwork.com/freelancers/pj", link: "https://upwork.com/freelancers/pj",
-      gridClass: "col-span-1 row-span-1" 
+      gridSlot: "col-span-1 row-span-1", 
+      paddingClass: "p-3 md:p-4" 
     },
     { 
       title: "RESUME", value: "Download PDF", link: "#",
-      gridClass: "col-span-1 row-span-1" 
+      gridSlot: "col-span-1 row-span-1",
+      paddingClass: "p-3 md:p-4" 
     },
   ];
 
@@ -81,12 +99,15 @@ export default function ContactsPage() {
           </p>
         </div>
 
-        {/* RIGHT SIDE: 8 CARDS GRID */}
-        {/* grid-cols-2 ensures 2 columns. auto-rows-[120px] sets the base height of row-span-1 */}
-        <div className="md:w-7/12 grid grid-cols-2 auto-rows-[120px] gap-5">
+        {/* RIGHT SIDE: CARDS GRID */}
+        {/* Notice how it uses rightSideContainerClass here! */}
+        <div 
+          className={rightSideContainerClass}
+          style={{ gridAutoRows: baseCardHeight }}
+        >
           {contactLinks.map((item, i) => (
             
-            <div key={i} className={`${item.gridClass} hover:z-50`}>
+            <div key={i} className={`${item.gridSlot} relative`}>
               <a 
                 href={item.link} 
                 target="_blank" 
@@ -94,7 +115,7 @@ export default function ContactsPage() {
                 className="block w-full h-full cursor-pointer group hover:scale-[1.02] transition-transform duration-300"
               >
                 <BentoCard 
-                  className="bg-[#2a2a2a]/90 backdrop-blur-md border border-[#4d4d4d] group-hover:border-[#8593F0] w-full h-full flex flex-col justify-center transition-colors duration-300 overflow-hidden p-6"
+                  className={`bg-[#2a2a2a]/90 backdrop-blur-md border border-[#4d4d4d] group-hover:border-[#8593F0] w-full h-full flex flex-col justify-center transition-colors duration-300 overflow-hidden ${item.paddingClass}`}
                 >
                   <h3 className={`${delaGothic.className} text-[#8593F0] text-[10px] tracking-widest uppercase mb-1`}>
                     {item.title}

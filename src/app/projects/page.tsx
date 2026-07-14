@@ -56,31 +56,46 @@ export default function ProjectsPage() {
     },
     bigCard: { 
       marginTop: "-30px", 
-      height: "600px", // Fixed height to allow scrolling for the 4 sections
-      padding: "32px" 
+      height: "auto",
+      minHeight: "600px",
+      padding: "32px",
+      demoButtonFontSize: "12px",
+      demoButtonPadding: "8px 16px",
+      techStackPadding: "6px 12px",
+      techStackGap: "12px",
+      carouselMaxHeight: "300px" // <-- Prevents giant images!
     },
     gridGap: "20px"
   };
 
-  // Expanded projects array with Carousel Images, Contributions, and Tech Stack
   const projects = [
     { 
       id: 1, 
       title: "LITTLE-LIONS MONITORING SYSTEM", 
       category: "INTERN - FRONT-END",
+      demoLink: "https://little-lion.pages.dev/",
       description: "A specialized administrative platform for a Special Education school — covering full requirements gathering, architecture, and delivery. Built five tailored portals for distinct stakeholder groups with an emphasis on accessibility and clarity. The user interface was engineered using React and polished with responsive CSS within VS Code, ensuring a clean, real-time dashboard for monitoring access logs across various screen sizes.",
-      images: ["Media 1 (Admin Portal)", "Media 2 (Teacher Portal)", "Media 3 (Dashboard)"],
+      images: [
+        "/images/about/little1.png", "/images/about/little2.png", "/images/about/little3.png", 
+        "/images/about/little4.png", "/images/about/little5.png", "/images/about/little6.png", 
+        "/images/about/little7.png", "/images/about/little8.png", "/images/about/little9.png", 
+        "/images/about/little10.png", "/images/about/little11.png", "/images/about/little12.png", 
+        "/images/about/little13.png", "/images/about/little14.png", "/images/about/little15.png", 
+        "/images/about/little16.png", "/images/about/little17.png", "/images/about/little18.png", 
+        "/images/about/little19.png", "/images/about/little20.png"
+      ],
       contributions: [
         "Designed accessible, calming frontend interfaces using intentional color palettes (greens and whites) and clear information hierarchies for users including parents with varying technical literacy.",
         "The layout of the website was completely driven by the client's preferences. I made sure to follow their exact requirements and ideas to give them the final look they expected.",
         "Used React, CSS, and VS Code to build and design the website. I made sure all layouts matched exactly what the client wanted and followed their specific vision.",
       ],
-      techStack: ["REACT", "VITE", "TAILWIND CSS", "FIGMA"]
+      techStack: ["REACT", "FIREBASE FIRESTORE", "FIREBASE AUTH", "JAVA SCRIPT", "CSS", "RBAC", "VS CODE", "FIGMA"]
     },
     { 
       id: 2, 
       title: "PCCI VALENZUELA WEBSITE", 
       category: "INTERN - FRONT-END",
+      demoLink: "https://pcci-valenzuela.onrender.com/",
       description: "Worked on the frontend development of a comprehensive membership platform for the Philippine Chamber of Commerce and Industry (PCCI) – Valenzuela Chapter. The platform was built on a headless architecture.",
       images: ["Media 1 (Landing Page)", "Media 2 (Events Page)"],
       contributions: [
@@ -93,6 +108,7 @@ export default function ProjectsPage() {
       id: 3, 
       title: "8CON ACADEMY WEBSITE", 
       category: "INTERN - FRONT-END",
+      demoLink: "https://8con-academy-website-batch6.vercel.app/",
       description: "Contributed to the frontend development of the marketing website for 8Con Academy, a Philippine-based forex trading education company.",
       images: ["Media 1 (Workshops)", "Media 2 (Sub-brands Carousel)"],
       contributions: [
@@ -117,14 +133,12 @@ export default function ProjectsPage() {
     },
   ];
 
-  // State Management
   const [selectedProjectId, setSelectedProjectId] = useState(projects[0].id);
   const [carouselIndex, setCarouselIndex] = useState(0);
 
   const selectedProject = projects.find(p => p.id === selectedProjectId) || projects[0];
-  const isDetailedLayout = selectedProject.id <= 3; // Applies the 4-section layout to projects 1, 2, 3
+  const isDetailedLayout = selectedProject.id <= 3;
 
-  // Reset carousel index when switching projects
   useEffect(() => {
     setCarouselIndex(0);
   }, [selectedProjectId]);
@@ -192,24 +206,9 @@ export default function ProjectsPage() {
           
           animation: panGrid 4s linear infinite, maskSweep 6s linear infinite;
         }
-
-        /* Custom Scrollbar for Big Card */
-        .big-card-scroll::-webkit-scrollbar {
-          width: 6px;
-        }
-        .big-card-scroll::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .big-card-scroll::-webkit-scrollbar-thumb {
-          background-color: #4d4d4d;
-          border-radius: 10px;
-        }
-        .big-card-scroll::-webkit-scrollbar-thumb:hover {
-          background-color: #8593F0;
-        }
       `}} />
 
-      <div className="relative min-h-screen animated-bg-container text-white overflow-hidden z-0">
+      <div className="relative min-h-screen animated-bg-container text-white overflow-clip z-0">
         
         <div className="relative z-10">
           <Navbar />
@@ -242,13 +241,12 @@ export default function ProjectsPage() {
             </div>
 
             <div 
-              className="flex flex-row" 
+              className="flex flex-row items-start relative" 
               style={{ gap: CONFIG.gridGap }}
             >
               
-              {/* --- LEFT SIDE: SMALL CARDS --- */}
               <div 
-                className="flex flex-col" 
+                className="flex flex-col sticky top-[120px] z-10 self-start" 
                 style={{ 
                   gap: CONFIG.smallCards.gap,
                   width: CONFIG.smallCards.width,
@@ -263,7 +261,11 @@ export default function ProjectsPage() {
                     <BentoCard 
                       key={proj.id} 
                       onClick={() => setSelectedProjectId(proj.id)}
-                      className={`bg-[#2a2a2a]/80 backdrop-blur-sm flex items-center transition-all duration-300 cursor-pointer group border-2 ${isSelected ? 'border-[#8593F0]' : 'border-[#4d4d4d] hover:border-[#8593F0]'}`}
+                      className={`bg-[#202020] flex items-center transition-all duration-300 cursor-pointer group border-[0.1px] ${
+                        isSelected 
+                          ? 'border-[#8593F0] shadow-[inset_4px_4px_8px_rgba(0,0,0,0.7),inset_-4px_-4px_8px_rgba(255,255,255,0.03)]' 
+                          : 'border-[#2a2a2a] hover:border-white/20 shadow-[6px_6px_12px_rgba(0,0,0,0.6),-6px_-6px_12px_rgba(255,255,255,0.04)] hover:shadow-[8px_8px_15px_rgba(0,0,0,0.8),-8px_-8px_15px_rgba(255,255,255,0.06)]'
+                      }`}
                       style={{ 
                         height: CONFIG.smallCards.height,
                         padding: CONFIG.smallCards.padding
@@ -313,71 +315,114 @@ export default function ProjectsPage() {
 
               {/* --- RIGHT SIDE: BIG CARD --- */}
               <div 
-                className="flex-grow"
+                className="flex-grow w-full"
                 style={{ marginTop: CONFIG.bigCard.marginTop }} 
               >
                 <BentoCard 
-                  className="border-2 border-[#8593F0] bg-[#2a2a2a]/80 backdrop-blur-sm flex flex-col overflow-y-auto big-card-scroll animate-in fade-in zoom-in-95 duration-300"
+                  className="bg-[#202020] border-[0.1px] border-[#2a2a2a] shadow-[10px_10px_25px_rgba(0,0,0,0.6),-10px_-10px_25px_rgba(255,255,255,0.03)] flex flex-col animate-in fade-in zoom-in-95 duration-300"
                   style={{ 
                     height: CONFIG.bigCard.height,
+                    minHeight: CONFIG.bigCard.minHeight,
                     padding: CONFIG.bigCard.padding
                   }}
                 >
-                  <div className="flex flex-col gap-1 mb-6 shrink-0">
-                    <span className={`${alata.className} text-[#E6FF2B] tracking-[0.2em] uppercase text-xs block`}>
-                      {selectedProject.category}
-                    </span>
-                    <h2 className={`${delaGothic.className} text-2xl md:text-3xl text-white uppercase`}>
-                      {selectedProject.title}
-                    </h2>
+                  
+                  <div className="flex justify-between items-start mb-6 shrink-0 gap-4">
+                    <div className="flex flex-col gap-1">
+                      <span className={`${alata.className} text-[#E6FF2B] tracking-[0.2em] uppercase text-xs block`}>
+                        {selectedProject.category}
+                      </span>
+                      <h2 className={`${delaGothic.className} text-2xl md:text-3xl text-white uppercase`}>
+                        {selectedProject.title}
+                      </h2>
+                    </div>
+
+                    {selectedProject.id <= 3 && selectedProject.demoLink && (
+                      <a 
+                        href={selectedProject.demoLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className={`${alata.className} shrink-0 bg-[#202020] text-[#ffffff] mt-1 rounded-[6px] font-bold tracking-[0.15em] uppercase transition-all duration-300 border border-[#898A8D] hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] flex items-center justify-center gap-2`}
+                        style={{ 
+                          fontSize: CONFIG.bigCard.demoButtonFontSize,
+                          padding: CONFIG.bigCard.demoButtonPadding
+                        }}
+                      >
+                        Live Demo
+                        <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                      </a>
+                    )}
                   </div>
                   
-                  {/* SECTION 1: MEDIA CAROUSEL */}
+                  {/* SECTION 1: MEDIA CAROUSEL (Updated Layout) */}
                   {selectedProject.images && selectedProject.images.length > 0 && (
-                    <div className="relative w-full h-[220px] bg-[#1a1a1a] rounded-lg mb-8 border border-[#4d4d4d] flex items-center justify-center overflow-hidden shrink-0 group">
+                    <div className="flex flex-col w-full mb-8 shrink-0 group">
                       
-                      <div className="absolute inset-0 flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
-                        {selectedProject.images.map((img, i) => (
-                          <div key={i} className="w-full h-full shrink-0 flex items-center justify-center bg-[#1a1a1a]">
-                            <span className={`${alata.className} text-[#4d4d4d] tracking-widest uppercase`}>{img} Placeholder</span>
-                            {/* NOTE: You can replace the span above with an <Image /> component later! */}
-                          </div>
-                        ))}
+                      {/* Image Viewer Container */}
+                      <div 
+                        className="relative w-full rounded-lg overflow-hidden border-[0.1px] border-[#2a2a2a] bg-[#1a1a1a]" 
+                        style={{ height: CONFIG.bigCard.carouselMaxHeight }}
+                      >
+                        <div className="absolute inset-0 flex transition-transform duration-500 ease-in-out items-center" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
+                          {selectedProject.images.map((img, i) => {
+                            const fixedImgSrc = img.startsWith('/') ? img : `/${img}`;
+                            return (
+                              <div key={i} className="w-full h-full shrink-0 flex justify-center items-center p-4">
+                                {img.includes('.png') || img.includes('.jpg') || img.includes('.jpeg') ? (
+                                  <img 
+                                    src={fixedImgSrc} 
+                                    alt={`${selectedProject.title} screenshot ${i + 1}`} 
+                                    className="w-full h-full object-contain pointer-events-none drop-shadow-xl"
+                                  />
+                                ) : (
+                                  <div className="flex items-center justify-center w-full h-full">
+                                    <span className={`${alata.className} text-[#4d4d4d] tracking-widest uppercase`}>{img} Placeholder</span>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                       
-                      {/* Carousel Controls */}
+                      {/* Controls (Positioned Below the Images) */}
                       {selectedProject.images.length > 1 && (
-                        <>
+                        <div className="flex justify-center items-center gap-8 mt-5">
+                          
+                          {/* Previous Button */}
                           <button 
                             onClick={(e) => { e.stopPropagation(); setCarouselIndex(prev => Math.max(0, prev - 1)); }}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity disabled:hidden hover:bg-[#8593F0]"
+                            className="bg-[#2a2a2a] p-2.5 rounded-full text-[#898A8D] hover:text-[#E6FF2B] hover:border-white transition-all duration-300 border-[0.5px] border-[#4d4d4d] hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] disabled:opacity-30 disabled:hover:text-[#898A8D] disabled:hover:border-[#4d4d4d] disabled:hover:shadow-none cursor-pointer"
                             disabled={carouselIndex === 0}
                           >
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                           </button>
+                          
+                          {/* Middle Indicator */}
+                          <span className={`${alata.className} text-[12px] text-white tracking-[0.2em] font-bold w-12 text-center`}>
+                            {carouselIndex + 1} / {selectedProject.images.length}
+                          </span>
+                          
+                          {/* Next Button */}
                           <button 
                             onClick={(e) => { e.stopPropagation(); setCarouselIndex(prev => Math.min(selectedProject.images.length - 1, prev + 1)); }}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity disabled:hidden hover:bg-[#8593F0]"
+                            className="bg-[#2a2a2a] p-2.5 rounded-full text-[#898A8D] hover:text-[#E6FF2B] hover:border-white transition-all duration-300 border-[0.5px] border-[#4d4d4d] hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] disabled:opacity-30 disabled:hover:text-[#898A8D] disabled:hover:border-[#4d4d4d] disabled:hover:shadow-none cursor-pointer"
                             disabled={carouselIndex === selectedProject.images.length - 1}
                           >
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                           </button>
                           
-                          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-                            {selectedProject.images.map((_, i) => (
-                              <div key={i} className={`w-2 h-2 rounded-full transition-colors ${carouselIndex === i ? 'bg-[#E6FF2B]' : 'bg-white/30'}`} />
-                            ))}
-                          </div>
-                        </>
+                        </div>
                       )}
                     </div>
                   )}
                   
-                  {/* DYNAMIC CONTENT SWITCH: 4-Sections vs Simple */}
                   {isDetailedLayout ? (
                     <div className="flex flex-col gap-8 shrink-0">
-                      
-                      {/* SECTION 2: DESCRIPTION */}
                       <div>
                         <h3 className={`${alata.className} text-[#898A8D] text-[11px] tracking-[0.15em] uppercase mb-2 border-b border-[#4d4d4d] pb-2 inline-block w-full`}>Project Overview</h3>
                         <p className={`${alata.className} text-white/80 text-sm leading-relaxed text-justify mt-2`}>
@@ -385,17 +430,17 @@ export default function ProjectsPage() {
                         </p>
                       </div>
 
-                      {/* SECTION 3: KEY CONTRIBUTIONS */}
                       {selectedProject.contributions && (
                         <div>
                           <h3 className={`${alata.className} text-[#898A8D] text-[11px] tracking-[0.15em] uppercase mb-4 border-b border-[#4d4d4d] pb-2 inline-block w-full`}>Key Contributions</h3>
-                          <ul className="flex flex-col gap-3">
+                          <ul className="flex flex-col" style={{ gap: "15px" }}>
                             {selectedProject.contributions.map((cont, i) => (
-                              <li key={i} className="flex items-start gap-3">
-                                <span className="text-[#8593F0] shrink-0 mt-[4px]">
-                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                  </svg>
+                              <li key={i} className="flex items-start">
+                                <span 
+                                  className={`${vinaSans.className} text-[#8593F0] shrink-0 mt-[2px] text-lg tracking-wider`}
+                                  style={{ minWidth: "30px" }}
+                                >
+                                  {String(i + 1).padStart(2, '0')}
                                 </span>
                                 <span className={`${alata.className} text-white/80 text-sm leading-relaxed`}>{cont}</span>
                               </li>
@@ -408,21 +453,25 @@ export default function ProjectsPage() {
                       {selectedProject.techStack && (
                         <div>
                           <h3 className={`${alata.className} text-[#898A8D] text-[11px] tracking-[0.15em] uppercase mb-4 border-b border-[#4d4d4d] pb-2 inline-block w-full`}>Tech Stack & Tools</h3>
-                          <div className="flex flex-wrap gap-2">
+                          
+                          <div className="flex flex-wrap" style={{ gap: CONFIG.bigCard.techStackGap }}>
                             {selectedProject.techStack.map((tech, i) => (
-                              <div key={i} className="py-1.5 px-3 rounded-[6px] bg-[#4d4d4d]/40 border border-[#4d4d4d] flex items-center justify-center">
-                                <span className={`${alata.className} text-[10px] text-white tracking-wide uppercase`}>
+                              <div 
+                                key={i} 
+                                className="rounded-[7px] bg-[#2a2a2a] text-[#898A8D] transition-all duration-300 border-[0.5px] border-[#4d4d4d] hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] flex items-center justify-center cursor-default"
+                                style={{ padding: CONFIG.bigCard.techStackPadding }}
+                              >
+                                <span className={`${alata.className} text-[12px] font-bold tracking-[0.15em] uppercase`}>
                                   {tech}
                                 </span>
                               </div>
                             ))}
                           </div>
+                          
                         </div>
                       )}
-
                     </div>
                   ) : (
-                    /* SIMPLE LAYOUT (For Projects 4 & 5) */
                     <div className="shrink-0">
                       <p className={`${alata.className} text-white/80 text-sm leading-relaxed text-justify mt-2`}>
                         {selectedProject.description}

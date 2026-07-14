@@ -68,11 +68,12 @@ export default function ProjectsPage() {
       id: 1, 
       title: "LITTLE-LIONS MONITORING SYSTEM", 
       category: "INTERN - FRONT-END",
-      description: "Contributed to the frontend development of a monitoring platform for a Special Education (SPED) school. Designed to support school administration through tailored portals for Admins, Staff, Teachers, Therapists, and Parents.",
+      description: "A specialized administrative platform for a Special Education school — covering full requirements gathering, architecture, and delivery. Built five tailored portals for distinct stakeholder groups with an emphasis on accessibility and clarity. The user interface was engineered using React and polished with responsive CSS within VS Code, ensuring a clean, real-time dashboard for monitoring access logs across various screen sizes.",
       images: ["Media 1 (Admin Portal)", "Media 2 (Teacher Portal)", "Media 3 (Dashboard)"],
       contributions: [
-        "Developed the frontend for the Admin and Teacher portals.",
-        "Collaborated on the UI design and implemented responsive interfaces using React and Vite."
+        "Designed accessible, calming frontend interfaces using intentional color palettes (greens and whites) and clear information hierarchies for users including parents with varying technical literacy.",
+        "The layout of the website was completely driven by the client's preferences. I made sure to follow their exact requirements and ideas to give them the final look they expected.",
+        "Used React, CSS, and VS Code to build and design the website. I made sure all layouts matched exactly what the client wanted and followed their specific vision.",
       ],
       techStack: ["REACT", "VITE", "TAILWIND CSS", "FIGMA"]
     },

@@ -153,11 +153,13 @@ export default function ContactsPage() {
         </svg>
       ),
       iconPosition: "absolute-right",
-      link: "", 
+      link: "https://www.google.com/maps/search/?api=1&query=Pantoc,+Meycauayan,+Bulacan,+Philippines", 
       gridClass: "col-span-4 row-span-1", 
       titleFont: alata.className, 
       valueFont: victorMono.className, 
       
+      valueColor: "!text-white group-hover:!text-white", 
+
       // CIRCLE CONTROLS
       hasCircle: true,
 
@@ -193,14 +195,12 @@ export default function ContactsPage() {
           <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
         </svg>
       ),
-      link: "#", 
+      link: "https://www.facebook.com/leiarjhen.deguzman", 
       gridClass: "col-span-1 row-span-1", 
       titleFont: victorMono.className,
       valueFont: victorMono.className, 
       
-      // CHANGED TEXT COLOR
       titleColor: "text-[#ffffff]",
-
       hasCircle: true,
 
       iconSize: "w-[50px] h-[50px] md:w-[60px] md:h-[60px]",
@@ -209,7 +209,7 @@ export default function ContactsPage() {
 
       titleSize: "text-[20px] md:text-[18px]",
       titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[20px]", // ADDED MARGIN LEFT
+      titleMarginLeft: "ml-[20px]", 
     },
 
     // --- CARD 6: INSTAGRAM ---
@@ -224,14 +224,12 @@ export default function ContactsPage() {
           <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
         </svg>
       ),
-      link: "#", 
+      link: "https://www.instagram.com/leideguzman_/", 
       gridClass: "col-span-1 row-span-1", 
       titleFont: victorMono.className,
       valueFont: victorMono.className,
       
-      // CHANGED TEXT COLOR
       titleColor: "text-[#ffffff]",
-
       hasCircle: true,
 
       iconSize: "w-[50px] h-[50px] md:w-[60px] md:h-[60px]",
@@ -240,7 +238,7 @@ export default function ContactsPage() {
 
       titleSize: "text-[20px] md:text-[18px]",
       titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[20px]", // ADDED MARGIN LEFT
+      titleMarginLeft: "ml-[20px]", 
     },
 
     // --- CARD 7: GITHUB ---
@@ -253,14 +251,12 @@ export default function ContactsPage() {
           <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
         </svg>
       ),
-      link: "#", 
+      link: "https://github.com/leiarjhendeguzman110403-pixel", 
       gridClass: "col-span-1 row-span-1", 
       titleFont: victorMono.className,
       valueFont: victorMono.className,
       
-      // CHANGED TEXT COLOR
       titleColor: "text-[#ffffff]",
-
       hasCircle: true,
 
       iconSize: "w-[50px] h-[50px] md:w-[60px] md:h-[60px]",
@@ -269,7 +265,7 @@ export default function ContactsPage() {
 
       titleSize: "text-[20px] md:text-[18px]",
       titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[20px]", // ADDED MARGIN LEFT
+      titleMarginLeft: "ml-[20px]", 
     },
 
     // --- CARD 8: LINKEDIN ---
@@ -282,14 +278,12 @@ export default function ContactsPage() {
           <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
         </svg>
       ),
-      link: "#", 
+      link: "https://www.linkedin.com/in/lei-de-guzman-1ba84039b/", 
       gridClass: "col-span-1 row-span-1", 
       titleFont: victorMono.className,
       valueFont: victorMono.className,
       
-      // CHANGED TEXT COLOR
       titleColor: "text-[#ffffff]",
-
       hasCircle: true,
 
       iconSize: "w-[50px] h-[50px] md:w-[60px] md:h-[60px]",
@@ -298,7 +292,7 @@ export default function ContactsPage() {
 
       titleSize: "text-[20px] md:text-[18px]",
       titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[20px]", // ADDED MARGIN LEFT
+      titleMarginLeft: "ml-[20px]", 
     },
   ];
 
@@ -306,10 +300,9 @@ export default function ContactsPage() {
     <div className="relative min-h-screen animated-bg-container text-white pb-24">
       <Navbar />
       
+      {/* --- UPDATED STYLE BLOCK TO MATCH OTHER PAGES --- */}
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes panGrid { 0% { background-position: 0px 0px; } 100% { background-position: 20px 20px; } }
-        
-        /* --- Sweep Animation --- */
+        /* --- Sweep Animation for Cards --- */
         @keyframes glassSweep {
           0% { left: -100%; }
           100% { left: 200%; }
@@ -326,15 +319,72 @@ export default function ContactsPage() {
           z-index: 1;
         }
 
-        .animated-bg-container { background-color: #121212; position: relative; }
+        /* --- DUAL SWEEPING GRID ANIMATIONS (20px SIZE) --- */
+        @keyframes panGrid {
+          0% { background-position: 0px 0px; }
+          100% { background-position: 20px 20px; }
+        }
+        
+        @keyframes maskSweep {
+          0% { 
+            -webkit-mask-position: 0 -50vh, -50vw 0; 
+            mask-position: 0 -50vh, -50vw 0; 
+          }
+          100% { 
+            -webkit-mask-position: 0 150vh, 150vw 0; 
+            mask-position: 0 150vh, 150vw 0; 
+          }
+        }
+
+        .animated-bg-container {
+          background-color: #121212;
+          position: relative;
+        }
+
+        /* Base Faint Grid */
         .animated-bg-container::before {
-          content: ""; position: absolute; inset: 0;
-          background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-          background-size: 20px 20px; animation: panGrid 4s linear infinite; z-index: 0; pointer-events: none;
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          background-size: 20px 20px;
+          animation: panGrid 4s linear infinite;
+          z-index: 0;
+          pointer-events: none;
+        }
+
+        /* Sweeping Glow Grid */
+        .animated-bg-container::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(133, 147, 240, 0.4) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(133, 147, 240, 0.4) 1px, transparent 1px);
+          background-size: 20px 20px;
+          z-index: 0;
+          pointer-events: none;
+          
+          -webkit-mask-image: 
+            linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%),
+            linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%);
+          mask-image: 
+            linear-gradient(to bottom, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%),
+            linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 50%, transparent 100%);
+            
+          -webkit-mask-size: 100% 40vh, 40vw 100%;
+          mask-size: 100% 40vh, 40vw 100%;
+          
+          -webkit-mask-repeat: no-repeat, no-repeat;
+          mask-repeat: no-repeat, no-repeat;
+          
+          animation: panGrid 4s linear infinite, maskSweep 6s linear infinite;
         }
       `}} />
 
-      <main className="max-w-[1200px] mx-auto px-4 pt-[100px] md:pt-[140px] flex flex-col md:flex-row gap-10 md:gap-16 relative z-10">
+      <main className="max-w-[1200px] mx-auto px-4 pt-[100px] md:pt-[140px] pb-16 md:pb-24 flex flex-col md:flex-row gap-10 md:gap-16 relative z-10">
         
         {/* LEFT SIDE: BIG TEXT */}
         <div 
@@ -376,10 +426,8 @@ export default function ContactsPage() {
             const isTopIcon = item.icon && item.iconPosition === "top";
             const isRightIcon = item.icon && item.iconPosition === "absolute-right";
             
-            // If the card doesn't have a titleMarginLeft adjustment, it's treated as an auto-center card
             const isAutoCenter = !item.titleMarginLeft;
             
-            // Generate circle wrapper classes dynamically
             const circleClasses = item.hasCircle 
               ? `rounded-full bg-[#8593F0]/10 border border-[#8593F0]/30 flex items-center justify-center group-hover:border-[#8593F0] group-hover:bg-[#8593F0]/20 transition-all duration-300 shadow-md` 
               : "";
@@ -392,10 +440,8 @@ export default function ContactsPage() {
               <BentoCard 
                 className={`bg-[#2a2a2a]/90 backdrop-blur-md border border-[#4d4d4d] group-hover:border-[#8593F0] w-full h-full flex flex-col transition-colors duration-300 overflow-hidden relative ${isAutoCenter ? 'items-center justify-center p-4' : ''}`}
               >
-                {/* --- NEW: Glass Sweep Effect --- */}
                 <div className="glass-sweep" />
 
-                {/* --- NEW: Top Right Corner Text --- */}
                 {item.topRightText && (
                   <div className={`absolute top-[20px] right-[24px] text-[#a1a1aa] tracking-widest text-[10px] md:text-[12px] uppercase ${alata.className}`}>
                     {item.topRightText}
@@ -425,21 +471,24 @@ export default function ContactsPage() {
 
                 {/* 2. Title */}
                 {item.title && (
-                  <h3 className={`${item.titleFont} ${item.titleSize} ${item.titleColor || 'text-[#8593F0]'} ${item.titleMarginTop || ''} ${item.titleMarginLeft || ''} tracking-widest uppercase break-words w-full ${isAutoCenter ? 'text-center' : 'text-left relative z-10'}`}>
+                  <h3 className={`${item.titleFont} ${item.titleSize} ${item.titleColor || 'text-[#8593F0]'} ${item.titleMarginTop || ''} ${item.titleMarginLeft || ''} tracking-widest uppercase break-words w-full [text-shadow:0_0_10px_currentColor] no-underline ${isAutoCenter ? 'text-center' : 'text-left relative z-10'}`}>
                     {item.title}
                   </h3>
                 )}
                 
                 {/* 3. Value */}
                 {item.value && (
-                  <p className={`${item.valueFont} ${item.valueSize} ${item.valueColor || (item.link ? 'text-white group-hover:text-[#8593F0]' : 'text-white')} ${item.valueMarginTop || ''} ${item.valueMarginLeft || ''} tracking-wide break-words leading-tight transition-colors duration-300 w-full ${isAutoCenter ? 'text-center' : 'text-left relative z-10'}`}>
+                  <p 
+                    className={`${item.valueFont} ${item.valueSize} ${item.valueColor || (item.link ? 'text-white group-hover:text-[#8593F0]' : 'text-white')} ${item.valueMarginTop || ''} ${item.valueMarginLeft || ''} tracking-wide break-words leading-tight transition-colors duration-300 w-full no-underline ${isAutoCenter ? 'text-center' : 'text-left relative z-10'}`}
+                    style={item.title === "CURRENT LOCATION" ? { color: 'white' } : undefined}
+                  >
                     {item.value}
                   </p>
                 )}
 
                 {/* 4. Subtitle */}
                 {item.subtitle && (
-                  <p className={`${alata.className} text-[#a1a1aa] ${item.subtitleSize} ${item.subtitleMarginTop || ''} ${item.subtitleMarginLeft || ''} tracking-wide break-words whitespace-normal leading-tight w-[70%] text-left relative z-10`}>
+                  <p className={`${alata.className} text-[#a1a1aa] ${item.subtitleSize} ${item.subtitleMarginTop || ''} ${item.subtitleMarginLeft || ''} tracking-wide break-words whitespace-normal leading-tight w-[70%] text-left relative z-10 no-underline`}>
                     {item.subtitle}
                   </p>
                 )}
@@ -453,7 +502,8 @@ export default function ContactsPage() {
                     href={item.link} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="block w-full h-full cursor-pointer group hover:scale-[1.02] transition-transform duration-300"
+                    className="block w-full h-full cursor-pointer group hover:scale-[1.02] transition-transform duration-300 no-underline hover:no-underline focus:outline-none"
+                    style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {CardContent}
                   </a>
@@ -468,6 +518,9 @@ export default function ContactsPage() {
         </div>
 
       </main>
+      
+      {/* Spacer div to guarantee space at the bottom */}
+      <div className="h-24 md:h-32 w-full relative z-10" />
     </div>
   );
 }

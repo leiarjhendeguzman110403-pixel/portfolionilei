@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image"; // <-- Added Next.js Image component
 import Navbar from "@/components/navbar";
 import BentoCard from "@/components/ui/BentoCard";
 import { Vina_Sans, Dela_Gothic_One, Alata } from "next/font/google";
@@ -63,7 +64,7 @@ export default function ProjectsPage() {
       demoButtonPadding: "8px 16px",
       techStackPadding: "6px 12px",
       techStackGap: "12px",
-      carouselMaxHeight: "300px" // <-- Prevents giant images!
+      carouselMaxHeight: "300px"
     },
     gridGap: "20px"
   };
@@ -358,7 +359,7 @@ export default function ProjectsPage() {
                     )}
                   </div>
                   
-                  {/* SECTION 1: MEDIA CAROUSEL (Updated Layout) */}
+                  {/* SECTION 1: MEDIA CAROUSEL */}
                   {selectedProject.images && selectedProject.images.length > 0 && (
                     <div className="flex flex-col w-full mb-8 shrink-0 group">
                       
@@ -367,17 +368,26 @@ export default function ProjectsPage() {
                         className="relative w-full rounded-lg overflow-hidden border-[0.1px] border-[#2a2a2a] bg-[#1a1a1a]" 
                         style={{ height: CONFIG.bigCard.carouselMaxHeight }}
                       >
-                        <div className="absolute inset-0 flex transition-transform duration-500 ease-in-out items-center" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
+                        <div 
+                          className="flex h-full w-full transition-transform duration-500 ease-in-out" 
+                          style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
+                        >
                           {selectedProject.images.map((img, i) => {
                             const fixedImgSrc = img.startsWith('/') ? img : `/${img}`;
+                            const isImage = img.toLowerCase().match(/\.(png|jpe?g|gif|webp|svg)$/);
+
                             return (
-                              <div key={i} className="w-full h-full shrink-0 flex justify-center items-center p-4">
-                                {img.includes('.png') || img.includes('.jpg') || img.includes('.jpeg') ? (
-                                  <img 
-                                    src={fixedImgSrc} 
-                                    alt={`${selectedProject.title} screenshot ${i + 1}`} 
-                                    className="w-full h-full object-contain pointer-events-none drop-shadow-xl"
-                                  />
+                              <div key={i} className="relative w-full h-full shrink-0 flex justify-center items-center p-4">
+                                {isImage ? (
+                                  <div className="relative w-full h-full">
+                                    <Image 
+                                      src={fixedImgSrc} 
+                                      alt={`${selectedProject.title} screenshot ${i + 1}`} 
+                                      fill
+                                      sizes="(max-width: 1200px) 100vw, 800px"
+                                      className="object-contain pointer-events-none drop-shadow-xl"
+                                    />
+                                  </div>
                                 ) : (
                                   <div className="flex items-center justify-center w-full h-full">
                                     <span className={`${alata.className} text-[#4d4d4d] tracking-widest uppercase`}>{img} Placeholder</span>
@@ -389,11 +399,9 @@ export default function ProjectsPage() {
                         </div>
                       </div>
                       
-                      {/* Controls (Positioned Below the Images) */}
+                      {/* Controls */}
                       {selectedProject.images.length > 1 && (
                         <div className="flex justify-center items-center gap-8 mt-5">
-                          
-                          {/* Previous Button */}
                           <button 
                             onClick={(e) => { e.stopPropagation(); setCarouselIndex(prev => Math.max(0, prev - 1)); }}
                             className="bg-[#2a2a2a] p-2.5 rounded-full text-[#898A8D] hover:text-[#E6FF2B] hover:border-white transition-all duration-300 border-[0.5px] border-[#4d4d4d] hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] disabled:opacity-30 disabled:hover:text-[#898A8D] disabled:hover:border-[#4d4d4d] disabled:hover:shadow-none cursor-pointer"
@@ -402,12 +410,10 @@ export default function ProjectsPage() {
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                           </button>
                           
-                          {/* Middle Indicator */}
                           <span className={`${alata.className} text-[12px] text-white tracking-[0.2em] font-bold w-12 text-center`}>
                             {carouselIndex + 1} / {selectedProject.images.length}
                           </span>
                           
-                          {/* Next Button */}
                           <button 
                             onClick={(e) => { e.stopPropagation(); setCarouselIndex(prev => Math.min(selectedProject.images.length - 1, prev + 1)); }}
                             className="bg-[#2a2a2a] p-2.5 rounded-full text-[#898A8D] hover:text-[#E6FF2B] hover:border-white transition-all duration-300 border-[0.5px] border-[#4d4d4d] hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] disabled:opacity-30 disabled:hover:text-[#898A8D] disabled:hover:border-[#4d4d4d] disabled:hover:shadow-none cursor-pointer"
@@ -415,7 +421,6 @@ export default function ProjectsPage() {
                           >
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                           </button>
-                          
                         </div>
                       )}
                     </div>

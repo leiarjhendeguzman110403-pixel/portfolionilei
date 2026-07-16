@@ -3,40 +3,72 @@
 import Image from "next/image";
 import { Vina_Sans, Rubik_Mono_One } from "next/font/google";
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import BentoCard from "@/components/ui/BentoCard";
 import { motion, Variants } from "framer-motion";
-import { useEffect, useState } from "react";
 
 const vinaSans = Vina_Sans({ weight: "400", subsets: ["latin"], display: "swap" });
 const rubikMonoOne = Rubik_Mono_One({ weight: "400", subsets: ["latin"], display: "swap" });
 
 // Animation Variants matching your About page
-const containerVariants: Variants = {
-  offscreen: { opacity: 1 }, 
+
+const itemVariants: Variants = {
+  offscreen: (custom: number = 0) => ({
+    opacity: 0,
+    y: 70,
+    scale: 0.75,
+    rotate: custom % 2 === 0 ? -10 : 10,
+  }),
   onscreen: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+    y: 0,
+    scale: 1,
+    rotate: 0,
+    transition: { type: "spring", stiffness: 130, damping: 15, mass: 0.9 },
   },
 };
 
-const itemVariants: Variants = {
-  offscreen: { opacity: 0, y: 40, scale: 0.96 }, 
-  onscreen: { 
-    opacity: 1, y: 0, scale: 1, 
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } 
+// Hero headline entrance: "THINK. DESIGN." slides in from the right,
+// "DEVELOP." slides in from the left.
+const slideInRight: Variants = {
+  hidden: { x: "120%", opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const slideInLeft: Variants = {
+  hidden: { x: "-120%", opacity: 0 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const fadeIn: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 2, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+// Portrait entrance: noticeable rise + scale + fade in, then settles
+// into a slow continuous float so the motion stays visible.
+const portraitVariants: Variants = {
+  hidden: { opacity: 0, y: 120, scale: 0.85 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 1.4, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(true);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile(); 
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   return (
     <>
     <Navbar />
@@ -132,17 +164,52 @@ export default function Home() {
         <section className="relative w-full max-w-7xl flex flex-col items-center justify-center text-center mt-12 pointer-events-none shrink-0">
           <div className="relative flex flex-col items-center justify-center w-full">
             <div className="z-10 flex flex-col items-center">
-              <h1 className={`relative top-[80px] md:top-[100px] text-[15vw] md:text-[10rem] text-[#F25623] leading-[0.8] tracking-tighter select-none whitespace-nowrap ${vinaSans.className}`}>THINK. DESIGN.</h1>
-              <h1 className={`relative top-[-360px] md:top-[80px] text-[25vw] md:text-[10rem] text-white leading-[0.8] tracking-tighter select-none whitespace-nowrap ${vinaSans.className}`}>DEVELOP.</h1>
+              <motion.h1
+                initial="hidden"
+                animate="visible"
+                variants={slideInRight}
+                className={`relative top-[80px] md:top-[100px] text-[15vw] md:text-[10rem] text-[#F25623] leading-[0.8] tracking-tighter select-none whitespace-nowrap ${vinaSans.className}`}
+              >
+                THINK. DESIGN.
+              </motion.h1>
+              <motion.h1
+                initial="hidden"
+                animate="visible"
+                variants={slideInLeft}
+                className={`relative top-[-360px] md:top-[80px] text-[25vw] md:text-[10rem] text-white leading-[0.8] tracking-tighter select-none whitespace-nowrap ${vinaSans.className}`}
+              >
+                DEVELOP.
+              </motion.h1>
             </div>
             
-            <div className="absolute z-20 top-[32%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] md:w-[850px] md:h-[1150px] pointer-events-none">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={portraitVariants}
+              className="absolute z-20 top-[32%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] md:w-[850px] md:h-[1150px] pointer-events-none"
+            >
               <Image src="/images/about/portrait.png" alt="Portrait" fill className="object-cover object-top" priority />
-            </div>
+            </motion.div>
             
             <div className="absolute z-30 top-0 flex flex-col items-center w-full pointer-events-none">
-              <h1 className={`relative top-[80px] md:top-[100px] text-[15vw] md:text-[10rem] leading-[0.8] tracking-tighter select-none whitespace-nowrap ${vinaSans.className}`} style={{ WebkitTextStroke: "2px #F25623", color: "transparent" }}>THINK. DESIGN.</h1>
-              <h1 className={`relative top-[-360px] md:top-[80px] text-[25vw] md:text-[10rem] leading-[0.8] tracking-tighter select-none whitespace-nowrap ${vinaSans.className}`} style={{ WebkitTextStroke: "2px #FFFFFF", color: "transparent" }}>DEVELOP.</h1>
+              <motion.h1
+                initial="hidden"
+                animate="visible"
+                variants={slideInRight}
+                className={`relative top-[80px] md:top-[100px] text-[15vw] md:text-[10rem] leading-[0.8] tracking-tighter select-none whitespace-nowrap ${vinaSans.className}`}
+                style={{ WebkitTextStroke: "2px #F25623", color: "transparent" }}
+              >
+                THINK. DESIGN.
+              </motion.h1>
+              <motion.h1
+                initial="hidden"
+                animate="visible"
+                variants={slideInLeft}
+                className={`relative top-[-360px] md:top-[80px] text-[25vw] md:text-[10rem] leading-[0.8] tracking-tighter select-none whitespace-nowrap ${vinaSans.className}`}
+                style={{ WebkitTextStroke: "2px #FFFFFF", color: "transparent" }}
+              >
+                DEVELOP.
+              </motion.h1>
             </div>
           </div>
         </section>
@@ -191,17 +258,19 @@ export default function Home() {
               </h2>
             </div>
 
-            <motion.div 
+            <div 
               /* CHANGED to grid-cols-3 and slightly taller rows to balance the layout */
               className="grid grid-cols-3 auto-rows-[90px] grid-flow-dense"
               style={{ gap: '10px' }}
-              variants={containerVariants}
-              initial={isMobile ? "onscreen" : "offscreen"}
-              whileInView="onscreen"
-              viewport={{ once: true, margin: "-100px" }}
             >
               {/* CARD 1: GRAPHIC DESIGN (1 Column, 2 Rows) */}
-              <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
+              <motion.div
+                variants={itemVariants}
+                custom={0}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.4 }}
+                className="col-span-1 row-span-2 hover:z-50">
                 <BentoCard 
                   style={{ borderRadius: "10px", backgroundColor: "#171717" }} 
                   /* 🛠️ BRIGHT WHITE GLOW APPLIED HERE */
@@ -249,7 +318,13 @@ export default function Home() {
               </motion.div>
 
               {/* CARD 2: WEB DESIGNER (1 Column, 2 Rows) */}
-              <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
+              <motion.div
+                variants={itemVariants}
+                custom={1}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.4 }}
+                className="col-span-1 row-span-2 hover:z-50">
                 <BentoCard 
                   style={{ borderRadius: "10px", backgroundColor: "#4d4d4d" }} 
                   className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
@@ -296,7 +371,13 @@ export default function Home() {
               </motion.div>
 
               {/* CARD 3: UI/UX DESIGNER (1 Column, 4 Rows) */}
-              <motion.div variants={itemVariants} className="col-span-1 row-span-4 hover:z-50">
+              <motion.div
+                variants={itemVariants}
+                custom={2}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.4 }}
+                className="col-span-1 row-span-4 hover:z-50">
                 <BentoCard 
                   style={{ borderRadius: "10px", backgroundColor: "#171717" }} 
                   className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
@@ -355,7 +436,13 @@ export default function Home() {
               </motion.div>
 
               {/* CARD 4: SOCIAL MEDIA MANAGER (2 Columns, 2 Rows) */}
-              <motion.div variants={itemVariants} className="col-span-2 row-span-2 hover:z-50">
+              <motion.div
+                variants={itemVariants}
+                custom={3}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.4 }}
+                className="col-span-2 row-span-2 hover:z-50">
                 <BentoCard 
                   style={{ borderRadius: "10px", backgroundColor: "#ffffff" }} 
                   className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
@@ -387,7 +474,13 @@ export default function Home() {
               </motion.div>
 
               {/* CARD 5: VIDEO EDITOR (1 Column, 2 Rows) */}
-              <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
+              <motion.div
+                variants={itemVariants}
+                custom={4}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.4 }}
+                className="col-span-1 row-span-2 hover:z-50">
                 <BentoCard 
                   style={{ borderRadius: "10px", backgroundColor: "#1e1e1e" }} 
                   className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
@@ -431,7 +524,13 @@ export default function Home() {
               </motion.div>
 
               {/* CARD 6: FRONT-END DEVELOPER (2 Columns, 2 Rows) */}
-              <motion.div variants={itemVariants} className="col-span-2 row-span-2 hover:z-50">
+              <motion.div
+                variants={itemVariants}
+                custom={5}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.4 }}
+                className="col-span-2 row-span-2 hover:z-50">
                 <BentoCard 
                   style={{ borderRadius: "10px", backgroundColor: "#d9d9d9" }} 
                   className="w-full h-full p-0 overflow-hidden relative group transition-all duration-300 scale-[0.98] hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
@@ -479,7 +578,7 @@ export default function Home() {
                   </div>
                 </BentoCard>
               </motion.div>
-            </motion.div>
+            </div>
 
             {/* DEDICATED SPACER TO FORCE SCROLL HEIGHT */}
             <div className="w-full h-[150px] md:h-[250px] pointer-events-none shrink-0"></div>
@@ -488,6 +587,7 @@ export default function Home() {
         </section>
       </div>
     </div>
+    <Footer />
     </>
   );
 }

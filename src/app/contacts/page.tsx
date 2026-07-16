@@ -1,22 +1,50 @@
 "use client";
 
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import BentoCard from "@/components/ui/BentoCard";
-import { Vina_Sans, Dela_Gothic_One, Alata, Victor_Mono } from "next/font/google";
+import { Vina_Sans, Dela_Gothic_One, Alata } from "next/font/google";
 
 const vinaSans = Vina_Sans({ weight: "400", subsets: ["latin"] });
 const delaGothic = Dela_Gothic_One({ weight: "400", subsets: ["latin"] });
 const alata = Alata({ weight: "400", subsets: ["latin"] });
-const victorMono = Victor_Mono({ weight: "400", subsets: ["latin"] });
 
 // ==========================================
 // --- GLOBAL LAYOUT CONTROLS ---
 // ==========================================
 const CONFIG = {
-  textMarginTop: "-70px", 
+  // Push the "LET'S / CONNECT." text block down (increase to move it further down)
+  textPaddingTop: "0px",
+  // Push the "LET'S / CONNECT." text block left/right (increase to move it right)
+  textPaddingLeft: "30px",
   subtitleMarginTop: "-50px",
-  gridMarginTop: "10px",
-  cardGap: "20px",
+
+  // Push the entire cards grid down (increase to move it further down)
+  cardsPaddingTop: "50px",
+  // Push the entire cards grid in from the right edge (increase to move it left)
+  cardsPaddingRight: "30px",
+
+  cardGap: "16px",
+  // Row heights: balanced against the heading size so both columns end near the same line
+  gridTemplateRows: "108px 116px 64px 88px",
+
+  // Horizontal gap between the "LET'S / CONNECT." text column and the cards grid
+  // (decrease to bring them closer together, increase to push them apart)
+  textToCardsGap: "0px",
+
+  // --- "LET'S" TEXT CONTROLS (adjust independently of "CONNECT.") ---
+  // NOTE: these are now plain pixel values (not clamp()), so changing the
+  // number always changes the rendered size — clamp() was capping it before.
+  letsSize: "280px",
+  letsMarginTop: "0px",
+  letsMarginLeft: "0px",
+  letsColor: "#F25623",
+
+  // --- "CONNECT." TEXT CONTROLS (adjust independently of "LET'S") ---
+  connectSize: "160px",
+  connectMarginTop: "0px",
+  connectMarginLeft: "0px",
+  connectColor: "#ffffff",
 };
 
 export default function ContactsPage() {
@@ -41,67 +69,67 @@ export default function ContactsPage() {
       link: "", 
       gridClass: "col-span-4 row-span-1", 
       titleFont: alata.className, 
-      valueFont: victorMono.className, 
+      valueFont: delaGothic.className, 
       
       // CIRCLE CONTROLS
       hasCircle: true,
 
-      iconSize: "w-[50px] h-[50px] md:w-[140px] md:h-[140px]",
-      iconMarginTop: "mt-[60px]", 
-      iconMarginLeft: "ml-[calc(100%-80px)] md:ml-[calc(100%-170px)]", 
+      iconSize: "w-[36px] h-[36px] md:w-[48px] md:h-[48px]",
+      iconMarginTop: "mt-[35px]", 
+      iconMarginLeft: "ml-[calc(100%-62px)]", 
 
       // TITLE ADJUSTMENTS
-      titleSize: "text-[15px] md:text-[14px]", 
-      titleMarginTop: "mt-[45px]", 
-      titleMarginLeft: "ml-[24px]",
+      titleSize: "text-[12px] md:text-[12px]", 
+      titleMarginTop: "mt-[25px]", 
+      titleMarginLeft: "ml-[22px]",
 
       // VALUE ADJUSTMENTS
-      valueSize: "text-[30px] md:text-[24px]", 
-      valueMarginTop: "mt-[-5px]",
-      valueMarginLeft: "ml-[23px]",
+      valueSize: "text-[26px] md:text-[24px]", 
+      valueMarginTop: "mt-[-12px]",
+      valueMarginLeft: "ml-[21px]",
 
       // SUBTITLE ADJUSTMENTS
-      subtitleSize: "text-[15px] md:text-[13px]",
-      subtitleMarginTop: "mt-[-35px]",
-      subtitleMarginLeft: "ml-[24px]",
+      subtitleSize: "text-[12px] md:text-[11px]",
+      subtitleMarginTop: "mt-[-30px]",
+      subtitleMarginLeft: "ml-[22px]",
     },
 
-    // --- CARD 2: EMAIL ADDRESS ---
+    // --- CARD 2: CURRENT LOCATION (moved here from Card 4 so EMAIL can have the wider box) ---
     { 
-      title: "EMAIL ADDRESS", 
-      value: "LEIARJHENDEGUZMAN110403@GMAIL.COM", 
-      subtitle: "",
-      topRightText: "Available 10AM - 7PM", 
-      // Envelope Icon
+      title: "CURRENT LOCATION", 
+      value: "PANTOC, MEYCAUAYAN", 
+      subtitle: "Bulacan, Philippines",
+      topRightText: "", 
+      // Map Pin Icon
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[55%] h-[55%] drop-shadow-[0_0_12px_currentColor]">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[55%] h-[55%] opacity-90 drop-shadow-[0_0_12px_currentColor]">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
         </svg>
       ),
       iconPosition: "top",
-      link: "mailto:LEIARJHENDEGUZMAN110403@GMAIL.COM",
+      link: "https://www.google.com/maps/search/?api=1&query=Pantoc,+Meycauayan,+Bulacan,+Philippines",
       gridClass: "col-span-2 row-span-1", 
       titleFont: alata.className, 
-      valueFont: victorMono.className, 
-      valueColor: "text-[#ffffff]",
+      valueFont: delaGothic.className, 
+      valueColor: "!text-white group-hover:!text-white",
       
       // CIRCLE CONTROLS
       hasCircle: true,
 
-      iconSize: "w-[50px] h-[50px] md:w-[70px] md:h-[70px]", 
-      iconMarginTop: "mt-[20px]", 
-      iconMarginLeft: "ml-[24px]", 
+      iconSize: "w-[32px] h-[32px] md:w-[32px] md:h-[32px]", 
+      iconMarginTop: "mt-[13px]", 
+      iconMarginLeft: "ml-[18px]", 
 
-      titleSize: "text-[15px] md:text-[14px]",
-      titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[24px]",
+      titleSize: "text-[11px] md:text-[11px]",
+      titleMarginTop: "mt-[15px]", 
+      titleMarginLeft: "ml-[18px]",
 
-      valueSize: "text-[27px] md:text-[24px]",
-      valueMarginTop: "mt-[-18px]",
-      valueMarginLeft: "ml-[24px]",
+      valueSize: "text-[16px] md:text-[16px]",
+      valueMarginTop: "mt-[-12px]",
+      valueMarginLeft: "ml-[18px]",
 
-      subtitleSize: "", subtitleMarginTop: "", subtitleMarginLeft: "",
+      subtitleSize: "text-[10px]", subtitleMarginTop: "mt-[-20px]", subtitleMarginLeft: "ml-[18px]",
     },
 
     // --- CARD 3: MOBILE NUMBER ---
@@ -109,7 +137,7 @@ export default function ContactsPage() {
       title: "MOBILE NUMBER", 
       value: "+63 9318652170",
       subtitle: "", 
-      topRightText: "Available 10AM - 7PM", 
+      topRightText: "", 
       // Phone Icon
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[55%] h-[55%] drop-shadow-[0_0_12px_currentColor]">
@@ -120,65 +148,62 @@ export default function ContactsPage() {
       link: "", 
       gridClass: "col-span-2 row-span-1", 
       titleFont: alata.className, 
-      valueFont: victorMono.className, 
+      valueFont: delaGothic.className, 
       
       // CIRCLE CONTROLS
       hasCircle: true,
 
-      iconSize: "w-[50px] h-[50px] md:w-[70px] md:h-[70px]", 
-      iconMarginTop: "mt-[20px]", 
-      iconMarginLeft: "ml-[24px]", 
+      iconSize: "w-[32px] h-[32px] md:w-[32px] md:h-[32px]", 
+      iconMarginTop: "mt-[13px]", 
+      iconMarginLeft: "ml-[18px]", 
 
-      titleSize: "text-[15px] md:text-[14px]",
-      titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[24px]",
+      titleSize: "text-[11px] md:text-[11px]",
+      titleMarginTop: "mt-[15px]", 
+      titleMarginLeft: "ml-[18px]",
 
-      valueSize: "text-[27px] md:text-[24px]", 
-      valueMarginTop: "mt-[-18px]",
-      valueMarginLeft: "ml-[24px]",
+      valueSize: "text-[18px] md:text-[17px]", 
+      valueMarginTop: "mt-[-12px]",
+      valueMarginLeft: "ml-[18px]",
 
       subtitleSize: "", subtitleMarginTop: "", subtitleMarginLeft: "",
     },
 
-    // --- CARD 4: CURRENT LOCATION ---
+    // --- CARD 4: EMAIL ADDRESS (moved here from Card 2 for the extra width) ---
     { 
-      title: "CURRENT LOCATION", 
-      value: "PANTOC, MEYCAUAYAN, BULACAN", 
-      subtitle: "Philippines", 
-      // Map Pin Icon
+      title: "EMAIL ADDRESS", 
+      value: "LEIARJHENDEGUZMAN110403@GMAIL.COM", 
+      subtitle: "", 
+      // Envelope Icon
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-[55%] h-[55%] opacity-90 drop-shadow-[0_0_12px_currentColor]">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-          <circle cx="12" cy="10" r="3"></circle>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[55%] h-[55%] drop-shadow-[0_0_12px_currentColor]">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
         </svg>
       ),
       iconPosition: "absolute-right",
-      link: "https://www.google.com/maps/search/?api=1&query=Pantoc,+Meycauayan,+Bulacan,+Philippines", 
+      link: "mailto:LEIARJHENDEGUZMAN110403@GMAIL.COM", 
       gridClass: "col-span-4 row-span-1", 
       titleFont: alata.className, 
-      valueFont: victorMono.className, 
+      valueFont: delaGothic.className, 
       
-      valueColor: "!text-white group-hover:!text-white", 
+      valueColor: "text-[#ffffff]", 
 
       // CIRCLE CONTROLS
       hasCircle: true,
 
-      iconSize: "w-[50px] h-[50px] md:w-[130px] md:h-[130px]",
-      iconMarginTop: "mt-[60px]", 
-      iconMarginLeft: "ml-[calc(100%-80px)] md:ml-[calc(100%-160px)]",
+      iconSize: "w-[36px] h-[36px] md:w-[48px] md:h-[48px]",
+      iconMarginTop: "mt-[14px]", 
+      iconMarginLeft: "ml-[calc(100%-62px)]",
 
-      titleSize: "text-[15px] md:text-[14px]",
-      titleMarginTop: "mt-[45px]", 
-      titleMarginLeft: "ml-[24px]",
+      titleSize: "text-[11px] md:text-[11px]",
+      titleMarginTop: "mt-[15px]", 
+      titleMarginLeft: "ml-[22px]",
 
-      valueSize: "text-[30px] md:text-[24px]", 
-      valueMarginTop: "mt-[-5px]",
-      valueMarginLeft: "ml-[23px]",
+      valueSize: "text-[18px] md:text-[11px]", 
+      valueMarginTop: "mt-[-10px]",
+      valueMarginLeft: "ml-[21px]",
 
-      // STYLED SUBTITLE SO IT SITS UNDER THE VALUE
-      subtitleSize: "text-[15px] md:text-[12px]", 
-      subtitleMarginTop: "mt-[-35px] md:mt-[2px]", 
-      subtitleMarginLeft: "ml-[24px]",
+      subtitleSize: "", subtitleMarginTop: "", subtitleMarginLeft: "",
     },
 
     // ========================================================
@@ -197,19 +222,19 @@ export default function ContactsPage() {
       ),
       link: "https://www.facebook.com/leiarjhen.deguzman", 
       gridClass: "col-span-1 row-span-1", 
-      titleFont: victorMono.className,
-      valueFont: victorMono.className, 
+      titleFont: delaGothic.className,
+      valueFont: delaGothic.className, 
       
       titleColor: "text-[#ffffff]",
       hasCircle: true,
 
-      iconSize: "w-[50px] h-[50px] md:w-[60px] md:h-[60px]",
-      iconMarginTop: "mt-[50px]", 
-      iconMarginLeft: "ml-[-95px]", 
+      iconSize: "w-[36px] h-[36px] md:w-[36px] md:h-[36px]",
+      iconMarginTop: "mt-[13px]", 
+      iconMarginLeft: "ml-[-48px]", 
 
-      titleSize: "text-[20px] md:text-[18px]",
-      titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[20px]", 
+      titleSize: "text-[14px] md:text-[13px]",
+      titleMarginTop: "mt-[6px]", 
+      titleMarginLeft: "ml-[11px]", 
     },
 
     // --- CARD 6: INSTAGRAM ---
@@ -226,19 +251,19 @@ export default function ContactsPage() {
       ),
       link: "https://www.instagram.com/leideguzman_/", 
       gridClass: "col-span-1 row-span-1", 
-      titleFont: victorMono.className,
-      valueFont: victorMono.className,
+      titleFont: delaGothic.className,
+      valueFont: delaGothic.className,
       
       titleColor: "text-[#ffffff]",
       hasCircle: true,
 
-      iconSize: "w-[50px] h-[50px] md:w-[60px] md:h-[60px]",
-      iconMarginTop: "mt-[50px]", 
-      iconMarginLeft: "ml-[-95px]", 
+      iconSize: "w-[36px] h-[36px] md:w-[36px] md:h-[36px]",
+      iconMarginTop: "mt-[13px]", 
+      iconMarginLeft: "ml-[-48px]", 
 
-      titleSize: "text-[20px] md:text-[18px]",
-      titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[20px]", 
+      titleSize: "text-[14px] md:text-[13px]",
+      titleMarginTop: "mt-[6px]", 
+      titleMarginLeft: "ml-[11px]", 
     },
 
     // --- CARD 7: GITHUB ---
@@ -253,19 +278,19 @@ export default function ContactsPage() {
       ),
       link: "https://github.com/leiarjhendeguzman110403-pixel", 
       gridClass: "col-span-1 row-span-1", 
-      titleFont: victorMono.className,
-      valueFont: victorMono.className,
+      titleFont: delaGothic.className,
+      valueFont: delaGothic.className,
       
       titleColor: "text-[#ffffff]",
       hasCircle: true,
 
-      iconSize: "w-[50px] h-[50px] md:w-[60px] md:h-[60px]",
-      iconMarginTop: "mt-[50px]", 
-      iconMarginLeft: "ml-[-95px]", 
+      iconSize: "w-[36px] h-[36px] md:w-[36px] md:h-[36px]",
+      iconMarginTop: "mt-[13px]", 
+      iconMarginLeft: "ml-[-48px]", 
 
-      titleSize: "text-[20px] md:text-[18px]",
-      titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[20px]", 
+      titleSize: "text-[14px] md:text-[13px]",
+      titleMarginTop: "mt-[6px]", 
+      titleMarginLeft: "ml-[11px]", 
     },
 
     // --- CARD 8: LINKEDIN ---
@@ -280,24 +305,24 @@ export default function ContactsPage() {
       ),
       link: "https://www.linkedin.com/in/lei-de-guzman-1ba84039b/", 
       gridClass: "col-span-1 row-span-1", 
-      titleFont: victorMono.className,
-      valueFont: victorMono.className,
+      titleFont: delaGothic.className,
+      valueFont: delaGothic.className,
       
       titleColor: "text-[#ffffff]",
       hasCircle: true,
 
-      iconSize: "w-[50px] h-[50px] md:w-[60px] md:h-[60px]",
-      iconMarginTop: "mt-[50px]", 
-      iconMarginLeft: "ml-[-95px]", 
+      iconSize: "w-[36px] h-[36px] md:w-[36px] md:h-[36px]",
+      iconMarginTop: "mt-[13px]", 
+      iconMarginLeft: "ml-[-48px]", 
 
-      titleSize: "text-[20px] md:text-[18px]",
-      titleMarginTop: "mt-[10px]", 
-      titleMarginLeft: "ml-[20px]", 
+      titleSize: "text-[14px] md:text-[13px]",
+      titleMarginTop: "mt-[6px]", 
+      titleMarginLeft: "ml-[11px]", 
     },
   ];
 
   return (
-    <div className="relative min-h-screen animated-bg-container text-white pb-24">
+    <div className="relative min-h-screen animated-bg-container text-white">
       <Navbar />
       
       {/* --- UPDATED STYLE BLOCK TO MATCH OTHER PAGES --- */}
@@ -384,41 +409,60 @@ export default function ContactsPage() {
         }
       `}} />
 
-      <main className="max-w-[1200px] mx-auto px-4 pt-[100px] md:pt-[140px] pb-16 md:pb-24 flex flex-col md:flex-row gap-10 md:gap-16 relative z-10">
+      <main
+        className="max-w-[1200px] mx-auto px-4 pt-[100px] pb-16 grid relative z-10"
+        style={{
+          gridTemplateColumns: "500px 1fr",
+          columnGap: CONFIG.textToCardsGap,
+          alignItems: "start",
+        }}
+      >
         
         {/* LEFT SIDE: BIG TEXT */}
         <div 
-          className="md:w-5/12 self-start flex flex-col" 
-          style={{ marginTop: CONFIG.textMarginTop }}
+          className="self-start flex flex-col" 
+          style={{ paddingTop: CONFIG.textPaddingTop, paddingLeft: CONFIG.textPaddingLeft }}
         >
           <h1 
-            className={`${vinaSans.className} text-[#E6FF2B] uppercase tracking-tight`}
-            style={{ 
-              fontSize: "clamp(60px, 9vw, 90px)", 
-              lineHeight: "0.85" 
-            }}
+            className={`${vinaSans.className} uppercase tracking-tight`}
+            style={{ lineHeight: "0.85" }}
           >
-            LET'S CONNECT.
+            <span
+              style={{
+                display: "block",
+                fontSize: CONFIG.letsSize,
+                marginTop: CONFIG.letsMarginTop,
+                marginLeft: CONFIG.letsMarginLeft,
+                color: CONFIG.letsColor,
+              }}
+            >
+              LET'S
+            </span>
+            <span
+              style={{
+                display: "block",
+                fontSize: CONFIG.connectSize,
+                marginTop: CONFIG.connectMarginTop,
+                marginLeft: CONFIG.connectMarginLeft,
+                color: CONFIG.connectColor,
+              }}
+            >
+              CONNECT.
+            </span>
           </h1>
-          
-          <p 
-            className={`${alata.className} text-[#ffffff] uppercase tracking-widest`}
-            style={{ 
-              fontSize: "clamp(12px, 2vw, 16px)", 
-              lineHeight: "1.5", 
-              marginTop: CONFIG.subtitleMarginTop 
-            }}
-          >
-            Available for New Projects and Career Opportunities.
-          </p>
+
+          {/* Accent bar, matching the reference layout */}
+          <div className="w-full max-w-[460px] h-[44px] bg-[#E6FF2B] mt-10 rounded-[2px]" />
         </div>
 
         {/* RIGHT SIDE: 8 CARDS GRID */}
         <div 
-          className="md:w-7/12 grid grid-cols-4 auto-rows-[150px]" 
+          className="grid grid-cols-4" 
           style={{ 
-            marginTop: CONFIG.gridMarginTop,
-            gap: CONFIG.cardGap
+            paddingTop: CONFIG.cardsPaddingTop,
+            paddingRight: CONFIG.cardsPaddingRight,
+            gap: CONFIG.cardGap,
+            gridTemplateRows: CONFIG.gridTemplateRows,
           }}
         >
           {contactLinks.map((item, i) => {
@@ -518,9 +562,11 @@ export default function ContactsPage() {
         </div>
 
       </main>
-      
-      {/* Spacer div to guarantee space at the bottom */}
-      <div className="h-24 md:h-32 w-full relative z-10" />
+
+      {/* Spacer to keep the Footer from touching the cards above it */}
+      <div className="w-full h-[60px] md:h-[80px]" />
+
+      <Footer />
     </div>
   );
 }

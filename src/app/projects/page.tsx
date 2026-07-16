@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image"; // <-- Added Next.js Image component
 import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import BentoCard from "@/components/ui/BentoCard";
 import { Vina_Sans, Dela_Gothic_One, Alata } from "next/font/google";
 
@@ -489,6 +490,11 @@ export default function ProjectsPage() {
 
             </div>
           </main>
+
+          {/* Spacer to keep the Footer from touching the cards above it */}
+          <div className="w-full h-[60px] md:h-[80px]" />
+
+          <Footer />
         </div>
       </div>
     </>

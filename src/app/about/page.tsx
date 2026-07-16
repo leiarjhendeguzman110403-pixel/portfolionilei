@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import BentoCard from "@/components/ui/BentoCard";
 import Navbar from "@/components/navbar"; 
+import Footer from "@/components/footer";
 import { 
   GraduationCap, 
   BrainCircuit, 
@@ -44,15 +45,17 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  offscreen: { opacity: 0, y: 40, scale: 0.96 }, 
+  offscreen: { opacity: 0, y: 40, scale: 0.94, filter: "blur(6px)" }, 
   onscreen: { 
-    opacity: 1, y: 0, scale: 1, 
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } 
+    opacity: 1, y: 0, scale: 1, filter: "blur(0px)",
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
   },
 };
 
 export default function AboutPage() {
-  const [isMobile, setIsMobile] = useState(true);
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== "undefined" && window.innerWidth < 768
+  );
   const [activeTab, setActiveTab] = useState("SEMINAR");
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   
@@ -199,8 +202,8 @@ export default function AboutPage() {
           {/* CARD 1: PROFILE PICTURE */}
           <motion.div variants={itemVariants} className="col-span-2 row-span-5 hover:z-50">
             <BentoCard 
-              style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
+              style={{ borderRadius: "10px", backgroundColor: "#2b2b2b", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)" }} 
+              className="w-full h-full p-0 overflow-hidden relative group border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
               <div className="glass-sweep" /> 
 
@@ -269,8 +272,8 @@ export default function AboutPage() {
           {/* CARD 2: ACADEMIC BACKGROUND 1 */}
           <motion.div variants={itemVariants} className="col-span-2 row-span-2 hover:z-50">
             <BentoCard 
-              style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
+              style={{ borderRadius: "10px", backgroundColor: "#2b2b2b", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)" }} 
+              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
               <div className="glass-sweep" /> 
 
@@ -315,8 +318,8 @@ export default function AboutPage() {
           {/* CARD 3: GET TO KNOW ME */}
           <motion.div variants={itemVariants} className="col-span-1 row-span-4 z-20 hover:z-50">
             <BentoCard 
-              style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
+              style={{ borderRadius: "10px", backgroundColor: "#2b2b2b", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)" }} 
+              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
               <div className="glass-sweep" /> 
 
@@ -349,8 +352,8 @@ export default function AboutPage() {
           {/* CARD 4: TECH & DESIGN STACK */}
           <motion.div variants={itemVariants} className="col-span-2 row-span-1 hover:z-50">
             <BentoCard 
-              style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
+              style={{ borderRadius: "10px", backgroundColor: "#2b2b2b", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)" }} 
+              className="w-full h-full p-5 lg:p-8 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
               <div className="glass-sweep" /> 
 
@@ -401,8 +404,8 @@ export default function AboutPage() {
           {/* CARD 5: CURRENT RESIDENCE */}
           <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
             <BentoCard 
-              style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full flex flex-col p-5 lg:px-6 overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
+              style={{ borderRadius: "10px", backgroundColor: "#2b2b2b", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)" }} 
+              className="w-full h-full flex flex-col p-5 lg:px-6 overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
               <div className="glass-sweep" /> 
 
@@ -441,8 +444,8 @@ export default function AboutPage() {
           {/* CARD 6: CREATIVE CAPABILITIES */}
           <motion.div variants={itemVariants} className="col-span-1 row-span-2 hover:z-50">
             <BentoCard 
-              style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-              className="w-full h-full p-5 lg:px-6 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
+              style={{ borderRadius: "10px", backgroundColor: "#2b2b2b", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)" }} 
+              className="w-full h-full p-5 lg:px-6 flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
             >
               <div className="glass-sweep" /> 
 
@@ -578,7 +581,8 @@ export default function AboutPage() {
               className="flex flex-col max-w-[600px] mx-auto mt-8 relative z-20"
               variants={containerVariants}
               initial="offscreen"
-              animate="onscreen"
+              whileInView="onscreen"
+              viewport={{ once: true, margin: "-100px" }}
               exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
               layout 
             >
@@ -641,8 +645,8 @@ export default function AboutPage() {
                     style={{ zIndex: expandedIndex === index ? 50 : 20 }}
                   >
                     <BentoCard 
-                      style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)", padding: "12px 16px", height: "100px" }} 
-                      className="w-full flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] backdrop-blur-sm"
+                      style={{ borderRadius: "10px", backgroundColor: "#2b2b2b", padding: "12px 16px", height: "100px", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)" }} 
+                      className="w-full flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]"
                     >
                       <div className="glass-sweep" /> 
                       
@@ -748,7 +752,8 @@ export default function AboutPage() {
               key="certificates"
               variants={containerVariants}
               initial="offscreen"
-              animate="onscreen"
+              whileInView="onscreen"
+              viewport={{ once: true, margin: "-100px" }}
               exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
               style={{
                 display: 'flex',
@@ -822,8 +827,8 @@ export default function AboutPage() {
                     }}
                   >
                     <BentoCard 
-                      style={{ borderRadius: "10px", backgroundColor: "rgba(77, 77, 77, 0.3)" }} 
-                      className="w-[330px] h-[270px] flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] group backdrop-blur-sm"
+                      style={{ borderRadius: "10px", backgroundColor: "#2b2b2b", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)" }} 
+                      className="w-[330px] h-[270px] flex flex-col overflow-hidden relative border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] group"
                     >
                       <div className="glass-sweep" /> 
 
@@ -854,6 +859,11 @@ export default function AboutPage() {
         </AnimatePresence>
 
       </div>
+
+      {/* Spacer to keep the Footer from touching the cards above it */}
+      <div className="w-full h-[60px] md:h-[80px]" />
+
+      <Footer />
 
       {/* --- EXPANDED IMAGE MODAL --- */}
       <AnimatePresence>

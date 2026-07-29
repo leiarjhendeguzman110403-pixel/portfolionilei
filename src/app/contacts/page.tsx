@@ -226,6 +226,7 @@ export default function ContactsPage() {
       valueFont: delaGothic.className, 
       
       titleColor: "text-[#ffffff]",
+      noTitleGlow: true,
       hasCircle: true,
 
       iconSize: "w-[36px] h-[36px] md:w-[36px] md:h-[36px]",
@@ -255,6 +256,7 @@ export default function ContactsPage() {
       valueFont: delaGothic.className,
       
       titleColor: "text-[#ffffff]",
+      noTitleGlow: true,
       hasCircle: true,
 
       iconSize: "w-[36px] h-[36px] md:w-[36px] md:h-[36px]",
@@ -282,6 +284,7 @@ export default function ContactsPage() {
       valueFont: delaGothic.className,
       
       titleColor: "text-[#ffffff]",
+      noTitleGlow: true,
       hasCircle: true,
 
       iconSize: "w-[36px] h-[36px] md:w-[36px] md:h-[36px]",
@@ -309,6 +312,7 @@ export default function ContactsPage() {
       valueFont: delaGothic.className,
       
       titleColor: "text-[#ffffff]",
+      noTitleGlow: true,
       hasCircle: true,
 
       iconSize: "w-[36px] h-[36px] md:w-[36px] md:h-[36px]",
@@ -407,6 +411,16 @@ export default function ContactsPage() {
           
           animation: panGrid 4s linear infinite, maskSweep 6s linear infinite;
         }
+
+        @keyframes contactCardFadeInUp {
+          0% { opacity: 0; transform: translateY(18px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .contact-card-entrance {
+          opacity: 0;
+          animation: contactCardFadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
       `}} />
 
       <main
@@ -452,7 +466,7 @@ export default function ContactsPage() {
           </h1>
 
           {/* Accent bar, matching the reference layout */}
-          <div className="w-full max-w-[460px] h-[44px] bg-[#E6FF2B] mt-10 rounded-[2px]" />
+          <div className="w-full max-w-[460px] h-[44px] bg-[#8593F0] mt-10 rounded-[2px]" />
         </div>
 
         {/* RIGHT SIDE: 8 CARDS GRID */}
@@ -480,9 +494,20 @@ export default function ContactsPage() {
               ? "text-[#8593F0]" 
               : (item.link ? "text-white group-hover:text-[#8593F0]" : "text-[#8593F0]");
 
+            const isFirstCard = i === 0;
+
             const CardContent = (
               <BentoCard 
-                className={`bg-[#2a2a2a]/90 backdrop-blur-md border border-[#4d4d4d] group-hover:border-[#8593F0] w-full h-full flex flex-col transition-colors duration-300 overflow-hidden relative ${isAutoCenter ? 'items-center justify-center p-4' : ''}`}
+                className={`${isFirstCard ? '' : 'bg-[#2a2a2a]/90'} backdrop-blur-md border-[3px] ${isFirstCard ? 'border-[#8593F0]' : 'border-[#4d4d4d] group-hover:border-[#8593F0]/50 group-hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]'} w-full h-full flex flex-col transition-all duration-300 overflow-hidden relative ${isAutoCenter ? 'items-center justify-center p-4' : ''}`}
+                style={{ 
+                  borderRadius: "10px",
+                  boxShadow: isFirstCard 
+                    ? "0 0 20px rgba(133,147,240,0.25)" 
+                    : "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)",
+                  ...(isFirstCard ? { 
+                    background: "linear-gradient(135deg, rgba(133,147,240,0.20) 0%, rgba(133,147,240,0.25) 55%, rgba(42,42,42,0.85) 100%)" 
+                  } : {})
+                }}
               >
                 <div className="glass-sweep" />
 
@@ -515,7 +540,7 @@ export default function ContactsPage() {
 
                 {/* 2. Title */}
                 {item.title && (
-                  <h3 className={`${item.titleFont} ${item.titleSize} ${item.titleColor || 'text-[#8593F0]'} ${item.titleMarginTop || ''} ${item.titleMarginLeft || ''} tracking-widest uppercase break-words w-full [text-shadow:0_0_10px_currentColor] no-underline ${isAutoCenter ? 'text-center' : 'text-left relative z-10'}`}>
+                  <h3 className={`${item.titleFont} ${item.titleSize} ${item.titleColor || 'text-[#8593F0]'} ${item.titleMarginTop || ''} ${item.titleMarginLeft || ''} tracking-widest uppercase break-words w-full ${item.noTitleGlow ? '' : '[text-shadow:0_0_10px_currentColor]'} no-underline ${isAutoCenter ? 'text-center' : 'text-left relative z-10'}`}>
                     {item.title}
                   </h3>
                 )}
@@ -540,13 +565,17 @@ export default function ContactsPage() {
             );
 
             return (
-              <div key={i} className={`${item.gridClass} hover:z-50`}>
+              <div 
+                key={i} 
+                className={`${item.gridClass} hover:z-50 contact-card-entrance`}
+                style={{ animationDelay: `${i * 70}ms` }}
+              >
                 {item.link ? (
                   <a 
                     href={item.link} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="block w-full h-full cursor-pointer group hover:scale-[1.02] transition-transform duration-300 no-underline hover:no-underline focus:outline-none"
+                    className="block w-full h-full cursor-pointer group hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 no-underline hover:no-underline focus:outline-none"
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
                     {CardContent}

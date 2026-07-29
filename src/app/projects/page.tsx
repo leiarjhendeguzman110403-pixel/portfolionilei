@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image"; // <-- Added Next.js Image component
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -98,48 +99,148 @@ export default function ProjectsPage() {
       title: "PCCI VALENZUELA WEBSITE", 
       category: "INTERN - FRONT-END",
       demoLink: "https://pcci-valenzuela.onrender.com/",
-      description: "Worked on the frontend development of a comprehensive membership platform for the Philippine Chamber of Commerce and Industry (PCCI) – Valenzuela Chapter. The platform was built on a headless architecture.",
-      images: ["Media 1 (Landing Page)", "Media 2 (Events Page)"],
-      contributions: [
-        "Developed the frontend for the Contact Us and Events pages.",
-        "Implemented responsive, pixel-perfect layouts based on the provided UI/UX designs."
+      description: "Developed the front-end of a comprehensive business membership platform for the Philippine Chamber of Commerce and Industry (Valenzuela Chapter). Built responsive, user-friendly interfaces and integrated APIs to deliver a seamless user experience. The platform utilizes a headless architecture, decoupling the frontend from the backend to improve scalability, flexibility, and maintainability.",
+      images: [
+        "/images/about/basta1.png", "/images/about/basta2.png", "/images/about/basta3.png",
+        "/images/about/basta4.png", "/images/about/basta5.png", "/images/about/basta6.png",
+        "/images/about/basta7.png", "/images/about/basta8.png", "/images/about/basta9.png",
+        "/images/about/basta10.png"
       ],
-      techStack: ["NEXT.JS", "TAILWIND CSS", "HEADLESS CMS"]
+      contributions: [
+        "Developed responsive and user-friendly web pages using Laravel, Blade, CSS, and JavaScript.",
+        "Built the website based on the client's preferred layout and design, ensuring the final result matched their vision.",
+        "Integrated frontend pages with backend functionality to display dynamic content smoothly.",
+        "Maintained a clean, consistent, and easy-to-use interface across different pages and devices.",
+      ],
+      techStack: ["LARAVEL", "BOOTSTRAP", "PHP", "REST APIS", "MIDDLEWARE", "RBAC", "VS CODE", "FIGMA"]
     },
     { 
       id: 3, 
       title: "8CON ACADEMY WEBSITE", 
       category: "INTERN - FRONT-END",
       demoLink: "https://8con-academy-website-batch6.vercel.app/",
-      description: "Contributed to the frontend development of the marketing website for 8Con Academy, a Philippine-based forex trading education company.",
-      images: ["Media 1 (Workshops)", "Media 2 (Sub-brands Carousel)"],
-      contributions: [
-        "Redesigned the workshop registration page based on finalized UI/UX.",
-        "Implemented an interactive carousel to highlight sub-brands."
+      description: "Developed the front-end of a corporate website for 8Con Academy, a Forex trading company, during my On-the-Job Training. Built responsive and user-friendly interfaces using React and Vite, creating a modern platform that showcases the company's services, internship opportunities, and student registration process.",
+      images: [
+        "/images/about/PCCI1.png", "/images/about/PCCI2.png", "/images/about/PCCI3.png",
+        "/images/about/PCCI4.png", "/images/about/PCCI5.png", "/images/about/PCCI6.png",
+        "/images/about/PCCI7.png", "/images/about/PCCI8.png", "/images/about/PCCI9.png",
+        "/images/about/PCCI10.png", "/images/about/PCCI11.png", "/images/about/PCCI12.png",
+        "/images/about/PCCI13.png", "/images/about/PCCI14.png", "/images/about/PCCI15.png"
       ],
-      techStack: ["REACT", "TAILWIND CSS", "FIGMA", "FRAMER MOTION"]
+      contributions: [
+        "Developed responsive and user-friendly frontend interfaces using React, Vite, CSS, and JavaScript.",
+        "Redesigned the UI of individual sub-brand pages, and the student registration page to create a more modern and intuitive user experience.",
+        "Implemented a carousel feature to showcase the company's sub-brands, enhancing the visual appeal and interactivity of the website.",
+        "Built pages that showcased the company's brand, services, internship programs, and career opportunities.",
+        "Worked closely with the design and development team to ensure responsive layouts, consistent design, and smooth frontend functionality across different devices."
+      ],
+      techStack: ["REACT", "VITE", "JAVASCRIPT", "CSS", "VS CODE", "FIGMA"]
     },
     { 
       id: 4, 
       title: "GRAPHIC DESIGNS", 
       category: "GRAPHIC DESIGNER - FREELANCE",
-      description: "Created visual designs that help clients communicate their ideas and strengthen their brand identity. Designed posters, banners, logos, and custom graphics.",
-      images: ["Graphic 1", "Graphic 2"],
+      description: "Designed a wide range of creative visual materials for freelance clients, personal projects, and relatives, including logos, posters, brochures, invitations, social media graphics, and web UI designs. Focused on creating visually appealing, purpose-driven designs tailored to each project's goals while maintaining consistency, creativity, and attention to detail.",
+      images: [
+        "/images/about/alicia.png", "/images/about/bro1.png", "/images/about/bro2.png",
+        "/images/about/Cali.png", "/images/about/CYPRIAN.png", "/images/about/ESCAPEROOM.png",
+        "/images/about/fatima.png", "/images/about/Join1.png", "/images/about/join2.png",
+        "/images/about/logo1.png", "/images/about/logo2.png", "/images/about/logo3.png",
+        "/images/about/logo4.png", "/images/about/logo5.png",
+        "/images/about/solar1.png", "/images/about/solar2.png", "/images/about/solar3.png",
+        "/images/about/solar4.png", "/images/about/solar5.png", "/images/about/solar6.png",
+        "/images/about/solar7.png", "/images/about/solar8.png", "/images/about/solar9.png",
+        "/images/about/solar10.png", "/images/about/solar11.png", "/images/about/solar12.png",
+        "/images/about/solar13.png", "/images/about/solar14.png",
+        "/images/about/story1.png", "/images/about/story2.png", "/images/about/story3.png",
+        "/images/about/story4.png", "/images/about/story5.png", "/images/about/story6.png",
+        "/images/about/story7.png", "/images/about/story8.png", "/images/about/story9.png",
+        "/images/about/story10.png", "/images/about/story11.png",
+        "/images/about/workshop.png",
+        "/images/about/zayn1.png", "/images/about/zayn2.png"
+      ],
     },
     { 
       id: 5, 
       title: "VIDEO EDITS", 
       category: "VIDEO EDITOR - PERSONAL/SCHOOL PROJECT",
-      description: "Edited engaging videos for school presentations, academic projects, and promotional social media content. Added smooth transitions and visual effects to enhance quality.",
+      description: "Edited high-quality videos for personal, academic, and freelance projects, adapting each edit to its intended audience and objective. Produced short-form promotional videos for TikTok Shop affiliate marketing, using creative editing techniques and attention-grabbing visuals to attract target audiences, showcase products effectively, and drive viewer interest.",
       images: ["Video Thumbnail 1"],
     },
   ];
 
   const [selectedProjectId, setSelectedProjectId] = useState(projects[0].id);
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [collageGroupIndex, setCollageGroupIndex] = useState<Record<string, number>>({ solar: 0, story: 0 });
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+
+  const openLightbox = (images: string[], index: number) => {
+    setLightbox({ images, index });
+  };
+
+  // Portals need document.body, which only exists client-side after mount
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const closeLightbox = () => setLightbox(null);
+
+  const showPrevLightboxImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setLightbox(prev => prev ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : prev);
+  };
+
+  const showNextLightboxImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setLightbox(prev => prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : prev);
+  };
 
   const selectedProject = projects.find(p => p.id === selectedProjectId) || projects[0];
   const isDetailedLayout = selectedProject.id <= 3;
+  const isCollageLayout = selectedProject.id === 4;
+
+  // Groups consecutive series (solar1..N, story1..N) into single clickable stacked tiles
+  type CollageItem = { key: string; type: "group" | "single"; images: string[] };
+
+  const getCollageItems = (images: string[]): CollageItem[] => {
+    const solarRegex = /solar(\d+)\.png$/i;
+    const storyRegex = /story(\d+)\.png$/i;
+
+    const sortByNumber = (arr: string[], regex: RegExp): string[] => 
+      [...arr].sort((a, b) => {
+        const numA = parseInt(a.match(regex)?.[1] ?? "0", 10);
+        const numB = parseInt(b.match(regex)?.[1] ?? "0", 10);
+        return numA - numB;
+      });
+
+    const solarImgs = sortByNumber(images.filter(img => solarRegex.test(img)), solarRegex);
+    const storyImgs = sortByNumber(images.filter(img => storyRegex.test(img)), storyRegex);
+
+    const items: CollageItem[] = [];
+    let solarAdded = false;
+    let storyAdded = false;
+
+    images.forEach(img => {
+      if (solarRegex.test(img)) {
+        if (!solarAdded) {
+          items.push({ key: "solar", type: "group", images: solarImgs });
+          solarAdded = true;
+        }
+        return;
+      }
+      if (storyRegex.test(img)) {
+        if (!storyAdded) {
+          items.push({ key: "story", type: "group", images: storyImgs });
+          storyAdded = true;
+        }
+        return;
+      }
+      items.push({ key: img, type: "single", images: [img] });
+    });
+
+    return items;
+  };
+
+  const collageItems = isCollageLayout ? getCollageItems(selectedProject.images) : [];
 
   useEffect(() => {
     setCarouselIndex(0);
@@ -208,6 +309,25 @@ export default function ProjectsPage() {
           
           animation: panGrid 4s linear infinite, maskSweep 6s linear infinite;
         }
+
+        @keyframes cardFadeInUp {
+          0% { opacity: 0; transform: translateY(18px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-entrance {
+          opacity: 0;
+          animation: cardFadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes bigCardSwitch {
+          0% { opacity: 0; transform: translateY(10px) scale(0.985); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .big-card-switch {
+          animation: bigCardSwitch 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
       `}} />
 
       <div className="relative min-h-screen animated-bg-container text-white overflow-clip z-0">
@@ -263,20 +383,25 @@ export default function ProjectsPage() {
                     <BentoCard 
                       key={proj.id} 
                       onClick={() => setSelectedProjectId(proj.id)}
-                      className={`bg-[#202020] flex items-center transition-all duration-300 cursor-pointer group border-[0.1px] ${
+                      className={`card-entrance bg-[#202020] flex items-center transition-all duration-300 cursor-pointer group border-[3px] hover:-translate-y-[3px] active:translate-y-0 active:scale-[0.98] ${
                         isSelected 
-                          ? 'border-[#8593F0] shadow-[inset_4px_4px_8px_rgba(0,0,0,0.7),inset_-4px_-4px_8px_rgba(255,255,255,0.03)]' 
-                          : 'border-[#2a2a2a] hover:border-white/20 shadow-[6px_6px_12px_rgba(0,0,0,0.6),-6px_-6px_12px_rgba(255,255,255,0.04)] hover:shadow-[8px_8px_15px_rgba(0,0,0,0.8),-8px_-8px_15px_rgba(255,255,255,0.06)]'
+                          ? 'border-[#8593F0]/50' 
+                          : 'border-[#4d4d4d] hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)]'
                       }`}
                       style={{ 
                         height: CONFIG.smallCards.height,
-                        padding: CONFIG.smallCards.padding
+                        padding: CONFIG.smallCards.padding,
+                        borderRadius: "10px",
+                        animationDelay: `${index * 80}ms`,
+                        boxShadow: isSelected
+                          ? "inset 2px 2px 5px rgba(0,0,0,0.6), inset -2px -2px 5px rgba(255,255,255,0.05), 0 0 20px rgba(133,147,240,0.25)"
+                          : "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)"
                       }}
                     >
                       <div className="flex flex-row items-center w-full gap-4">
                         
                         <div 
-                          className={`${vinaSans.className} transition-colors block ${isSelected ? 'text-[#8593F0]' : 'text-[#4d4d4d] group-hover:text-[#E6FF2B]'}`}
+                          className={`${vinaSans.className} transition-colors block ${isSelected ? 'text-[#8593F0]' : 'text-[#4d4d4d] group-hover:text-white'}`}
                           style={{ 
                             fontSize: CONFIG.smallCardText.numberFontSize,
                             paddingLeft: CONFIG.smallCardText.numberPaddingLeft,
@@ -289,7 +414,7 @@ export default function ProjectsPage() {
                         
                         <div className="flex flex-col overflow-hidden w-full">
                           <div 
-                            className={`${alata.className} tracking-[0.2em] uppercase block transition-colors ${isSelected ? 'text-[#E6FF2B]' : 'text-[#8593F0]'}`}
+                            className={`${alata.className} tracking-[0.2em] uppercase block transition-colors text-white`}
                             style={{ 
                               fontSize: CONFIG.smallCardText.categoryFontSize,
                               paddingLeft: CONFIG.smallCardText.categoryPaddingLeft,
@@ -299,7 +424,7 @@ export default function ProjectsPage() {
                             {proj.category}
                           </div>
                           <div 
-                            className={`${delaGothic.className} text-white truncate block`}
+                            className={`${delaGothic.className} truncate block transition-colors text-white`}
                             style={{ 
                               fontSize: CONFIG.smallCardText.titleFontSize,
                               paddingLeft: CONFIG.smallCardText.titlePaddingLeft,
@@ -321,17 +446,49 @@ export default function ProjectsPage() {
                 style={{ marginTop: CONFIG.bigCard.marginTop }} 
               >
                 <BentoCard 
-                  className="bg-[#202020] border-[0.1px] border-[#2a2a2a] shadow-[10px_10px_25px_rgba(0,0,0,0.6),-10px_-10px_25px_rgba(255,255,255,0.03)] flex flex-col animate-in fade-in zoom-in-95 duration-300"
+                  key={selectedProject.id}
+                  className="big-card-switch bg-[#202020] border-[3px] border-[#4d4d4d] transition-all duration-300 hover:border-[#8593F0]/50 hover:shadow-[0_0_30px_rgba(133,147,240,0.3)] flex flex-col"
                   style={{ 
                     height: CONFIG.bigCard.height,
                     minHeight: CONFIG.bigCard.minHeight,
-                    padding: CONFIG.bigCard.padding
+                    padding: CONFIG.bigCard.padding,
+                    borderRadius: "10px",
+                    boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)"
+                  }}
+                  onClick={(e) => {
+                    // Fallback hit-test: if a click landed on the gallery area but the
+                    // direct button onClick never fired (e.g. something inside BentoCard
+                    // visually overlaps the buttons and steals the hit-test), find the
+                    // real target by coordinates instead of relying on e.target directly.
+                    // elementsFromPoint returns every element stacked at that point,
+                    // regardless of what's "on top", so this works even when something
+                    // else physically intercepts the click.
+                    const target = e.target as HTMLElement;
+                    if (target.closest('[data-lightbox]')) return; // direct hit already handled it
+
+                    const stack = document.elementsFromPoint(e.clientX, e.clientY);
+                    const hit = stack.find((el) => el.hasAttribute("data-lightbox")) as HTMLElement | undefined;
+                    if (!hit) return;
+
+                    if (hit.dataset.lightbox === "collage") {
+                      const key = hit.dataset.key as string;
+                      const idx = Number(hit.dataset.index ?? 0);
+                      const item = collageItems.find((it) => it.key === key);
+                      if (item) {
+                        console.log("[Lightbox] fallback collage click:", { key, idx });
+                        openLightbox(item.images, idx);
+                      }
+                    } else if (hit.dataset.lightbox === "carousel") {
+                      const idx = Number(hit.dataset.index ?? 0);
+                      console.log("[Lightbox] fallback carousel click:", { idx });
+                      openLightbox(selectedProject.images, idx);
+                    }
                   }}
                 >
                   
                   <div className="flex justify-between items-start mb-6 shrink-0 gap-4">
                     <div className="flex flex-col gap-1">
-                      <span className={`${alata.className} text-[#E6FF2B] tracking-[0.2em] uppercase text-xs block`}>
+                      <span className={`${alata.className} text-[#8593F0] tracking-[0.2em] uppercase text-xs block`}>
                         {selectedProject.category}
                       </span>
                       <h2 className={`${delaGothic.className} text-2xl md:text-3xl text-white uppercase`}>
@@ -344,7 +501,7 @@ export default function ProjectsPage() {
                         href={selectedProject.demoLink} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className={`${alata.className} shrink-0 bg-[#202020] text-[#ffffff] mt-1 rounded-[6px] font-bold tracking-[0.15em] uppercase transition-all duration-300 border border-[#898A8D] hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] flex items-center justify-center gap-2`}
+                        className={`${alata.className} shrink-0 bg-[#202020] text-[#8593F0] mt-1 rounded-[6px] font-bold tracking-[0.15em] uppercase transition-all duration-300 border border-[#8593F0] hover:shadow-[0_0_15px_rgba(133,147,240,0.4)] flex items-center justify-center gap-2`}
                         style={{ 
                           fontSize: CONFIG.bigCard.demoButtonFontSize,
                           padding: CONFIG.bigCard.demoButtonPadding
@@ -360,82 +517,219 @@ export default function ProjectsPage() {
                     )}
                   </div>
                   
-                  {/* SECTION 1: MEDIA CAROUSEL */}
+                  {/* SECTION 1: PROJECT OVERVIEW */}
+                  <div className="mb-8 shrink-0">
+                    <h3 className={`${alata.className} text-[#898A8D] text-[11px] tracking-[0.15em] uppercase mb-2 border-b border-[#4d4d4d] pb-2 inline-block w-full`}>Project Overview</h3>
+                    <p className={`${alata.className} text-white/80 text-sm leading-relaxed text-justify mt-2`}>
+                      {selectedProject.description}
+                    </p>
+                  </div>
+
+                  {/* SECTION 2: PROJECT GALLERY */}
                   {selectedProject.images && selectedProject.images.length > 0 && (
-                    <div className="flex flex-col w-full mb-8 shrink-0 group">
-                      
+                    <div className="relative z-20 flex flex-col w-full mb-8 shrink-0 group">
+                      <h3 className={`${alata.className} text-[#898A8D] text-[11px] tracking-[0.15em] uppercase mb-4 border-b border-[#4d4d4d] pb-2 inline-block w-full`}>Project Gallery</h3>
+
+                      {isCollageLayout ? (
+                        /* Collage Layout — grows with content, page scrolls (no inner scroll container) */
+                        <div className="w-full">
+                          <div className="columns-2 sm:columns-3 gap-6">
+                            {collageItems.map((item) => {
+                              const isGroup = item.type === "group";
+                              const activeIdx = isGroup ? (collageGroupIndex[item.key] ?? 0) : 0;
+                              const currentImg = item.images[activeIdx];
+                              const fixedImgSrc = currentImg.startsWith('/') ? currentImg : `/${currentImg}`;
+                              const isImage = currentImg.toLowerCase().match(/\.(png|jpe?g|gif|webp|svg)$/);
+
+                              return (
+                                <button
+                                  key={item.key}
+                                  type="button"
+                                  data-lightbox="collage"
+                                  data-key={item.key}
+                                  data-index={activeIdx}
+                                  onClick={(e) => { e.stopPropagation(); openLightbox(item.images, activeIdx); }}
+                                  style={{ position: "relative", zIndex: 5, pointerEvents: "auto" }}
+                                  className="appearance-none block w-full text-left p-0 m-0 border-0 bg-transparent mb-[15px] break-inside-avoid rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
+                                >
+                                  {isImage ? (
+                                    <Image 
+                                      src={fixedImgSrc} 
+                                      alt={`${selectedProject.title} artwork ${item.key}`} 
+                                      width={400}
+                                      height={400}
+                                      sizes="(max-width: 640px) 50vw, 33vw"
+                                      className="w-full h-auto object-cover rounded-xl"
+                                      style={{ borderRadius: "12px" }}
+                                    />
+                                  ) : (
+                                    <div className="flex items-center justify-center w-full aspect-square">
+                                      <span className={`${alata.className} text-[#4d4d4d] text-xs tracking-widest uppercase`}>{currentImg} Placeholder</span>
+                                    </div>
+                                  )}
+
+                                  {isGroup && (
+                                    <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/70 backdrop-blur-sm rounded-full px-2 py-0.5">
+                                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#8593F0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <rect x="3" y="3" width="13" height="13" rx="2"></rect>
+                                        <path d="M8 8h13v13H8z"></path>
+                                      </svg>
+                                      <span className={`${alata.className} text-white text-[10px]`}>{activeIdx + 1}/{item.images.length}</span>
+                                    </div>
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      ) : (
+                        <>
                       {/* Image Viewer Container */}
                       <div 
                         className="relative w-full rounded-lg overflow-hidden border-[0.1px] border-[#2a2a2a] bg-[#1a1a1a]" 
                         style={{ height: CONFIG.bigCard.carouselMaxHeight }}
                       >
-                        <div 
-                          className="flex h-full w-full transition-transform duration-500 ease-in-out" 
-                          style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
-                        >
-                          {selectedProject.images.map((img, i) => {
-                            const fixedImgSrc = img.startsWith('/') ? img : `/${img}`;
-                            const isImage = img.toLowerCase().match(/\.(png|jpe?g|gif|webp|svg)$/);
+                        {selectedProject.images.map((img, i) => {
+                          const fixedImgSrc = img.startsWith('/') ? img : `/${img}`;
+                          const isImage = img.toLowerCase().match(/\.(png|jpe?g|gif|webp|svg)$/);
 
-                            return (
-                              <div key={i} className="relative w-full h-full shrink-0 flex justify-center items-center p-4">
-                                {isImage ? (
-                                  <div className="relative w-full h-full">
-                                    <Image 
-                                      src={fixedImgSrc} 
-                                      alt={`${selectedProject.title} screenshot ${i + 1}`} 
-                                      fill
-                                      sizes="(max-width: 1200px) 100vw, 800px"
-                                      className="object-contain pointer-events-none drop-shadow-xl"
-                                    />
-                                  </div>
-                                ) : (
-                                  <div className="flex items-center justify-center w-full h-full">
-                                    <span className={`${alata.className} text-[#4d4d4d] tracking-widest uppercase`}>{img} Placeholder</span>
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
+                          const offset = i - carouselIndex;
+                          const isCenter = offset === 0;
+                          const isAdjacent = Math.abs(offset) === 1;
+                          const scale = isCenter ? 1 : isAdjacent ? 0.8 : 0.65;
+                          const blur = isCenter ? 0 : isAdjacent ? 6 : 12;
+                          const opacity = isCenter ? 1 : isAdjacent ? 0.4 : 0;
+                          const zIndex = isCenter ? 20 : isAdjacent ? 10 : 0;
+
+                          return (
+                            <div 
+                              key={i} 
+                              data-lightbox={isCenter ? "carousel" : undefined}
+                              data-index={i}
+                              onClick={isCenter ? (e) => { e.stopPropagation(); openLightbox(selectedProject.images, i); } : undefined}
+                              className={`absolute top-0 left-1/2 h-full w-full flex justify-center items-center p-4 transition-all duration-500 ease-in-out ${isCenter ? 'cursor-pointer' : ''}`}
+                              style={{
+                                transform: `translateX(-50%) translateX(${offset * 62}%) scale(${scale})`,
+                                filter: `blur(${blur}px)`,
+                                opacity,
+                                zIndex: isCenter ? Math.max(zIndex, 30) : zIndex,
+                                pointerEvents: isCenter ? "auto" : "none",
+                              }}
+                            >
+                              {isImage ? (
+                                <div className="relative w-full h-full">
+                                  <Image 
+                                    src={fixedImgSrc} 
+                                    alt={`${selectedProject.title} screenshot ${i + 1}`} 
+                                    fill
+                                    sizes="(max-width: 1200px) 100vw, 800px"
+                                    className="object-contain drop-shadow-xl rounded-lg pointer-events-none"
+                                  />
+                                </div>
+                              ) : (
+                                <div className="flex items-center justify-center w-full h-full pointer-events-none">
+                                  <span className={`${alata.className} text-[#4d4d4d] tracking-widest uppercase`}>{img} Placeholder</span>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
                       
                       {/* Controls */}
                       {selectedProject.images.length > 1 && (
-                        <div className="flex justify-center items-center gap-8 mt-5">
+                        <div className="relative flex items-center justify-between w-full" style={{ marginTop: "10px" }}>
                           <button 
+                            type="button"
                             onClick={(e) => { e.stopPropagation(); setCarouselIndex(prev => Math.max(0, prev - 1)); }}
-                            className="bg-[#2a2a2a] p-2.5 rounded-full text-[#898A8D] hover:text-[#E6FF2B] hover:border-white transition-all duration-300 border-[0.5px] border-[#4d4d4d] hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] disabled:opacity-30 disabled:hover:text-[#898A8D] disabled:hover:border-[#4d4d4d] disabled:hover:shadow-none cursor-pointer"
+                            className="group/btn relative z-10 flex items-center justify-center w-12 h-12 shrink-0 rounded-full bg-[#202020] text-[#8593F0] border-2 border-[#8593F0]/70 transition-all duration-300 hover:bg-[#8593F0] hover:text-[#202020] hover:border-[#8593F0] hover:shadow-[0_0_25px_rgba(133,147,240,0.6)] hover:scale-110 active:scale-90 disabled:opacity-20 disabled:pointer-events-none cursor-pointer mt-3"
+                            style={{ boxShadow: "0 0 12px rgba(133,147,240,0.25), inset 1px 1px 3px rgba(0,0,0,0.4)" }}
                             disabled={carouselIndex === 0}
+                            aria-label="Previous image"
                           >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover/btn:-translate-x-0.5">
+                              <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
                           </button>
                           
-                          <span className={`${alata.className} text-[12px] text-white tracking-[0.2em] font-bold w-12 text-center`}>
-                            {carouselIndex + 1} / {selectedProject.images.length}
-                          </span>
+                          {/* Dot Indicators — sliding carousel window */}
+                          {(() => {
+                            const DOT_STEP = 22;    // px between dot centers
+                            const MAX_VISIBLE = 7;   // how many dots show at once
+                            const total = selectedProject.images.length;
+                            const containerWidth = Math.min(total, MAX_VISIBLE) * DOT_STEP;
+                            const trackWidth = total * DOT_STEP;
+                            const centerOffset = Math.floor(MAX_VISIBLE / 2) * DOT_STEP;
+                            const rawTranslate = carouselIndex * DOT_STEP - centerOffset;
+                            const maxTranslate = Math.max(0, trackWidth - containerWidth);
+                            const translate = Math.max(0, Math.min(rawTranslate, maxTranslate));
+                            const needsFade = total > MAX_VISIBLE;
+                            const fadeMask = "linear-gradient(to right, transparent 0, black 12px, black calc(100% - 12px), transparent 100%)";
+
+                            return (
+                              <div
+                                className="absolute left-1/2 -translate-x-1/2 overflow-hidden"
+                                style={{
+                                  width: `${containerWidth}px`,
+                                  maskImage: needsFade ? fadeMask : undefined,
+                                  WebkitMaskImage: needsFade ? fadeMask : undefined,
+                                }}
+                              >
+                                <div
+                                  className="flex items-center transition-transform duration-300 ease-out"
+                                  style={{ transform: `translateX(-${translate}px)`, width: `${trackWidth}px` }}
+                                >
+                                  {selectedProject.images.map((_, i) => {
+                                    const isActiveDot = i === carouselIndex;
+                                    return (
+                                      <button
+                                        key={i}
+                                        type="button"
+                                        onClick={(e) => { e.stopPropagation(); setCarouselIndex(i); }}
+                                        aria-label={`Go to image ${i + 1}`}
+                                        className="appearance-none bg-transparent border-none outline-none p-0 m-0 cursor-pointer group/dot flex items-center justify-center shrink-0"
+                                        style={{ width: `${DOT_STEP}px`, height: "20px" }}
+                                      >
+                                        <span 
+                                          className="transition-all duration-300 group-hover/dot:bg-[#8593F0]/60"
+                                          style={{
+                                            display: "block",
+                                            borderRadius: "50%",
+                                            width: isActiveDot ? "10px" : "8px",
+                                            height: isActiveDot ? "10px" : "8px",
+                                            backgroundColor: isActiveDot ? "#8593F0" : "#4d4d4d",
+                                            boxShadow: isActiveDot ? "0 0 8px rgba(133,147,240,0.8)" : "none",
+                                          }}
+                                        />
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            );
+                          })()}
                           
                           <button 
+                            type="button"
                             onClick={(e) => { e.stopPropagation(); setCarouselIndex(prev => Math.min(selectedProject.images.length - 1, prev + 1)); }}
-                            className="bg-[#2a2a2a] p-2.5 rounded-full text-[#898A8D] hover:text-[#E6FF2B] hover:border-white transition-all duration-300 border-[0.5px] border-[#4d4d4d] hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] disabled:opacity-30 disabled:hover:text-[#898A8D] disabled:hover:border-[#4d4d4d] disabled:hover:shadow-none cursor-pointer"
+                            className="group/btn relative z-10 flex items-center justify-center w-12 h-12 shrink-0 rounded-full bg-[#202020] text-[#8593F0] border-2 border-[#8593F0]/70 transition-all duration-300 hover:bg-[#8593F0] hover:text-[#202020] hover:border-[#8593F0] hover:shadow-[0_0_25px_rgba(133,147,240,0.6)] hover:scale-110 active:scale-90 disabled:opacity-20 disabled:pointer-events-none cursor-pointer mt-3"
+                            style={{ boxShadow: "0 0 12px rgba(133,147,240,0.25), inset 1px 1px 3px rgba(0,0,0,0.4)" }}
                             disabled={carouselIndex === selectedProject.images.length - 1}
+                            aria-label="Next image"
                           >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover/btn:translate-x-0.5">
+                              <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
                           </button>
                         </div>
+                      )}
+                        </>
                       )}
                     </div>
                   )}
                   
-                  {isDetailedLayout ? (
+                  {isDetailedLayout && (
                     <div className="flex flex-col gap-8 shrink-0">
-                      <div>
-                        <h3 className={`${alata.className} text-[#898A8D] text-[11px] tracking-[0.15em] uppercase mb-2 border-b border-[#4d4d4d] pb-2 inline-block w-full`}>Project Overview</h3>
-                        <p className={`${alata.className} text-white/80 text-sm leading-relaxed text-justify mt-2`}>
-                          {selectedProject.description}
-                        </p>
-                      </div>
-
                       {selectedProject.contributions && (
                         <div>
                           <h3 className={`${alata.className} text-[#898A8D] text-[11px] tracking-[0.15em] uppercase mb-4 border-b border-[#4d4d4d] pb-2 inline-block w-full`}>Key Contributions</h3>
@@ -464,7 +758,7 @@ export default function ProjectsPage() {
                             {selectedProject.techStack.map((tech, i) => (
                               <div 
                                 key={i} 
-                                className="rounded-[7px] bg-[#2a2a2a] text-[#898A8D] transition-all duration-300 border-[0.5px] border-[#4d4d4d] hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] flex items-center justify-center cursor-default"
+                                className="rounded-[7px] bg-[#2a2a2a] text-[#8593F0] transition-all duration-300 border-[0.5px] border-[#8593F0] hover:shadow-[0_0_15px_rgba(133,147,240,0.4)] flex items-center justify-center cursor-default"
                                 style={{ padding: CONFIG.bigCard.techStackPadding }}
                               >
                                 <span className={`${alata.className} text-[12px] font-bold tracking-[0.15em] uppercase`}>
@@ -476,12 +770,6 @@ export default function ProjectsPage() {
                           
                         </div>
                       )}
-                    </div>
-                  ) : (
-                    <div className="shrink-0">
-                      <p className={`${alata.className} text-white/80 text-sm leading-relaxed text-justify mt-2`}>
-                        {selectedProject.description}
-                      </p>
                     </div>
                   )}
 
@@ -497,6 +785,73 @@ export default function ProjectsPage() {
           <Footer />
         </div>
       </div>
+
+      {/* Lightbox — enlarged image view, with nav buttons when viewing a group */}
+      {/* Rendered via portal into document.body so it can never get trapped by an
+          ancestor's transform/filter (e.g. a page-transition wrapper in layout.tsx),
+          which is what breaks `position: fixed` and makes the overlay invisible. */}
+      {lightbox && mounted && createPortal(
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          onClick={closeLightbox}
+        >
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 z-10 flex items-center justify-center w-10 h-10 rounded-full bg-[#202020] text-white border border-white/20 hover:bg-white/10 transition-colors cursor-pointer"
+            aria-label="Close"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+
+          {lightbox.images.length > 1 && (
+            <button
+              onClick={showPrevLightboxImage}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-12 h-12 rounded-full bg-[#202020] text-[#8593F0] border-2 border-[#8593F0]/70 transition-all duration-300 hover:bg-[#8593F0] hover:text-[#202020] hover:scale-110 active:scale-90 cursor-pointer"
+              aria-label="Previous image"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+          )}
+
+          <div 
+            className="relative max-w-[90vw] max-h-[85vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img 
+              src={(() => {
+                const src = lightbox.images[lightbox.index];
+                return src.startsWith('/') ? src : `/${src}`;
+              })()}
+              alt="Enlarged view"
+              className="max-w-[90vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg"
+            />
+          </div>
+
+          {lightbox.images.length > 1 && (
+            <button
+              onClick={showNextLightboxImage}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-12 h-12 rounded-full bg-[#202020] text-[#8593F0] border-2 border-[#8593F0]/70 transition-all duration-300 hover:bg-[#8593F0] hover:text-[#202020] hover:scale-110 active:scale-90 cursor-pointer"
+              aria-label="Next image"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          )}
+
+          {lightbox.images.length > 1 && (
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1">
+              <span className={`${alata.className} text-white text-xs tracking-wide`}>{lightbox.index + 1} / {lightbox.images.length}</span>
+            </div>
+          )}
+        </div>,
+        document.body
+      )}
     </>
   );
 }

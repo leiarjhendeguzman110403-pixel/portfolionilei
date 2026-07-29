@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, MouseEvent, ReactNode } from "react";
 import { motion, Variants } from "framer-motion";
 
 interface BentoCardProps {
@@ -12,7 +12,7 @@ interface BentoCardProps {
   className?: string;
   style?: CSSProperties;
   external?: boolean;
-  onClick?: () => void; // 1. Added onClick here
+  onClick?: (e: MouseEvent<HTMLDivElement>) => void; // 1. Added onClick here
 }
 
 const cardVariants: Variants = {

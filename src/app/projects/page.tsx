@@ -68,7 +68,17 @@ export default function ProjectsPage() {
       techStackGap: "12px",
       carouselMaxHeight: "300px"
     },
-    gridGap: "20px"
+    gridGap: "20px",
+    tiktokProfile: {
+      imageMaxWidth: "610px",
+      imageBottomMargin: "15px",
+      buttonBottomMargin: "10px",
+      buttonPaddingRight: "9px"
+    },
+    videoGrid: {
+      columnGap: "7px",
+      rowGap: "15px"
+    }
   };
 
   const projects = [
@@ -165,7 +175,12 @@ export default function ProjectsPage() {
       title: "VIDEO EDITS", 
       category: "VIDEO EDITOR - PERSONAL/SCHOOL PROJECT",
       description: "Edited high-quality videos for personal, academic, and freelance projects, adapting each edit to its intended audience and objective. Produced short-form promotional videos for TikTok Shop affiliate marketing, using creative editing techniques and attention-grabbing visuals to attract target audiences, showcase products effectively, and drive viewer interest.",
-      images: ["Video Thumbnail 1"],
+      profileImage: "/images/about/tiktok.png",
+      profileLink: "https://www.tiktok.com/@leiarjhen_",
+      images: [
+        "/videos/promo1.mov", "/videos/promo2.mov", "/videos/promo3.mov",
+        "/videos/promo4.mov", "/videos/promo5.mov", "/videos/promo6.mov"
+      ],
     },
   ];
 
@@ -196,7 +211,7 @@ export default function ProjectsPage() {
 
   const selectedProject = projects.find(p => p.id === selectedProjectId) || projects[0];
   const isDetailedLayout = selectedProject.id <= 3;
-  const isCollageLayout = selectedProject.id === 4;
+  const isCollageLayout = selectedProject.id === 4 || selectedProject.id === 5;
 
   // Groups consecutive series (solar1..N, story1..N) into single clickable stacked tiles
   type CollageItem = { key: string; type: "group" | "single"; images: string[] };
@@ -328,6 +343,24 @@ export default function ProjectsPage() {
         .big-card-switch {
           animation: bigCardSwitch 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
+
+        @keyframes lightboxBackdropIn {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+
+        @keyframes lightboxZoomIn {
+          0% { opacity: 0; transform: scale(0.85); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+
+        .lightbox-backdrop {
+          animation: lightboxBackdropIn 0.25s ease-out;
+        }
+
+        .lightbox-image-zoom {
+          animation: lightboxZoomIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
       `}} />
 
       <div className="relative min-h-screen animated-bg-container text-white overflow-clip z-0">
@@ -455,35 +488,6 @@ export default function ProjectsPage() {
                     borderRadius: "10px",
                     boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.08), 0 3px 6px rgba(0,0,0,0.35)"
                   }}
-                  onClick={(e) => {
-                    // Fallback hit-test: if a click landed on the gallery area but the
-                    // direct button onClick never fired (e.g. something inside BentoCard
-                    // visually overlaps the buttons and steals the hit-test), find the
-                    // real target by coordinates instead of relying on e.target directly.
-                    // elementsFromPoint returns every element stacked at that point,
-                    // regardless of what's "on top", so this works even when something
-                    // else physically intercepts the click.
-                    const target = e.target as HTMLElement;
-                    if (target.closest('[data-lightbox]')) return; // direct hit already handled it
-
-                    const stack = document.elementsFromPoint(e.clientX, e.clientY);
-                    const hit = stack.find((el) => el.hasAttribute("data-lightbox")) as HTMLElement | undefined;
-                    if (!hit) return;
-
-                    if (hit.dataset.lightbox === "collage") {
-                      const key = hit.dataset.key as string;
-                      const idx = Number(hit.dataset.index ?? 0);
-                      const item = collageItems.find((it) => it.key === key);
-                      if (item) {
-                        console.log("[Lightbox] fallback collage click:", { key, idx });
-                        openLightbox(item.images, idx);
-                      }
-                    } else if (hit.dataset.lightbox === "carousel") {
-                      const idx = Number(hit.dataset.index ?? 0);
-                      console.log("[Lightbox] fallback carousel click:", { idx });
-                      openLightbox(selectedProject.images, idx);
-                    }
-                  }}
                 >
                   
                   <div className="flex justify-between items-start mb-6 shrink-0 gap-4">
@@ -533,24 +537,59 @@ export default function ProjectsPage() {
                       {isCollageLayout ? (
                         /* Collage Layout — grows with content, page scrolls (no inner scroll container) */
                         <div className="w-full">
-                          <div className="columns-2 sm:columns-3 gap-6">
+                          {selectedProject.profileImage && (
+                            <div className="w-full mx-auto" style={{ maxWidth: CONFIG.tiktokProfile.imageMaxWidth, marginBottom: CONFIG.tiktokProfile.imageBottomMargin }}>
+                              {selectedProject.profileLink && (
+                                <div className="flex justify-end" style={{ marginBottom: CONFIG.tiktokProfile.buttonBottomMargin, paddingRight: CONFIG.tiktokProfile.buttonPaddingRight }}>
+                                  <a
+                                    href={selectedProject.profileLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`${alata.className} flex items-center justify-center gap-2 w-fit rounded-[6px] bg-[#202020] text-[#8593F0] font-bold tracking-[0.15em] uppercase text-xs transition-all duration-300 border border-[#8593F0] hover:shadow-[0_0_15px_rgba(133,147,240,0.4)]`}
+                                    style={{ padding: "8px 16px" }}
+                                  >
+                                    View TikTok Profile
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                      <path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"></path>
+                                    </svg>
+                                  </a>
+                                </div>
+                              )}
+
+                              <button
+                                type="button"
+                                onClick={() => openLightbox([selectedProject.profileImage!], 0)}
+                                className="appearance-none block w-full text-left p-0 m-0 border-0 bg-transparent rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
+                              >
+                                <Image
+                                  src={selectedProject.profileImage}
+                                  alt={`${selectedProject.title} TikTok profile`}
+                                  width={800}
+                                  height={800}
+                                  sizes="(max-width: 640px) 90vw, 610px"
+                                  className="w-full h-auto object-contain rounded-xl pointer-events-none"
+                                  style={{ borderRadius: "12px" }}
+                                />
+                              </button>
+                            </div>
+                          )}
+
+                          <div className="columns-2 sm:columns-3" style={{ columnGap: CONFIG.videoGrid.columnGap }}>
                             {collageItems.map((item) => {
                               const isGroup = item.type === "group";
                               const activeIdx = isGroup ? (collageGroupIndex[item.key] ?? 0) : 0;
                               const currentImg = item.images[activeIdx];
                               const fixedImgSrc = currentImg.startsWith('/') ? currentImg : `/${currentImg}`;
                               const isImage = currentImg.toLowerCase().match(/\.(png|jpe?g|gif|webp|svg)$/);
+                              const isVideo = currentImg.toLowerCase().match(/\.(mp4|webm|mov|ogv|ogg)$/);
 
                               return (
                                 <button
                                   key={item.key}
                                   type="button"
-                                  data-lightbox="collage"
-                                  data-key={item.key}
-                                  data-index={activeIdx}
-                                  onClick={(e) => { e.stopPropagation(); openLightbox(item.images, activeIdx); }}
-                                  style={{ position: "relative", zIndex: 5, pointerEvents: "auto" }}
-                                  className="appearance-none block w-full text-left p-0 m-0 border-0 bg-transparent mb-[15px] break-inside-avoid rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] cursor-pointer"
+                                  onClick={() => openLightbox(item.images, activeIdx)}
+                                  className="appearance-none block w-full text-left p-0 m-0 border-0 bg-transparent break-inside-avoid rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] cursor-pointer relative"
+                                  style={{ marginBottom: CONFIG.videoGrid.rowGap }}
                                 >
                                   {isImage ? (
                                     <Image 
@@ -559,17 +598,37 @@ export default function ProjectsPage() {
                                       width={400}
                                       height={400}
                                       sizes="(max-width: 640px) 50vw, 33vw"
-                                      className="w-full h-auto object-cover rounded-xl"
+                                      className="w-full h-auto object-cover rounded-xl pointer-events-none"
                                       style={{ borderRadius: "12px" }}
                                     />
+                                  ) : isVideo ? (
+                                    <div className="relative w-full aspect-square">
+                                      <video
+                                        src={fixedImgSrc}
+                                        muted
+                                        loop
+                                        playsInline
+                                        autoPlay
+                                        preload="metadata"
+                                        className="w-full h-full object-cover rounded-xl pointer-events-none"
+                                        style={{ borderRadius: "12px" }}
+                                      />
+                                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm">
+                                          <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                                            <path d="M8 5v14l11-7z"></path>
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
                                   ) : (
-                                    <div className="flex items-center justify-center w-full aspect-square">
+                                    <div className="flex items-center justify-center w-full aspect-square pointer-events-none">
                                       <span className={`${alata.className} text-[#4d4d4d] text-xs tracking-widest uppercase`}>{currentImg} Placeholder</span>
                                     </div>
                                   )}
 
                                   {isGroup && (
-                                    <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/70 backdrop-blur-sm rounded-full px-2 py-0.5">
+                                    <div className="absolute top-2 right-2 flex items-center gap-1 bg-black/70 backdrop-blur-sm rounded-full px-2 py-0.5 pointer-events-none">
                                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#8593F0" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                         <rect x="3" y="3" width="13" height="13" rx="2"></rect>
                                         <path d="M8 8h13v13H8z"></path>
@@ -604,9 +663,7 @@ export default function ProjectsPage() {
                           return (
                             <div 
                               key={i} 
-                              data-lightbox={isCenter ? "carousel" : undefined}
-                              data-index={i}
-                              onClick={isCenter ? (e) => { e.stopPropagation(); openLightbox(selectedProject.images, i); } : undefined}
+                              onClick={isCenter ? () => openLightbox(selectedProject.images, i) : undefined}
                               className={`absolute top-0 left-1/2 h-full w-full flex justify-center items-center p-4 transition-all duration-500 ease-in-out ${isCenter ? 'cursor-pointer' : ''}`}
                               style={{
                                 transform: `translateX(-50%) translateX(${offset * 62}%) scale(${scale})`,
@@ -792,7 +849,7 @@ export default function ProjectsPage() {
           which is what breaks `position: fixed` and makes the overlay invisible. */}
       {lightbox && mounted && createPortal(
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          className="lightbox-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
           onClick={closeLightbox}
         >
           <button
@@ -819,17 +876,32 @@ export default function ProjectsPage() {
           )}
 
           <div 
-            className="relative max-w-[90vw] max-h-[85vh]"
+            key={lightbox.index}
+            className="lightbox-image-zoom relative max-w-[90vw] max-h-[85vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <img 
-              src={(() => {
-                const src = lightbox.images[lightbox.index];
-                return src.startsWith('/') ? src : `/${src}`;
-              })()}
-              alt="Enlarged view"
-              className="max-w-[90vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg"
-            />
+            {(() => {
+              const src = lightbox.images[lightbox.index];
+              const fixedSrc = src.startsWith('/') ? src : `/${src}`;
+              const isVideo = fixedSrc.toLowerCase().match(/\.(mp4|webm|mov|ogv|ogg)$/);
+
+              return isVideo ? (
+                <video
+                  key={lightbox.index}
+                  src={fixedSrc}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="max-w-[90vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg"
+                />
+              ) : (
+                <img 
+                  src={fixedSrc}
+                  alt="Enlarged view"
+                  className="max-w-[90vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg"
+                />
+              );
+            })()}
           </div>
 
           {lightbox.images.length > 1 && (

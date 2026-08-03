@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image"; // <-- Added Next.js Image component
 import Navbar from "@/components/navbar";
@@ -188,6 +188,35 @@ export default function ProjectsPage() {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [collageGroupIndex, setCollageGroupIndex] = useState<Record<string, number>>({ solar: 0, story: 0 });
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+  // Video grid interaction state: which item (by key) is currently hovered/playing
+  const [hoveredVideoKey, setHoveredVideoKey] = useState<string | null>(null);
+  const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
+
+  const handleVideoMouseEnter = (key: string) => {
+    setHoveredVideoKey(key);
+    const vid = videoRefs.current[key];
+    if (vid) {
+      vid.muted = false; // play with sound on hover
+      vid.currentTime = 0;
+      // Some browsers block unmuted autoplay unless the user has already interacted
+      // with the page (a hover alone doesn't always count). If it's blocked, fall
+      // back to muted playback so the preview still moves instead of throwing.
+      vid.play().catch(() => {
+        vid.muted = true;
+        vid.play().catch(() => {});
+      });
+    }
+  };
+
+  const handleVideoMouseLeave = (key: string) => {
+    setHoveredVideoKey(null);
+    const vid = videoRefs.current[key];
+    if (vid) {
+      vid.pause();
+      vid.currentTime = 0;
+      vid.muted = true;
+    }
+  };
 
   const openLightbox = (images: string[], index: number) => {
     setLightbox({ images, index });
@@ -588,7 +617,9 @@ export default function ProjectsPage() {
                                   key={item.key}
                                   type="button"
                                   onClick={() => openLightbox(item.images, activeIdx)}
-                                  className="appearance-none block w-full text-left p-0 m-0 border-0 bg-transparent break-inside-avoid rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.02] cursor-pointer relative"
+                                  onMouseEnter={() => isVideo && handleVideoMouseEnter(item.key)}
+                                  onMouseLeave={() => isVideo && handleVideoMouseLeave(item.key)}
+                                  className="appearance-none block w-full text-left p-0 m-0 border-0 bg-transparent break-inside-avoid rounded-xl overflow-hidden transition-transform duration-300 hover:scale-[1.07] cursor-pointer relative"
                                   style={{ marginBottom: CONFIG.videoGrid.rowGap }}
                                 >
                                   {isImage ? (
@@ -604,11 +635,11 @@ export default function ProjectsPage() {
                                   ) : isVideo ? (
                                     <div className="relative w-full aspect-square">
                                       <video
+                                        ref={(el) => { videoRefs.current[item.key] = el; }}
                                         src={fixedImgSrc}
                                         muted
                                         loop
                                         playsInline
-                                        autoPlay
                                         preload="metadata"
                                         className="w-full h-full object-cover rounded-xl pointer-events-none"
                                         style={{ borderRadius: "12px" }}
@@ -849,12 +880,33 @@ export default function ProjectsPage() {
           which is what breaks `position: fixed` and makes the overlay invisible. */}
       {lightbox && mounted && createPortal(
         <div 
-          className="lightbox-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
+          className="lightbox-backdrop"
           onClick={closeLightbox}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 100,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.9)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+            padding: "16px",
+          }}
         >
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 z-10 flex items-center justify-center w-10 h-10 rounded-full bg-[#202020] text-white border border-white/20 hover:bg-white/10 transition-colors cursor-pointer"
+            style={{
+              position: "absolute", top: "16px", right: "16px", zIndex: 10,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              width: "40px", height: "40px", borderRadius: "9999px",
+              backgroundColor: "#202020", color: "#fff",
+              border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer",
+            }}
             aria-label="Close"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -866,7 +918,13 @@ export default function ProjectsPage() {
           {lightbox.images.length > 1 && (
             <button
               onClick={showPrevLightboxImage}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-12 h-12 rounded-full bg-[#202020] text-[#8593F0] border-2 border-[#8593F0]/70 transition-all duration-300 hover:bg-[#8593F0] hover:text-[#202020] hover:scale-110 active:scale-90 cursor-pointer"
+              style={{
+                position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", zIndex: 10,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                width: "48px", height: "48px", borderRadius: "9999px",
+                backgroundColor: "#202020", color: "#8593F0",
+                border: "2px solid rgba(133,147,240,0.7)", cursor: "pointer",
+              }}
               aria-label="Previous image"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -875,39 +933,74 @@ export default function ProjectsPage() {
             </button>
           )}
 
-          <div 
-            key={lightbox.index}
-            className="lightbox-image-zoom relative max-w-[90vw] max-h-[85vh]"
+          {/* CAROUSEL STRIP */}
+          <div
+            style={{
+              position: "relative",
+              width: "90vw",
+              maxWidth: "900px",
+              height: "85vh",
+              overflow: "hidden",
+              borderRadius: "12px",
+            }}
             onClick={(e) => e.stopPropagation()}
           >
-            {(() => {
-              const src = lightbox.images[lightbox.index];
-              const fixedSrc = src.startsWith('/') ? src : `/${src}`;
-              const isVideo = fixedSrc.toLowerCase().match(/\.(mp4|webm|mov|ogv|ogg)$/);
+            <div
+              style={{
+                display: "flex",
+                height: "100%",
+                transform: `translateX(-${lightbox.index * 100}%)`,
+                transition: "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+              }}
+            >
+              {lightbox.images.map((src, i) => {
+                const fixedSrc = src.startsWith("/") ? src : `/${src}`;
+                const isVideo = fixedSrc.toLowerCase().match(/\.(mp4|webm|mov|ogv|ogg)$/);
 
-              return isVideo ? (
-                <video
-                  key={lightbox.index}
-                  src={fixedSrc}
-                  controls
-                  autoPlay
-                  playsInline
-                  className="max-w-[90vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg"
-                />
-              ) : (
-                <img 
-                  src={fixedSrc}
-                  alt="Enlarged view"
-                  className="max-w-[90vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg"
-                />
-              );
-            })()}
+                return (
+                  <div
+                    key={i}
+                    style={{
+                      flex: "0 0 100%",
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {isVideo ? (
+                      <video
+                        key={fixedSrc}
+                        src={fixedSrc}
+                        controls={i === lightbox.index}
+                        autoPlay={i === lightbox.index}
+                        playsInline
+                        style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", borderRadius: "8px" }}
+                      />
+                    ) : (
+                      <img
+                        src={fixedSrc}
+                        alt="Enlarged view"
+                        style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", borderRadius: "8px" }}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           {lightbox.images.length > 1 && (
             <button
               onClick={showNextLightboxImage}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-12 h-12 rounded-full bg-[#202020] text-[#8593F0] border-2 border-[#8593F0]/70 transition-all duration-300 hover:bg-[#8593F0] hover:text-[#202020] hover:scale-110 active:scale-90 cursor-pointer"
+              style={{
+                position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", zIndex: 10,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                width: "48px", height: "48px", borderRadius: "9999px",
+                backgroundColor: "#202020", color: "#8593F0",
+                border: "2px solid rgba(133,147,240,0.7)", cursor: "pointer",
+              }}
               aria-label="Next image"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -917,8 +1010,16 @@ export default function ProjectsPage() {
           )}
 
           {lightbox.images.length > 1 && (
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1">
-              <span className={`${alata.className} text-white text-xs tracking-wide`}>{lightbox.index + 1} / {lightbox.images.length}</span>
+            <div
+              style={{
+                position: "absolute", bottom: "24px", left: "50%", transform: "translateX(-50%)",
+                backgroundColor: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)",
+                borderRadius: "9999px", padding: "4px 12px",
+              }}
+            >
+              <span className={`${alata.className} text-white text-xs tracking-wide`}>
+                {lightbox.index + 1} / {lightbox.images.length}
+              </span>
             </div>
           )}
         </div>,
